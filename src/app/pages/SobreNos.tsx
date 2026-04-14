@@ -27,27 +27,6 @@ const faqsSobreNos: FAQEntry[] = [
   },
 ];
 
-const unidades = [
-  {
-    city: 'São José dos Campos',
-    role: 'Matriz',
-    address: 'Av. Comendador Vicente de Paulo Penido, 374 — Parque Res. Aquário, São José dos Campos, SP',
-    mapUrl: 'https://maps.google.com/maps?q=Av.+Comendador+Vicente+de+Paulo+Penido,+374,+Parque+Res.+Aquário,+São+José+dos+Campos,+SP,+12246-856&output=embed',
-  },
-  {
-    city: 'Jacareí',
-    role: 'Filial',
-    address: 'Endereço a confirmar — Jacareí, SP',
-    mapUrl: 'https://maps.google.com/maps?q=Jacareí,+SP&output=embed',
-  },
-  {
-    city: 'São Paulo',
-    role: 'Filial',
-    address: 'Av. Luiz Dumont Villares, 1160 — 11º andar, salas 111–116, Jardim São Paulo, SP',
-    mapUrl: 'https://maps.google.com/maps?q=Av.+Luiz+Dumont+Villares,+1160,+Jardim+São+Paulo,+SP,+02085-100&output=embed',
-  },
-];
-
 const numerosStats = [
   { icon: Users,      value: '+53 mil',     label: 'clientes atendidos' },
   { icon: FileText,   value: '+80 mil',     label: 'cotas de consórcio negociadas' },
@@ -93,7 +72,6 @@ function Label({ text, light }: { text: string; light?: boolean }) {
 export function SobreNos() {
   const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const [selectedUnidade, setSelectedUnidade] = useState(0);
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
   const carouselRef = useRef<HTMLDivElement>(null);
   const scroll = (dir: 'left' | 'right') => {
@@ -429,82 +407,6 @@ export function SobreNos() {
                 </div>
 
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 6. NOSSA PRESENÇA ── */}
-        <section style={{ backgroundColor: '#fff', padding: '96px 24px' }}>
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-              {/* Esquerda */}
-              <div>
-                <Label text="Nossa presença" />
-                <h2
-                  style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontWeight: 800,
-                    fontSize: 'clamp(26px, 3vw, 42px)',
-                    lineHeight: 1.1,
-                    letterSpacing: '-0.03em',
-                    color: '#111827',
-                    marginTop: '4px',
-                    marginBottom: '24px',
-                  }}
-                >
-                  Presença{' '}
-                  <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>
-                    nacional
-                  </span>
-                </h2>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(14px, 1.4vw, 16px)', color: '#374151', lineHeight: 1.9, marginBottom: '40px' }}>
-                  Com matriz em São José dos Campos e filiais em Jacareí e São Paulo, a Porto Vale atende clientes em todo o território nacional, com estrutura preparada para oferecer suporte consultivo em todas as etapas do consórcio.
-                </p>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  {unidades.map((u, i) => {
-                    const active = selectedUnidade === i;
-                    return (
-                      <button
-                        key={u.city}
-                        onClick={() => setSelectedUnidade(i)}
-                        style={{
-                          display: 'flex', alignItems: 'flex-start', gap: '12px',
-                          padding: '14px 18px', borderRadius: '12px', cursor: 'pointer',
-                          textAlign: 'left', width: '100%',
-                          background: active ? '#EFF6FF' : '#F9FAFB',
-                          border: active ? '1.5px solid #BFDBFE' : '1.5px solid transparent',
-                          transition: 'all 0.2s ease',
-                        }}
-                      >
-                        <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: active ? '#2563EB' : '#E5E7EB', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background 0.2s ease' }}>
-                          <MapPin size={14} color={active ? '#fff' : '#6B7280'} strokeWidth={2}/>
-                        </div>
-                        <div>
-                          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', fontWeight: 600, color: active ? '#1D4ED8' : '#111827' }}>{u.city}</div>
-                          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: active ? '#3B82F6' : '#9CA3AF', marginTop: '2px' }}>{u.role} · SP</div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Direita — Mapa placeholder */}
-              <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.08)', aspectRatio: '4/3' }}>
-                <iframe
-                  key={selectedUnidade}
-                  src={unidades[selectedUnidade].mapUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, display: 'block' }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-
             </div>
           </div>
         </section>

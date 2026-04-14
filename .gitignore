@@ -4,3 +4,5 @@ dist/
 .env.local
 .DS_Store
 src/videos/
+public/videos/*.mp4
+public/videos/*.mov
