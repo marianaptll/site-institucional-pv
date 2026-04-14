@@ -169,35 +169,30 @@ export function SobreNos() {
           <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '480px', height: '480px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,85,196,0.20) 0%, transparent 70%)', pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,156,222,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
-          <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
             <Label text="Sobre a Porto Vale" light />
-
-            <div className="grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-20 items-start" style={{ marginTop: '32px' }}>
-              <h1
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontWeight: 800,
-                  fontSize: 'clamp(28px, 3.2vw, 52px)',
-                  lineHeight: 1.1,
-                  letterSpacing: '-0.03em',
-                  color: '#fff',
-                  margin: 0,
-                }}
-              >
-                Mais de duas décadas conectando pessoas às melhores{' '}
-                <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>
-                  soluções em consórcios
-                </span>{' '}
-                e seguros no Brasil.
-              </h1>
-
-              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ width: '40px', height: '1.5px', background: 'rgba(255,255,255,0.15)', marginBottom: '28px' }} />
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(15px, 1.4vw, 17px)', color: 'rgba(255,255,255,0.65)', lineHeight: 1.85, margin: 0 }}>
-                  A Porto Vale é a maior corretora de consórcios da rede Porto, com atuação nacional e histórico de crescimento consistente no mercado de crédito planejado.
-                </p>
-              </div>
-            </div>
+            <h1
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 800,
+                fontSize: 'clamp(28px, 3.2vw, 52px)',
+                lineHeight: 1.1,
+                letterSpacing: '-0.03em',
+                color: '#fff',
+                maxWidth: '720px',
+                margin: '0 0 24px',
+              }}
+            >
+              Mais de duas décadas conectando pessoas às melhores{' '}
+              <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>
+                soluções em consórcios
+              </span>{' '}
+              e seguros no Brasil.
+            </h1>
+            <div style={{ width: '40px', height: '1.5px', background: 'rgba(255,255,255,0.15)', marginBottom: '24px' }} />
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(15px, 1.4vw, 17px)', color: 'rgba(255,255,255,0.55)', lineHeight: 1.85, maxWidth: '560px', margin: 0 }}>
+              A Porto Vale é a maior corretora de consórcios da rede Porto, com atuação nacional e histórico de crescimento consistente no mercado de crédito planejado.
+            </p>
           </div>
         </section>
 

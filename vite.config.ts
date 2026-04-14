@@ -19,4 +19,14 @@ export default defineConfig({
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv', '**/*.mp4', '**/*.mov', '**/*.webm'],
+
+  server: {
+    // Força reload completo quando o HMR falha, evitando tela em branco
+    hmr: {
+      overlay: true,
+    },
+    watch: {
+      usePolling: false,
+    },
+  },
 })

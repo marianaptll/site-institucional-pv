@@ -27,67 +27,26 @@ function HomePage() {
     >
       <Header />
       <main>
-        {/* 1. Hero */}
         <HeroSection />
-
-        {/* Shape cinza que cobre WhatIsConsorcio + Benefits */}
         <ScrollReveal>
-          <div
-            style={{
-              backgroundColor: '#eeebe6',
-              borderRadius: '46px',
-              marginTop: '-100px',
-              position: 'relative',
-              zIndex: 10,
-            }}
-          >
-            {/* 2. O que é consórcio */}
+          <div style={{ backgroundColor: '#eeebe6', borderRadius: '46px', marginTop: '-100px', position: 'relative', zIndex: 10 }}>
             <WhatIsConsorcioSection />
-            {/* 3. Benefícios / diferenciais */}
             <BenefitsSection />
           </div>
         </ScrollReveal>
-
-        {/* 4. Comparativo + Simulador */}
-        <ScrollReveal delay={0.05}>
-          <ComparisonSimulatorSection />
-        </ScrollReveal>
-
-        {/* 5. Porto Vale — Prova social + Nossos números */}
-        <ScrollReveal delay={0.05}>
-          <PortoValeSection />
-        </ScrollReveal>
-
-        {/* 6. Na mídia */}
-        <ScrollReveal delay={0.05}>
-          <MidiaSection />
-        </ScrollReveal>
-
-        {/* 7. Prova social — depoimentos */}
-        <ScrollReveal delay={0.05}>
-          <ProvaSection />
-        </ScrollReveal>
-
-        {/* 8. Especialistas — shape cinza */}
+        <ScrollReveal delay={0.05}><ComparisonSimulatorSection /></ScrollReveal>
+        <ScrollReveal delay={0.05}><PortoValeSection /></ScrollReveal>
+        <ScrollReveal delay={0.05}><MidiaSection /></ScrollReveal>
+        <ScrollReveal delay={0.05}><ProvaSection /></ScrollReveal>
         <ScrollReveal delay={0.05}>
           <div style={{ backgroundColor: '#eeebe6', borderRadius: '46px' }}>
             <VendedoresSection />
           </div>
         </ScrollReveal>
-
-        {/* 9. FAQ */}
-        <ScrollReveal delay={0.05}>
-          <FAQSection />
-        </ScrollReveal>
-
-        {/* 10. CTA final */}
-        <ScrollReveal delay={0.05}>
-          <CTABanner />
-        </ScrollReveal>
+        <ScrollReveal delay={0.05}><FAQSection /></ScrollReveal>
+        <ScrollReveal delay={0.05}><CTABanner /></ScrollReveal>
       </main>
-      {/* 11. Footer */}
       <Footer />
-
       <ChatWidget />
     </div>
   );
