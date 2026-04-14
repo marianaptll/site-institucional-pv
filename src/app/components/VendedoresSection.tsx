@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { X, Play, Pause } from 'lucide-react';
 
-import videoOQueEConsorcio    from '../../videos/o-que-e-consorcio.mp4';
-import videoReforma           from '../../videos/consorcio-para-reforma.mp4';
-import videoPrimeiroImovel    from '../../videos/planejando-primeiro-imovel.mp4';
-import videoPoderaVista       from '../../videos/poder-de-comprar-a-vista.mov';
-import videoQuantoCusta       from '../../videos/quanto-custa-imovel-300k.mov';
-import videoPreparado         from '../../videos/voce-esta-pronto.mov';
-import videoFrustracao        from '../../videos/frustracao-com-consorcio.mov';
-import videoPerfil            from '../../videos/perfil-combina-consorcio.mov';
-import videoSonho             from '../../videos/todo-sonho-comeca-planejamento.mov';
+const videoOQueEConsorcio    = '/videos/o-que-e-consorcio.mp4';
+const videoReforma           = '/videos/consorcio-para-reforma.mp4';
+const videoPrimeiroImovel    = '/videos/planejando-primeiro-imovel.mp4';
+const videoPoderaVista       = '/videos/poder-de-comprar-a-vista.mov';
+const videoQuantoCusta       = '/videos/quanto-custa-imovel-300k.mov';
+const videoPreparado         = '/videos/voce-esta-pronto.mov';
+const videoFrustracao        = '/videos/frustracao-com-consorcio.mov';
+const videoPerfil            = '/videos/perfil-combina-consorcio.mov';
+const videoSonho             = '/videos/todo-sonho-comeca-planejamento.mov';
 
 const cards = [
   { topic: 'O que é consórcio',                      videoSrc: videoOQueEConsorcio },

@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
-import videoFachada from '../../videos/video-fachada.mp4';
+const videoFachada = '/videos/video-fachada.mp4';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ChatWidget } from '../components/ChatWidget';

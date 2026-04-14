@@ -1,5 +1,6 @@
-import videoFachada from '../../videos/video-fachada.mp4';
 import { NumerosBar } from './NumerosBar';
+
+const videoFachada = '/videos/video-fachada.mp4';
 
 export function PortoValeSection() {
   return (
