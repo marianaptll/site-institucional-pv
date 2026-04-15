@@ -72,7 +72,7 @@ export function Footer() {
         </div>
 
         {/* Sitemap — 5 colunas */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10 py-12 border-b border-[#1F2937]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 sm:gap-x-8 lg:gap-x-10 py-12 border-b border-[#1F2937]">
 
           {/* Institucional */}
           <div>
@@ -192,7 +192,7 @@ export function Footer() {
         </div>
 
         {/* Selos de aprovação */}
-        <div className="py-8 border-b border-[#1F2937] flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="py-8 border-b border-[#1F2937] flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
 
           {/* Selo Banco Central */}
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', backgroundColor: '#161D2A', border: '1px solid #1F2937', borderRadius: '14px', padding: '14px 20px' }}>
@@ -225,10 +225,13 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
+        <div className="py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
+          <div className="flex flex-col gap-1">
             <p className="text-[11px] text-[#4B5563]" style={{ fontFamily: "'Inter', sans-serif" }}>
-              &copy; {currentYear} Porto Vale Consórcios &nbsp;·&nbsp; CNPJ 07.081.058/0001-56 &nbsp;·&nbsp; SUSEP n° 202089657
+              &copy; {currentYear} Porto Vale Consórcios
+            </p>
+            <p className="text-[11px] text-[#4B5563]" style={{ fontFamily: "'Inter', sans-serif" }}>
+              CNPJ 07.081.058/0001-56 &nbsp;·&nbsp; SUSEP n° 202089657
             </p>
           </div>
           <p className="text-[11px] text-[#4B5563]" style={{ fontFamily: "'Inter', sans-serif" }}>

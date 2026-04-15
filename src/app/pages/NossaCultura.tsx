@@ -34,9 +34,10 @@ export function NossaCultura() {
         <section
           style={{
             backgroundColor: '#111827',
-            padding: '96px 24px',
+            padding: 'clamp(56px, 10vw, 96px) clamp(24px, 6vw, 96px)',
             position: 'relative',
             overflow: 'hidden',
+            borderRadius: '0 0 28px 28px',
           }}
         >
           <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '480px', height: '480px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,85,196,0.20) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -76,7 +77,7 @@ export function NossaCultura() {
         </section>
 
         {/* ── 2. MISSÃO, VISÃO E VALORES ── */}
-        <section style={{ backgroundColor: '#fff', padding: '96px 24px' }}>
+        <section style={{ backgroundColor: '#fff', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div className="max-w-7xl mx-auto">
 
             <div style={{ marginBottom: '56px' }}>
@@ -213,7 +214,7 @@ export function NossaCultura() {
         <section
           style={{
             backgroundColor: '#111827',
-            padding: '96px 24px',
+            padding: 'clamp(56px, 10vw, 96px) 24px',
             position: 'relative',
             overflow: 'hidden',
           }}

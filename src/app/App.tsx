@@ -29,7 +29,7 @@ function HomePage() {
       <main>
         <HeroSection />
         <ScrollReveal>
-          <div style={{ backgroundColor: '#eeebe6', borderRadius: '46px', marginTop: '-100px', position: 'relative', zIndex: 10 }}>
+          <div className="rounded-2xl sm:rounded-[32px] lg:rounded-[46px]" style={{ backgroundColor: '#eeebe6', marginTop: '-100px', position: 'relative', zIndex: 10 }}>
             <WhatIsConsorcioSection />
             <BenefitsSection />
           </div>
@@ -39,7 +39,7 @@ function HomePage() {
         <ScrollReveal delay={0.05}><MidiaSection /></ScrollReveal>
         <ScrollReveal delay={0.05}><ProvaSection /></ScrollReveal>
         <ScrollReveal delay={0.05}>
-          <div style={{ backgroundColor: '#eeebe6', borderRadius: '46px' }}>
+          <div className="rounded-2xl sm:rounded-[32px] lg:rounded-[46px]" style={{ backgroundColor: '#eeebe6' }}>
             <VendedoresSection />
           </div>
         </ScrollReveal>

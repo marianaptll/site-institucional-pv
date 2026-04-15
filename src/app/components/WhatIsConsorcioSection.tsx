@@ -170,6 +170,7 @@ function TextCard() {
 /* ── Card 3: Guia do consórcio (branco) ───────────────────────── */
 function GuideCard() {
   const [hovered, setHovered] = useState(false);
+  const expanded = hovered;
   return (
     <div
       className="relative rounded-3xl flex flex-col justify-between p-8 overflow-hidden"
@@ -216,7 +217,7 @@ function GuideCard() {
           style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 800,
-            fontSize: 'clamp(36px, 4vw, 60px)',
+            fontSize: 'clamp(32px, 4vw, 60px)',
             color: '#111827',
             lineHeight: 1.05,
             letterSpacing: '-0.03em',
@@ -251,30 +252,29 @@ function GuideCard() {
       </div>
 
       <div style={{ position: 'relative', zIndex: 1, marginTop: '24px' }}>
+        {/* Desktop: expansão ao hover | Mobile: sempre expandido */}
         <button
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
+          className="lg:inline-flex hidden"
           style={{
-            display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: hovered ? '8px' : '0px',
+            gap: expanded ? '8px' : '0px',
             height: '48px',
-            width: hovered ? '148px' : '48px',
+            width: expanded ? '148px' : '48px',
             borderRadius: '999px',
             background: '#0055c4',
             color: '#fff',
             border: 'none',
             cursor: 'pointer',
-            boxShadow: hovered
-              ? '0 6px 28px rgba(0,85,196,0.40)'
-              : '0 4px 20px rgba(0,85,196,0.25)',
+            boxShadow: expanded ? '0 6px 28px rgba(0,85,196,0.40)' : '0 4px 20px rgba(0,85,196,0.25)',
             transition: 'width 0.28s cubic-bezier(.4,0,.2,1), box-shadow 0.2s',
             overflow: 'hidden',
             whiteSpace: 'nowrap',
             flexShrink: 0,
-            paddingLeft: hovered ? '20px' : '0px',
-            paddingRight: hovered ? '16px' : '0px',
+            paddingLeft: expanded ? '20px' : '0px',
+            paddingRight: expanded ? '16px' : '0px',
           }}
         >
           <span
@@ -283,14 +283,39 @@ function GuideCard() {
               fontWeight: 600,
               fontSize: '13px',
               color: '#fff',
-              maxWidth: hovered ? '100px' : '0px',
-              opacity: hovered ? 1 : 0,
+              maxWidth: expanded ? '100px' : '0px',
+              opacity: expanded ? 1 : 0,
               overflow: 'hidden',
               transition: 'max-width 0.28s cubic-bezier(.4,0,.2,1), opacity 0.2s 0.1s',
               flexShrink: 0,
               whiteSpace: 'nowrap',
             }}
           >
+            Ler o guia
+          </span>
+          <ArrowRight size={18} style={{ flexShrink: 0 }} />
+        </button>
+        {/* Mobile: botão sempre expandido */}
+        <button
+          className="lg:hidden inline-flex"
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            height: '48px',
+            paddingLeft: '20px',
+            paddingRight: '16px',
+            borderRadius: '999px',
+            background: '#0055c4',
+            color: '#fff',
+            border: 'none',
+            cursor: 'pointer',
+            boxShadow: '0 4px 20px rgba(0,85,196,0.25)',
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
+          }}
+        >
+          <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '13px', color: '#fff' }}>
             Ler o guia
           </span>
           <ArrowRight size={18} style={{ flexShrink: 0 }} />

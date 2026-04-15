@@ -54,15 +54,15 @@ function TableRow({ row, index, isLast }: { row: typeof rows[number]; index: num
       }}
     >
       {/* Critério */}
-      <div className="py-4 px-4 flex items-center" style={{ borderRight: '1px solid #E5E7EB' }}>
-        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: hovered ? '#111827' : '#6B7280', fontWeight: hovered ? 500 : 400, transition: 'color 0.18s' }}>
+      <div className="py-3 px-3 sm:py-4 sm:px-4 flex items-center" style={{ borderRight: '1px solid #E5E7EB' }}>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(11px, 2.5vw, 13px)', color: hovered ? '#111827' : '#6B7280', fontWeight: hovered ? 500 : 400, transition: 'color 0.18s', lineHeight: 1.4 }}>
           {row.criteria}
         </span>
       </div>
 
       {/* Consórcio — coluna destacada */}
       <div
-        className="py-4 px-4 flex items-center justify-center"
+        className="py-3 px-2 sm:py-4 sm:px-4 flex items-center justify-center"
         style={{
           backgroundColor: hovered ? 'rgba(0,85,196,0.08)' : 'rgba(0,85,196,0.04)',
           transition: 'background-color 0.18s ease',
@@ -71,10 +71,10 @@ function TableRow({ row, index, isLast }: { row: typeof rows[number]; index: num
           borderRadius: isLast ? '0 0 12px 12px' : undefined,
         }}
       >
-        <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '13px', color: '#0055c4', display: 'inline-flex', alignItems: 'center', gap: '7px', transition: 'color 0.18s, transform 0.18s', transform: hovered ? 'scale(1.04)' : 'scale(1)' }}>
+        <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(10px, 2.2vw, 13px)', color: '#0055c4', display: 'inline-flex', alignItems: 'center', gap: '4px', transition: 'color 0.18s, transform 0.18s', transform: hovered ? 'scale(1.04)' : 'scale(1)', textAlign: 'center', lineHeight: 1.3 }}>
           {row.consortio}
           {row.badge && (
-            <span style={{ display: 'inline-block', backgroundColor: '#0055c4', color: '#fff', fontFamily: "'Inter', sans-serif", fontSize: '9px', fontWeight: 800, letterSpacing: '0.1em', padding: '2px 7px', borderRadius: '4px', verticalAlign: 'middle' }}>
+            <span style={{ display: 'inline-block', backgroundColor: '#0055c4', color: '#fff', fontFamily: "'Inter', sans-serif", fontSize: '8px', fontWeight: 800, letterSpacing: '0.1em', padding: '2px 5px', borderRadius: '4px', verticalAlign: 'middle', flexShrink: 0 }}>
               PORTO
             </span>
           )}
@@ -82,8 +82,8 @@ function TableRow({ row, index, isLast }: { row: typeof rows[number]; index: num
       </div>
 
       {/* Financiamento */}
-      <div className="py-4 px-4 flex items-center justify-center">
-        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#C4C9D4', transition: 'color 0.18s', fontWeight: 400 }}>
+      <div className="py-3 px-2 sm:py-4 sm:px-4 flex items-center justify-center">
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(10px, 2.2vw, 13px)', color: '#C4C9D4', transition: 'color 0.18s', fontWeight: 400, textAlign: 'center', lineHeight: 1.3 }}>
           {row.financiamento}
         </span>
       </div>
@@ -212,17 +212,17 @@ export function ComparisonSimulatorSection() {
   return (
     <section
       className="relative z-10 px-4 sm:px-8 lg:px-16"
-      style={{ paddingTop: '80px', paddingBottom: '96px', backgroundColor: '#F9FAFB' }}
+      style={{ paddingTop: '64px', paddingBottom: '80px', backgroundColor: '#F9FAFB', overflowX: 'hidden' }}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-12 items-start lg:items-end">
+        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-12 items-start lg:items-end">
 
           {/* ══ ESQUERDA: Comparativo ══ */}
           <div>
             <span style={{ display: 'inline-block', padding: '4px 12px', borderRadius: '999px', background: 'rgba(0,156,222,0.10)', color: '#009cde', fontSize: '11px', fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '18px' }}>
               Comparativo
             </span>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(34px, 3.5vw, 50px)', color: '#111827', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: '16px' }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(28px, 3.5vw, 50px)', color: '#111827', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: '16px' }}>
               Consórcio ou{' '}
               <span style={{ display: 'block', fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#0055c4' }}>
                 financiamento?
@@ -232,9 +232,7 @@ export function ComparisonSimulatorSection() {
               Entender a diferença entre os dois é o primeiro passo para fazer uma escolha que cabe no seu bolso — e no seu planejamento de vida.
             </p>
 
-            {/* Wrapper scrollável no mobile */}
-            <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-            <div className="relative" style={{ paddingTop: '28px', minWidth: '480px' }}>
+            <div className="relative" style={{ paddingTop: '28px' }}>
               {/* Badge "Melhor escolha" flutuante acima da coluna Consórcio */}
               <div
                 style={{
@@ -309,7 +307,6 @@ export function ComparisonSimulatorSection() {
                 />
               </div>
             </div>
-            </div>{/* fim wrapper scrollável */}
           </div>
 
           {/* ══ DIREITA: Simulador ══ */}

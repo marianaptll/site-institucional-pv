@@ -105,7 +105,7 @@ export function NossosClientes() {
       <main style={{ paddingTop: '68px', fontFamily: "'Inter', sans-serif" }}>
 
         {/* ── HERO ── */}
-        <section style={{ backgroundColor: '#111827', padding: '96px 24px', position: 'relative', overflow: 'hidden' }}>
+        <section style={{ backgroundColor: '#111827', padding: 'clamp(56px, 10vw, 96px) clamp(24px, 6vw, 96px)', position: 'relative', overflow: 'hidden', borderRadius: '0 0 28px 28px' }}>
           <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '480px', height: '480px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,85,196,0.20) 0%, transparent 70%)', pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,156,222,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
@@ -295,7 +295,7 @@ export function NossosClientes() {
         </section>
 
         {/* ── CTA FINAL ── */}
-        <section style={{ backgroundColor: '#111827', padding: '96px 24px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
+        <section style={{ backgroundColor: '#111827', padding: 'clamp(56px, 10vw, 96px) 24px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
           <div style={{ position: 'absolute', top: '-100px', left: '50%', transform: 'translateX(-50%)', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,85,196,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
           <div className="max-w-2xl mx-auto" style={{ position: 'relative', zIndex: 1 }}>
             <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 42px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', marginBottom: '16px' }}>

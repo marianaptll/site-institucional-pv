@@ -138,7 +138,7 @@ export function TrabalheConosco() {
       <main style={{ paddingTop: '68px', fontFamily: "'Inter', sans-serif" }}>
 
         {/* ── 1. HERO ── */}
-        <section style={{ backgroundColor: '#111827', padding: '96px 24px', position: 'relative', overflow: 'hidden' }}>
+        <section style={{ backgroundColor: '#111827', padding: 'clamp(56px, 10vw, 96px) clamp(24px, 6vw, 96px)', position: 'relative', overflow: 'hidden', borderRadius: '0 0 28px 28px' }}>
           <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '480px', height: '480px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,85,196,0.20) 0%, transparent 70%)', pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,156,222,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
@@ -167,7 +167,7 @@ export function TrabalheConosco() {
         </section>
 
         {/* ── 2. POR QUE TRABALHAR CONOSCO ── */}
-        <section style={{ backgroundColor: '#fff', padding: '96px 24px' }}>
+        <section style={{ backgroundColor: '#fff', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div className="max-w-7xl mx-auto">
             <div style={{ marginBottom: '56px' }}>
               <Label text="Por que a Porto Vale" />
@@ -197,7 +197,7 @@ export function TrabalheConosco() {
         </section>
 
         {/* ── 3. NOSSA EQUIPE ── */}
-        <section style={{ backgroundColor: '#111827', padding: '96px 24px', position: 'relative', overflow: 'hidden' }}>
+        <section style={{ backgroundColor: '#111827', padding: 'clamp(56px, 10vw, 96px) 24px', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '480px', height: '480px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,85,196,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
           <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1 }}>
             <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20 items-start">
@@ -226,7 +226,7 @@ export function TrabalheConosco() {
         </section>
 
         {/* ── 4. VAGAS ABERTAS ── */}
-        <section style={{ backgroundColor: '#f8f7f5', padding: '96px 24px' }}>
+        <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div className="max-w-7xl mx-auto">
 
             {/* Cabeçalho + setas */}
@@ -346,7 +346,7 @@ export function TrabalheConosco() {
         </section>
 
         {/* ── 5. CTA FINAL ── */}
-        <section style={{ backgroundColor: '#111827', padding: '120px 24px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
+        <section style={{ backgroundColor: '#111827', padding: 'clamp(64px, 12vw, 120px) 24px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
           <div style={{ position: 'absolute', top: '-100px', left: '50%', transform: 'translateX(-50%)', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,85,196,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
           <div className="max-w-3xl mx-auto" style={{ position: 'relative', zIndex: 1 }}>

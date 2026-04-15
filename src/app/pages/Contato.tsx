@@ -43,9 +43,10 @@ export function Contato() {
         <section
           style={{
             backgroundColor: '#111827',
-            padding: '96px 24px',
+            padding: 'clamp(56px, 10vw, 96px) clamp(24px, 6vw, 96px)',
             position: 'relative',
             overflow: 'hidden',
+            borderRadius: '0 0 28px 28px',
           }}
         >
           <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '480px', height: '480px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,85,196,0.20) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -79,7 +80,7 @@ export function Contato() {
         </section>
 
         {/* ── Contato + Mapa ── */}
-        <section style={{ backgroundColor: '#fff', padding: '96px 24px' }}>
+        <section style={{ backgroundColor: '#fff', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
@@ -194,7 +195,10 @@ export function Contato() {
               </div>
 
               {/* Direita — Mapa */}
-              <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.08)', aspectRatio: '4/3', position: 'sticky', top: '88px' }}>
+              <div
+                className="lg:sticky lg:top-[88px]"
+                style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.08)', height: 'clamp(300px, 50vw, 480px)' }}
+              >
                 <MapaLeaflet
                   lat={unidades[selectedUnidade].lat}
                   lng={unidades[selectedUnidade].lng}

@@ -95,8 +95,8 @@ export function FAQSection() {
           {/* Left */}
           <div className="lg:sticky lg:top-24">
             <h2
-              className="text-[40px] leading-[1.1] mb-5"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800 }}
+              className="leading-[1.1] mb-5"
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(28px, 5vw, 40px)' }}
             >
               <span className="block text-[#111827] dark:text-white">Começando no</span>
               <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>consórcio?</span>

@@ -99,12 +99,12 @@ export function SobreNos() {
 
               <button
                 onClick={() => scroll('left')}
+                className="hidden lg:flex items-center justify-center"
                 style={{
                   position: 'absolute', left: '-18px', top: '50%', transform: 'translateY(-50%)',
                   zIndex: 10, width: '36px', height: '36px', borderRadius: '50%',
                   backgroundColor: '#fff', border: '1px solid #e5e7eb',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.12)', cursor: 'pointer',
                 }}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -114,12 +114,12 @@ export function SobreNos() {
 
               <button
                 onClick={() => scroll('right')}
+                className="hidden lg:flex items-center justify-center"
                 style={{
                   position: 'absolute', right: '-18px', top: '50%', transform: 'translateY(-50%)',
                   zIndex: 10, width: '36px', height: '36px', borderRadius: '50%',
                   backgroundColor: '#fff', border: '1px solid #e5e7eb',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.12)', cursor: 'pointer',
                 }}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -162,8 +162,9 @@ export function SobreNos() {
             backgroundColor: '#111827',
             position: 'relative',
             overflow: 'hidden',
-            padding: '96px 24px',
+            padding: 'clamp(56px, 10vw, 96px) clamp(24px, 6vw, 96px)',
             paddingTop: 'calc(96px + clamp(56px, 7vw, 84px))',
+            borderRadius: '0 0 28px 28px',
           }}
         >
           <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '480px', height: '480px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,85,196,0.20) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -197,7 +198,7 @@ export function SobreNos() {
         </section>
 
         {/* ── 3. QUEM SOMOS ── */}
-        <section style={{ backgroundColor: '#fff', padding: '96px 24px' }}>
+        <section style={{ backgroundColor: '#fff', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
@@ -247,7 +248,7 @@ export function SobreNos() {
         </section>
 
         {/* ── 4. NÚMEROS ── */}
-        <section style={{ backgroundColor: '#111827', padding: '96px 24px' }}>
+        <section style={{ backgroundColor: '#111827', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div className="max-w-7xl mx-auto">
 
             {/* Título */}
@@ -309,7 +310,7 @@ export function SobreNos() {
         </section>
 
         {/* ── 5. CRESCIMENTO RECENTE ── */}
-        <section style={{ backgroundColor: '#f8f7f5', padding: '96px 24px' }}>
+        <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">
 
@@ -407,7 +408,7 @@ export function SobreNos() {
         </section>
 
         {/* ── 7. DIFERENCIAIS ── */}
-        <section style={{ backgroundColor: '#f3f4f6', padding: '96px 24px' }}>
+        <section style={{ backgroundColor: '#f3f4f6', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div className="max-w-7xl mx-auto">
 
             <div style={{ marginBottom: '56px' }}>
@@ -465,7 +466,7 @@ export function SobreNos() {
         <section
           style={{
             backgroundColor: '#111827',
-            padding: '120px 24px',
+            padding: 'clamp(64px, 12vw, 120px) 24px',
             position: 'relative',
             overflow: 'hidden',
             textAlign: 'center',
@@ -512,7 +513,7 @@ export function SobreNos() {
         </section>
 
         {/* ── 9. FAQ ── */}
-        <section style={{ backgroundColor: '#fff', padding: '96px 24px' }}>
+        <section style={{ backgroundColor: '#fff', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div style={{ maxWidth: '860px', margin: '0 auto' }}>
             <div style={{ marginBottom: '48px' }}>
               <Label text="Perguntas frequentes" />
