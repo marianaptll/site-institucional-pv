@@ -23,13 +23,22 @@ export function PortoValeSection() {
             <div className="hidden lg:block" style={{ position: 'absolute', top: '20px', left: '20px', right: '-20px', bottom: '-20px', borderRadius: '20px', border: '1.5px solid rgba(0,85,196,0.45)', pointerEvents: 'none', zIndex: 0 }} />
             <div style={{ position: 'relative', zIndex: 1, borderRadius: '20px', overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.5)' }}>
               <video
-                src="https://awxqeqjaatuacnqlvxcw.supabase.co/storage/v1/object/public/videos-projeto/video-fachada2.mp4"
                 autoPlay
                 muted
                 loop
                 playsInline
+                poster="/imagens/fachada-pv.png"
+                onError={e => {
+                  const v = e.currentTarget;
+                  const img = document.createElement('img');
+                  img.src = '/imagens/fachada-pv.png';
+                  img.style.cssText = 'width:100%;height:320px;object-fit:cover;display:block;';
+                  v.parentNode?.replaceChild(img, v);
+                }}
                 style={{ width: '100%', height: '320px', objectFit: 'cover', display: 'block' }}
-              />
+              >
+                <source src="https://awxqeqjaatuacnqlvxcw.supabase.co/storage/v1/object/public/videos-projeto/video-fachada2.mp4" type="video/mp4" />
+              </video>
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '80px', background: 'linear-gradient(to top, rgba(17,24,39,0.6), transparent)' }} />
             </div>
             {/* Badge "18 anos" — reposicionado para não vazar no mobile */}
