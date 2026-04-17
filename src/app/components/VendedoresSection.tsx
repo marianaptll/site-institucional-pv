@@ -2,22 +2,23 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { X, Play, Pause } from 'lucide-react';
 import { SectionLabel } from './SectionLabel';
 
-const videoOQueEConsorcio    = '/videos/o-que-e-consorcio.mp4';
-const videoReforma           = '/videos/consorcio-para-reforma.mp4';
-const videoPrimeiroImovel    = '/videos/planejando-primeiro-imovel.mp4';
-const videoPoderaVista       = '/videos/poder-de-comprar-a-vista.mov';
-const videoQuantoCusta       = '/videos/quanto-custa-imovel-300k.mov';
-const videoPreparado         = '/videos/voce-esta-pronto.mov';
-const videoFrustracao        = '/videos/frustracao-com-consorcio.mov';
-const videoPerfil            = '/videos/perfil-combina-consorcio.mov';
-const videoSonho             = '/videos/todo-sonho-comeca-planejamento.mov';
+const BASE = 'https://awxqeqjaatuacnqlvxcw.supabase.co/storage/v1/object/public/videos-projeto';
+
+const videoOQueEConsorcio = `${BASE}/o-que-e-consorcio.mp4`;
+const videoReforma        = `${BASE}/consorcio-para-reforma.mp4`;
+const videoPrimeiroImovel = `${BASE}/planejando-primeiro-imovel.mp4`;
+const videoPreparado      = `${BASE}/voce-esta-pronto.mov`;
+const videoFrustracao     = `${BASE}/frustracao-com-consorcio.mov`;
+const videoPerfil         = `${BASE}/perfil-combina-consorcio.mov`;
+const videoSonho          = `${BASE}/todo-sonho-comeca-planejamento.mov`;
+// TODO: subir no Supabase quando disponíveis
+// const videoPoderaVista = `${BASE}/poder-de-comprar-a-vista.mov`;
+// const videoQuantoCusta = `${BASE}/quanto-custa-imovel-300k.mov`;
 
 const cards = [
   { topic: 'O que é consórcio',                      videoSrc: videoOQueEConsorcio },
   { topic: 'Consórcio para reforma',                 videoSrc: videoReforma        },
   { topic: 'Planejando a compra do 1º imóvel',       videoSrc: videoPrimeiroImovel },
-  { topic: 'Poder de comprar à vista',               videoSrc: videoPoderaVista    },
-  { topic: 'Quanto custa um imóvel de 300k',         videoSrc: videoQuantoCusta    },
   { topic: 'Você está 100% pronto',                  videoSrc: videoPreparado      },
   { topic: 'Por que a frustração com o consórcio?',  videoSrc: videoFrustracao     },
   { topic: 'Seu perfil combina com o consórcio',     videoSrc: videoPerfil         },
