@@ -376,7 +376,7 @@ export function SobreNos() {
         </section>
 
         {/* ── 4. NÚMEROS ── */}
-        <section style={{ backgroundColor: '#111827' }}>
+        <section style={{ backgroundColor: '#111827', paddingTop: 'clamp(40px, 5vw, 56px)' }}>
           <NumerosBar />
         </section>
 

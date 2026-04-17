@@ -123,7 +123,7 @@ export function NossosClientes() {
         </section>
 
         {/* ── GOOGLE + VÍDEOS ── */}
-        <section style={{ backgroundColor: '#fff', padding: '80px 24px 64px' }}>
+        <section style={{ backgroundColor: '#fff', padding: 'clamp(56px, 8vw, 80px) 24px 56px' }}>
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
 
@@ -204,7 +204,7 @@ export function NossosClientes() {
         </section>
 
         {/* ── COLUNAS DE DEPOIMENTOS SCROLLING ── */}
-        <section style={{ backgroundColor: '#f8f7f5', padding: '80px 24px', overflow: 'hidden' }}>
+        <section style={{ backgroundColor: '#f8f7f5', padding: '56px 24px clamp(56px, 8vw, 80px)', overflow: 'hidden' }}>
           <div className="max-w-7xl mx-auto">
 
             <motion.div

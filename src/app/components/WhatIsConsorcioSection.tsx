@@ -451,7 +451,7 @@ function GuideCard() {
 /* ── Section principal ─────────────────────────────────────────── */
 export function WhatIsConsorcioSection() {
   return (
-    <section className="py-16 lg:py-24 relative z-20" style={{ paddingBottom: '40px' }}>
+    <section className="relative z-20" style={{ padding: 'clamp(48px, 6vw, 72px) 0 clamp(32px, 4vw, 48px)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
         {/* Stack vertical no mobile, horizontal no desktop */}
         <div className="flex flex-col lg:flex-row gap-5" style={{ alignItems: 'stretch' }}>
