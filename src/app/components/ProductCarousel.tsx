@@ -123,6 +123,7 @@ export function ProductCarousel() {
   const dragStartOffset = useRef(0);
   const lastVelocity = useRef(0);
   const lastMoveX = useRef(0);
+  const hasDraggedRef = useRef(false);
 
   // RAF loop
   useEffect(() => {
@@ -159,20 +160,26 @@ export function ProductCarousel() {
   }, []);
 
   const onPointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    draggingRef.current = true;
-    setIsDragging(true);
     dragStartX.current = e.clientX;
     dragStartOffset.current = offsetRef.current;
     lastVelocity.current = 0;
     lastMoveX.current = e.clientX;
+    hasDraggedRef.current = false;
     (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
   }, []);
 
   const onPointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    if (!draggingRef.current) return;
+    const delta = e.clientX - dragStartX.current;
+    if (!hasDraggedRef.current && Math.abs(delta) < 6) return;
+
+    if (!hasDraggedRef.current) {
+      hasDraggedRef.current = true;
+      draggingRef.current = true;
+      setIsDragging(true);
+    }
+
     lastVelocity.current = e.clientX - lastMoveX.current;
     lastMoveX.current = e.clientX;
-    const delta = e.clientX - dragStartX.current;
     const lw = loopWidthRef.current;
     offsetRef.current = lw > 0
       ? normalizeOffset(dragStartOffset.current + delta, lw)
@@ -183,11 +190,12 @@ export function ProductCarousel() {
   }, [normalizeOffset]);
 
   const onPointerUp = useCallback(() => {
-    if (!draggingRef.current) return;
+    if (!hasDraggedRef.current) return;
     offsetRef.current += lastVelocity.current * 4;
     const lw = loopWidthRef.current;
     if (lw > 0) offsetRef.current = normalizeOffset(offsetRef.current, lw);
     draggingRef.current = false;
+    hasDraggedRef.current = false;
     setIsDragging(false);
   }, [normalizeOffset]);
 
