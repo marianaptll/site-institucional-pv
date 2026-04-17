@@ -1,75 +1,197 @@
-import { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { ArrowRight, X, Play, Pause } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import heroImage from '../../assets/casacarroemoto.png';
 import { SectionLabel } from './SectionLabel';
 
-/* ── Card 1: Vídeo ─────────────────────────────────────────────── */
-function VideoCard() {
+const VIDEO_SRC = 'https://awxqeqjaatuacnqlvxcw.supabase.co/storage/v1/object/public/videos-projeto/composicao-1_phetjC7F.mp4';
+
+/* ── Modal de vídeo com som ──────────────────────────────────────── */
+function VideoModal({ onClose }: { onClose: () => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) { v.play(); setPlaying(true); }
+    else          { v.pause(); setPlaying(false); }
+  };
+
+  const seek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const v = videoRef.current;
+    if (!v) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    v.currentTime = ((e.clientX - rect.left) / rect.width) * v.duration;
+  };
+
+  const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+
   return (
     <div
-      className="relative rounded-3xl overflow-hidden flex flex-col justify-end"
-      style={{ flex: '1 1 0', minHeight: '320px', background: '#111827' }}
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        backgroundColor: 'rgba(0,0,0,0.92)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '16px', animation: 'fadeIn 0.2s ease',
+      }}
     >
-      {/* Vídeo de fundo — mudo, em loop, sem controles */}
-      <video
-        src="https://awxqeqjaatuacnqlvxcw.supabase.co/storage/v1/object/public/videos-projeto/composicao-1_phetjC7F.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          display: 'block',
-        }}
-      />
-
-      {/* Gradiente sobre o vídeo para legibilidade do texto */}
       <div
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 60%, transparent 100%)' }}
-      />
+        onClick={e => e.stopPropagation()}
+        style={{
+          position: 'relative', width: '100%', maxWidth: '400px',
+          borderRadius: '20px', overflow: 'hidden',
+          backgroundColor: '#000', boxShadow: '0 32px 80px rgba(0,0,0,0.7)',
+          aspectRatio: '9/16',
+        }}
+      >
+        <video
+          ref={videoRef}
+          src={VIDEO_SRC}
+          playsInline
+          onClick={togglePlay}
+          onTimeUpdate={() => {
+            const v = videoRef.current;
+            if (v) setProgress(v.currentTime / (v.duration || 1));
+          }}
+          onLoadedMetadata={() => setDuration(videoRef.current?.duration ?? 0)}
+          onEnded={() => setPlaying(false)}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', cursor: 'pointer' }}
+        />
 
-      <div className="relative z-10 p-6">
-        <span
+        {/* Gradiente superior */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '80px', background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), transparent)', pointerEvents: 'none' }} />
+
+        {/* Botão fechar */}
+        <button
+          onClick={onClose}
+          aria-label="Fechar vídeo"
           style={{
-            fontSize: '11px',
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 600,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.55)',
+            position: 'absolute', top: '14px', right: '14px',
+            width: '36px', height: '36px', borderRadius: '50%',
+            background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(6px)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer', color: '#fff',
           }}
         >
-          Porto Vale Explica
-        </span>
-        <p
-          style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontWeight: 600,
-            fontSize: '18px',
-            color: '#fff',
-            marginTop: '4px',
-          }}
-        >
-          Entenda o consórcio em<br />2 minutos
-        </p>
-        <p
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '12px',
-            color: 'rgba(255,255,255,0.5)',
-            marginTop: '8px',
-          }}
-        >
-          • Vídeo · 2 min
-        </p>
+          <X size={16} />
+        </button>
+
+        {/* Gradiente inferior + controles */}
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '12px 16px 18px', background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
+          <div
+            onClick={seek}
+            style={{ height: '3px', borderRadius: '2px', background: 'rgba(255,255,255,0.25)', cursor: 'pointer', marginBottom: '10px', position: 'relative' }}
+          >
+            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${progress * 100}%`, background: '#fff', borderRadius: '2px', transition: 'width 0.1s linear' }} />
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <button
+              onClick={togglePlay}
+              aria-label={playing ? 'Pausar' : 'Reproduzir'}
+              style={{
+                width: '40px', height: '40px', borderRadius: '50%',
+                background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(6px)',
+                border: '1px solid rgba(255,255,255,0.25)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', color: '#fff', flexShrink: 0,
+              }}
+            >
+              {playing ? <Pause size={16} fill="white" color="white" /> : <Play size={16} fill="white" color="white" style={{ marginLeft: '2px' }} />}
+            </button>
+            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'rgba(255,255,255,0.75)' }}>
+              {fmt(progress * duration)} / {fmt(duration)}
+            </span>
+          </div>
+        </div>
       </div>
+      <style>{`@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }`}</style>
     </div>
+  );
+}
+
+/* ── Card 1: Vídeo ─────────────────────────────────────────────── */
+function VideoCard() {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  return (
+    <>
+      {modalOpen && <VideoModal onClose={() => setModalOpen(false)} />}
+
+      <div
+        className="relative rounded-3xl overflow-hidden flex flex-col justify-end"
+        style={{ flex: '1 1 0', minHeight: '320px', background: '#111827' }}
+      >
+        {/* Thumbnail — vídeo pausado, sem som */}
+        <video
+          src={VIDEO_SRC}
+          muted
+          playsInline
+          preload="metadata"
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'cover', display: 'block',
+          }}
+        />
+
+        {/* Gradiente */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.25) 50%, transparent 100%)' }}
+        />
+
+        {/* Botão play centralizado */}
+        <button
+          onClick={() => setModalOpen(true)}
+          aria-label="Reproduzir vídeo"
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
+        >
+          <div
+            style={{
+              width: '64px', height: '64px', borderRadius: '50%',
+              background: 'rgba(255,255,255,0.15)',
+              border: '1.5px solid rgba(255,255,255,0.3)',
+              backdropFilter: 'blur(8px)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'background 0.2s, transform 0.2s',
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.28)'; (e.currentTarget as HTMLDivElement).style.transform = 'scale(1.08)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.15)'; (e.currentTarget as HTMLDivElement).style.transform = 'scale(1)'; }}
+          >
+            <Play size={26} fill="white" color="white" style={{ marginLeft: '3px' }} />
+          </div>
+        </button>
+
+        {/* Texto inferior */}
+        <div className="relative z-10 p-6">
+          <span style={{ fontSize: '11px', fontFamily: "'Inter', sans-serif", fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)' }}>
+            Porto Vale Explica
+          </span>
+          <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600, fontSize: '18px', color: '#fff', marginTop: '4px' }}>
+            Entenda o consórcio em<br />2 minutos
+          </p>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginTop: '8px' }}>
+            • Vídeo · 2 min
+          </p>
+        </div>
+      </div>
+    </>
   );
 }
 
