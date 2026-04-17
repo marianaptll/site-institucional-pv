@@ -1,19 +1,20 @@
-import { Home, Globe, Building2, Car, Truck, Sprout, TrendingUp, Zap, Briefcase } from 'lucide-react';
+import { Home, MapPin, Hammer, Car, Truck, Sprout, TrendingUp, Sun, Briefcase } from 'lucide-react';
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router';
 
 const BLUE = '#009cde';
 const SPEED = 0.25;
 
 const products = [
-  { icon: Home,       label: 'Imóvel' },
-  { icon: Globe,      label: 'Terreno' },
-  { icon: Building2,  label: 'Construção e Reforma' },
-  { icon: Car,        label: 'Automóvel' },
-  { icon: Truck,      label: 'Pesados' },
-  { icon: Sprout,     label: 'Agro' },
-  { icon: TrendingUp, label: 'Investimento' },
-  { icon: Zap,        label: 'Placa Solar' },
-  { icon: Briefcase,  label: 'Empresarial' },
+  { icon: Home,       label: 'Imóvel',               href: '/consorcio-imovel' },
+  { icon: MapPin,     label: 'Terreno',               href: '/consorcio-terreno' },
+  { icon: Hammer,     label: 'Construção e Reforma',  href: '/consorcio-construcao-reforma' },
+  { icon: Car,        label: 'Automóvel',             href: '/consorcio-automovel' },
+  { icon: Truck,      label: 'Pesados',               href: '/consorcio-pesados' },
+  { icon: Sprout,     label: 'Agro',                  href: '/consorcio-agro' },
+  { icon: TrendingUp, label: 'Investimento',          href: '/consorcio-investimento' },
+  { icon: Sun,        label: 'Placa Solar',           href: '/consorcio-placa-solar' },
+  { icon: Briefcase,  label: 'Empresarial',           href: '/consorcio-empresarial' },
 ];
 
 const loopItems = [...products, ...products, ...products];
@@ -21,14 +22,24 @@ const loopItems = [...products, ...products, ...products];
 function IconButton({
   icon: Icon,
   label,
+  href,
   isDragging,
 }: {
   icon: React.ElementType;
   label: string;
+  href: string;
   isDragging: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
   const active = hovered && !isDragging;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (!isDragging) {
+      navigate(href);
+      window.scrollTo(0, 0);
+    }
+  };
 
   return (
     <div
@@ -74,8 +85,10 @@ function IconButton({
       </div>
 
       <button
+        onClick={handleClick}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        aria-label={label}
         className="flex items-center justify-center transition-all duration-200"
         style={{
           width: '68px',
@@ -87,6 +100,7 @@ function IconButton({
             ? '0 4px 18px rgba(0,156,222,0.22)'
             : '0 1px 4px rgba(0,0,0,0.06)',
           transform: active ? 'scale(1.1)' : 'scale(1)',
+          cursor: isDragging ? 'grabbing' : 'pointer',
           pointerEvents: isDragging ? 'none' : 'auto',
         }}
       >
@@ -110,7 +124,7 @@ export function ProductCarousel() {
   const lastVelocity = useRef(0);
   const lastMoveX = useRef(0);
 
-  // RAF loop — tudo dentro do effect para evitar closure stale
+  // RAF loop
   useEffect(() => {
     const applyTransform = () => {
       if (trackRef.current) {
@@ -119,7 +133,6 @@ export function ProductCarousel() {
     };
 
     const tick = () => {
-      // Mede loopWidth a cada frame até ter um valor válido
       if (loopWidthRef.current === 0 && trackRef.current) {
         const sw = trackRef.current.scrollWidth;
         if (sw > 0) loopWidthRef.current = sw / 3;
@@ -215,6 +228,7 @@ export function ProductCarousel() {
             key={i}
             icon={item.icon}
             label={item.label}
+            href={item.href}
             isDragging={isDragging}
           />
         ))}
