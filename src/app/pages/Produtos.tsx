@@ -728,8 +728,8 @@ function EditorialProdutoSection({ cfg }: { cfg: EditorialConfig }) {
             <div className="grid grid-cols-3" style={{ gap: '1px', background: '#E5E7EB', borderRadius: '16px', overflow: 'hidden', border: '1px solid #E5E7EB' }}>
               {cfg.stats.map(({ label, value }) => (
                 <div key={label} style={{ background: '#fff', padding: '18px 12px', textAlign: 'center' }}>
+                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: '#9CA3AF', marginBottom: '6px', lineHeight: 1.4 }}>{label}</div>
                   <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(16px, 1.8vw, 22px)', color: '#009cde', lineHeight: 1 }}>{value}</div>
-                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: '#9CA3AF', marginTop: '6px', lineHeight: 1.4 }}>{label}</div>
                 </div>
               ))}
             </div>
