@@ -697,6 +697,7 @@ interface EditorialConfig {
   badgeTopo: string;
   badgeInferior: { value: string; label: string };
   imagem?: string;
+  imagemPosition?: string;
 }
 
 function EditorialProdutoSection({ cfg }: { cfg: EditorialConfig }) {
@@ -745,7 +746,7 @@ function EditorialProdutoSection({ cfg }: { cfg: EditorialConfig }) {
                 <img
                   src={cfg.imagem}
                   alt=""
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: cfg.imagemPosition ?? 'center' }}
                 />
               ) : (
                 <>
@@ -1317,6 +1318,7 @@ const editorialAgro: EditorialConfig = {
   badgeTopo: 'Sem juros · Sem entrada',
   badgeInferior: { value: '26,6%', label: 'do PIB brasileiro é agro' },
   imagem: '/imagens/produto-agro.jpg',
+  imagemPosition: 'left center',
 };
 
 const tiposAgro: TipoItem[] = [
