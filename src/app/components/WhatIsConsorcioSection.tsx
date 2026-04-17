@@ -14,7 +14,15 @@ function VideoModal({ onClose }: { onClose: () => void }) {
   const [duration, setDuration] = useState(0);
 
   useEffect(() => {
-    videoRef.current?.play().catch(() => {});
+    const v = videoRef.current;
+    if (!v) return;
+    const tryPlay = () => v.play().catch(() => {});
+    if (v.readyState >= 3) {
+      tryPlay();
+    } else {
+      v.addEventListener('canplay', tryPlay, { once: true });
+      return () => v.removeEventListener('canplay', tryPlay);
+    }
   }, []);
 
   useEffect(() => {
@@ -62,6 +70,7 @@ function VideoModal({ onClose }: { onClose: () => void }) {
           ref={videoRef}
           src={VIDEO_SRC}
           playsInline
+          preload="auto"
           onClick={togglePlay}
           onTimeUpdate={() => {
             const v = videoRef.current;
@@ -138,7 +147,7 @@ function VideoCard() {
       >
         {/* Thumbnail — vídeo pausado, sem som */}
         <video
-          src={VIDEO_SRC}
+          src={`${VIDEO_SRC}#t=0.001`}
           muted
           playsInline
           preload="metadata"
