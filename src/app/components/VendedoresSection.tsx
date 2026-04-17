@@ -334,14 +334,13 @@ export function VendedoresSection() {
     const abs = Math.abs(offset);
 
     if (isMobile) {
-      // Esconde cards distantes demais (só mostra ±1)
       if (abs > 1) return { display: 'none' };
+      const scale = abs === 0 ? 1 : 0.82;
       return {
         position: 'absolute',
         left: '50%',
-        top: 0,
-        // translateX: centraliza (-50%) + desloca pelo offset
-        transform: `translateX(calc(-50% + ${offset * 68}vw + ${offset * 16}px))`,
+        top: '50%',
+        transform: `translate(calc(-50% + ${offset * 68}vw + ${offset * 16}px), -50%) scale(${scale})`,
         zIndex: abs === 0 ? 3 : 1,
         opacity: abs === 0 ? 1 : 0.55,
         transition: 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease',
