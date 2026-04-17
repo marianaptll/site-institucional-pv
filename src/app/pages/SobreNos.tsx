@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
-const videoFachada = '/videos/video-fachada.mp4';
+const videoFachada = 'https://awxqeqjaatuacnqlvxcw.supabase.co/storage/v1/object/public/videos-projeto/video-fachada2.mp4';
 import { motion } from 'motion/react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -213,9 +213,9 @@ export function SobreNos() {
 
         {/* ── 1. HERO ── */}
         <section style={{ position: 'relative', height: 'clamp(320px, 55vh, 600px)', overflow: 'visible' }}>
-          <img
-            src="/imagens/fachada-pv.png"
-            alt="Fachada Porto Vale"
+          <video
+            src={videoFachada}
+            autoPlay muted loop playsInline
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.55) 100%)' }} />
