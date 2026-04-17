@@ -1,5 +1,5 @@
 import { Menu, X, ChevronDown, Home, Car, Truck, Building2, Sprout, TrendingUp, Zap, Briefcase, Users, Heart, Globe, Handshake, Phone, Info, MessageCircle } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import portoValeLogo from '../../assets/logo-portovale.png';
 import { WHATSAPP_URL } from '../constants';
@@ -164,6 +164,23 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const isHome = location.pathname === '/';
+  const [showCTA, setShowCTA] = useState(!isHome);
+
+  useEffect(() => {
+    setShowCTA(!isHome);
+    if (!isHome) return;
+
+    const hero = document.getElementById('inicio');
+    if (!hero) { setShowCTA(true); return; }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowCTA(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, [isHome]);
 
   const isDropdownActive = (dropdown: NavDropdown) =>
     dropdown.items.some((item) => item.href && location.pathname === item.href);
@@ -230,6 +247,10 @@ export function Header() {
               paddingRight: '16px',
               textDecoration: 'none',
               flexShrink: 0,
+              opacity: showCTA ? 1 : 0,
+              transform: showCTA ? 'translateY(0)' : 'translateY(-6px)',
+              pointerEvents: showCTA ? 'auto' : 'none',
+              transition: 'opacity 0.3s ease, transform 0.3s ease, background-color 0.15s',
             }}
           >
             <MessageCircle size={15} />
