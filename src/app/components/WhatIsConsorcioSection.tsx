@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import heroImage from '../../assets/casacarroemoto.png';
 import { SectionLabel } from './SectionLabel';
@@ -7,41 +7,34 @@ import { SectionLabel } from './SectionLabel';
 /* ── Card 1: Vídeo ─────────────────────────────────────────────── */
 function VideoCard() {
   return (
-    <a
-      href="https://www.youtube.com/@portovaleconsorcio676"
-      target="_blank"
-      rel="noopener noreferrer"
+    <div
       className="relative rounded-3xl overflow-hidden flex flex-col justify-end"
-      style={{
-        flex: '1 1 0',
-        minHeight: '320px',
-        background: '#111827',
-        textDecoration: 'none',
-        cursor: 'pointer',
-      }}
+      style={{ flex: '1 1 0', minHeight: '320px', background: '#111827' }}
     >
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div
-          className="flex items-center justify-center rounded-full"
-          style={{
-            width: '64px',
-            height: '64px',
-            background: 'rgba(255,255,255,0.12)',
-            border: '1.5px solid rgba(255,255,255,0.22)',
-            backdropFilter: 'blur(8px)',
-            transition: 'background 0.2s, transform 0.2s',
-          }}
-        >
-          <Play size={26} fill="white" color="white" style={{ marginLeft: '3px' }} />
-        </div>
-      </div>
-
-      <div
-        className="relative z-10 p-6"
+      {/* Vídeo de fundo — mudo, em loop, sem controles */}
+      <video
+        src="https://awxqeqjaatuacnqlvxcw.supabase.co/storage/v1/object/public/videos-projeto/composicao-1_phetjC7F.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
         style={{
-          background: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%)',
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          display: 'block',
         }}
-      >
+      />
+
+      {/* Gradiente sobre o vídeo para legibilidade do texto */}
+      <div
+        className="absolute inset-0"
+        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 60%, transparent 100%)' }}
+      />
+
+      <div className="relative z-10 p-6">
         <span
           style={{
             fontSize: '11px',
@@ -49,7 +42,7 @@ function VideoCard() {
             fontWeight: 600,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.5)',
+            color: 'rgba(255,255,255,0.55)',
           }}
         >
           Porto Vale Explica
@@ -76,7 +69,7 @@ function VideoCard() {
           • Vídeo · 2 min
         </p>
       </div>
-    </a>
+    </div>
   );
 }
 
