@@ -298,22 +298,44 @@ function VideoPreview({
 
 /* ── Section ─────────────────────────────────────────────────────── */
 export function VendedoresSection() {
-  const [active, setActive] = useState(0);
+  const [active, setActive]       = useState(0);
   const [modalCard, setModalCard] = useState<typeof cards[number] | null>(null);
+  const [isMobile, setIsMobile]   = useState(false);
+  const touchStartX = useRef(0);
   const total = cards.length;
 
   const next = useCallback(() => setActive(prev => (prev + 1) % total), [total]);
-  const prev = () => setActive(prev => (prev - 1 + total) % total);
+  const prev = useCallback(() => setActive(prev => (prev - 1 + total) % total), [total]);
 
-  // Pausa rotação automática enquanto o modal estiver aberto
+  // Detecta mobile
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  // Rotação automática
   useEffect(() => {
     if (modalCard) return;
     const timer = setInterval(next, 10000);
     return () => clearInterval(timer);
   }, [next, modalCard]);
 
+  // Touch swipe
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+  };
+
   const getCardStyle = (offset: number): React.CSSProperties => {
     const abs = Math.abs(offset);
+
+    // Mobile: só exibe o card central
+    if (isMobile && abs > 0) return { display: 'none' };
     if (abs > 2) return { display: 'none' };
 
     const scale      = [1, 0.82, 0.66][abs];
@@ -336,9 +358,12 @@ export function VendedoresSection() {
     };
   };
 
+  // Dimensões do card: maior no mobile para ocupar bem a tela
+  const cardW = isMobile ? 'min(220px, 58vw)' : 'clamp(150px, 22vw, 220px)';
+  const cardH = isMobile ? 'min(390px, 103vw)' : 'clamp(265px, 38vw, 390px)';
+
   return (
     <>
-      {/* Modal */}
       {modalCard && (
         <VideoModal card={modalCard} onClose={() => setModalCard(null)} />
       )}
@@ -351,7 +376,7 @@ export function VendedoresSection() {
             <SectionLabel>Nossos especialistas</SectionLabel>
             <h2 style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800,
-              fontSize: 'clamp(28px, 3vw, 44px)', letterSpacing: '-0.03em',
+              fontSize: 'clamp(22px, 3vw, 44px)', letterSpacing: '-0.03em',
               lineHeight: 1.1, color: '#111827', marginBottom: '14px',
             }}>
               Tire suas dúvidas com{' '}
@@ -368,7 +393,20 @@ export function VendedoresSection() {
           </div>
 
           {/* Carrossel */}
-          <div className="carousel-wrapper" style={{ position: 'relative', height: 'clamp(340px, 50vw, 460px)', marginBottom: '48px', overflow: 'hidden' }}>
+          <div
+            style={{
+              position: 'relative',
+              height: isMobile ? 'auto' : 'clamp(340px, 50vw, 460px)',
+              marginBottom: '48px',
+              overflow: isMobile ? 'visible' : 'hidden',
+              // Mobile: flex centralizado com touch
+              display: isMobile ? 'flex' : 'block',
+              flexDirection: isMobile ? 'column' : undefined,
+              alignItems: isMobile ? 'center' : undefined,
+            }}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
             {cards.map((card, i) => {
               const offset = ((i - active + total) % total);
               const normalizedOffset = offset > total / 2 ? offset - total : offset;
@@ -394,14 +432,13 @@ export function VendedoresSection() {
 
                   {/* Card */}
                   <div style={{
-                    width: 'clamp(150px, 22vw, 220px)', height: 'clamp(265px, 38vw, 390px)', borderRadius: '20px',
+                    width: cardW, height: cardH, borderRadius: '20px',
                     overflow: 'hidden', background: '#D1D5DB',
                     boxShadow: isCenter ? '0 24px 60px rgba(0,0,0,0.18)' : '0 8px 24px rgba(0,0,0,0.10)',
                     position: 'relative',
                   }}>
                     <VideoPreview src={card.videoSrc} index={i} isCenter={isCenter} />
 
-                    {/* Botão play — só no card central, abre o modal */}
                     {isCenter && (
                       <button
                         onClick={() => setModalCard(card)}
@@ -417,7 +454,6 @@ export function VendedoresSection() {
                           background: 'rgba(255,255,255,0.9)',
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
                           boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
-                          transition: 'transform 0.2s, box-shadow 0.2s',
                         }}>
                           <svg width="20" height="20" viewBox="0 0 20 20" fill="#111827">
                             <path d="M5 3.5l12 6.5-12 6.5V3.5z" />
@@ -426,7 +462,6 @@ export function VendedoresSection() {
                       </button>
                     )}
 
-                    {/* Gradiente base */}
                     <div style={{
                       position: 'absolute', bottom: 0, left: 0, right: 0, height: '80px',
                       background: 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)',
@@ -440,15 +475,8 @@ export function VendedoresSection() {
 
           {/* Navegação */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', alignItems: 'center' }}>
-            <button
-              onClick={prev}
-              aria-label="Anterior"
-              style={{
-                width: '40px', height: '40px', borderRadius: '50%',
-                border: '1px solid rgba(0,0,0,0.15)', background: 'transparent',
-                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}
-            >
+            <button onClick={prev} aria-label="Anterior"
+              style={{ width: '40px', height: '40px', borderRadius: '50%', border: '1px solid rgba(0,0,0,0.15)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M10 3L5 8l5 5" stroke="#374151" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -456,30 +484,14 @@ export function VendedoresSection() {
 
             <div style={{ display: 'flex', gap: '6px' }}>
               {cards.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActive(i)}
-                  aria-label={`Ir para card ${i + 1}`}
-                  style={{
-                    width: active === i ? '20px' : '6px', height: '6px',
-                    borderRadius: '3px',
-                    background: active === i ? '#0055c4' : 'rgba(0,0,0,0.2)',
-                    border: 'none', cursor: 'pointer', padding: 0,
-                    transition: 'all 0.3s ease',
-                  }}
+                <button key={i} onClick={() => setActive(i)} aria-label={`Ir para card ${i + 1}`}
+                  style={{ width: active === i ? '20px' : '6px', height: '6px', borderRadius: '3px', background: active === i ? '#0055c4' : 'rgba(0,0,0,0.2)', border: 'none', cursor: 'pointer', padding: 0, transition: 'all 0.3s ease' }}
                 />
               ))}
             </div>
 
-            <button
-              onClick={next}
-              aria-label="Próximo"
-              style={{
-                width: '40px', height: '40px', borderRadius: '50%',
-                border: '1px solid rgba(0,0,0,0.15)', background: 'transparent',
-                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}
-            >
+            <button onClick={next} aria-label="Próximo"
+              style={{ width: '40px', height: '40px', borderRadius: '50%', border: '1px solid rgba(0,0,0,0.15)', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M6 3l5 5-5 5" stroke="#374151" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
