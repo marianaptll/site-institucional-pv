@@ -1,4 +1,5 @@
 import { NumerosBar } from './NumerosBar';
+import { Link } from 'react-router';
 
 export function PortoValeSection() {
   return (
@@ -63,8 +64,9 @@ export function PortoValeSection() {
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '16px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, maxWidth: '420px', marginBottom: '40px' }}>
               A Porto Vale é referência em consórcio Porto Seguro, unindo inovação, segurança e excelência para transformar sonhos em realidade.
             </p>
-            <a
-              href="#"
+            <Link
+              to="/sobre-nos"
+              onClick={() => window.scrollTo(0, 0)}
               style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '40px', fontFamily: "'Inter', sans-serif", fontSize: '15px', fontWeight: 600, color: '#009cde', textDecoration: 'none', borderBottom: '1px solid rgba(0,156,222,0.4)', paddingBottom: '2px', transition: 'color 0.2s, border-color 0.2s' }}
               onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#fff'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(255,255,255,0.4)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#009cde'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(0,156,222,0.4)'; }}
@@ -73,7 +75,7 @@ export function PortoValeSection() {
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-            </a>
+            </Link>
             <div style={{ width: '100%', height: '1px', background: 'linear-gradient(to right, rgba(255,255,255,0.12), transparent)' }} />
           </div>
         </div>
