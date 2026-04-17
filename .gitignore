@@ -8,3 +8,6 @@ public/videos/*.mp4
 public/videos/*.mov
 
 .vercel
+
+# Garantir que public/imagens/ seja sempre incluída
+!public/imagens/

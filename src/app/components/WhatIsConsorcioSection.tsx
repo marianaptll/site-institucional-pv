@@ -70,6 +70,7 @@ function VideoModal({ onClose }: { onClose: () => void }) {
           ref={videoRef}
           src={VIDEO_SRC}
           playsInline
+          autoPlay
           preload="auto"
           onClick={togglePlay}
           onTimeUpdate={() => {
