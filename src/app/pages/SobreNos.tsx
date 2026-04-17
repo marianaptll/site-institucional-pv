@@ -214,9 +214,9 @@ export function SobreNos() {
 
         {/* ── 1. HERO ── */}
         <section style={{ position: 'relative', height: 'clamp(320px, 55vh, 600px)', overflow: 'visible' }}>
-          <video
-            src={videoFachada}
-            autoPlay muted loop playsInline
+          <img
+            src="/imagens/fachada-pv-vazia.png"
+            alt="Fachada Porto Vale"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.55) 100%)' }} />
