@@ -334,9 +334,18 @@ export function VendedoresSection() {
   const getCardStyle = (offset: number): React.CSSProperties => {
     const abs = Math.abs(offset);
 
-    // Mobile: só exibe o card central
+    // Mobile: esconde todos exceto o central
     if (isMobile && abs > 0) return { display: 'none' };
     if (abs > 2) return { display: 'none' };
+
+    // Mobile: card central em fluxo normal (sem absolute) para o container ter altura
+    if (isMobile) {
+      return {
+        position: 'relative',
+        transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
+        cursor: 'default',
+      };
+    }
 
     const scale      = [1, 0.82, 0.66][abs];
     const zIndex     = [5, 4, 3][abs];
