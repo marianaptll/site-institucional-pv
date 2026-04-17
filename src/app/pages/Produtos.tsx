@@ -835,7 +835,7 @@ const editorialImovel: EditorialConfig = {
   stats: [{ label: 'Crédito a partir de', value: 'R$ 70 mil' }, { label: 'Taxa de juros', value: '0% a.a.' }, { label: 'Contemplação', value: 'Mensal' }],
   badgeTopo: 'Sem juros · Sem entrada',
   badgeInferior: { value: '+30 anos', label: 'de experiência no mercado' },
-  imagem: '/imagens/produto-imóvel.jpg',
+  imagem: '/imagens/produto-imovel.jpg',
 };
 
 const tiposImovel: TipoItem[] = [
@@ -1067,6 +1067,7 @@ const editorialAutomovel: EditorialConfig = {
   ],
   badgeTopo: 'Sem juros · Sem entrada',
   badgeInferior: { value: 'Menor taxa', label: 'de administração do mercado' },
+  imagem: '/imagens/produto-auto.jpg',
 };
 
 const tiposAutomovel: TipoItem[] = [
@@ -1177,6 +1178,7 @@ const editorialTerreno: EditorialConfig = {
   ],
   badgeTopo: 'Sem juros · Sem entrada',
   badgeInferior: { value: 'Parcela', label: 'reduzida até a contemplação' },
+  imagem: '/imagens/produto-terreno.jpg',
 };
 
 const tiposTerreno: TipoItem[] = [
