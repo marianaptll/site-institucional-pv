@@ -307,7 +307,6 @@ export function VendedoresSection() {
   const next = useCallback(() => setActive(prev => (prev + 1) % total), [total]);
   const prev = useCallback(() => setActive(prev => (prev - 1 + total) % total), [total]);
 
-  // Detecta mobile
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 640);
     check();
@@ -315,37 +314,42 @@ export function VendedoresSection() {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  // Rotação automática
   useEffect(() => {
     if (modalCard) return;
     const timer = setInterval(next, 10000);
     return () => clearInterval(timer);
   }, [next, modalCard]);
 
-  // Touch swipe
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
   const onTouchEnd = (e: React.TouchEvent) => {
     const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+    if (Math.abs(diff) > 40) diff > 0 ? next() : prev();
   };
 
+  // Largura do card mobile: 68vw → sobram ~16vw de cada lado para o peek
+  // Step entre cards = 68vw + 16px (gap)
   const getCardStyle = (offset: number): React.CSSProperties => {
     const abs = Math.abs(offset);
 
-    // Mobile: esconde todos exceto o central
-    if (isMobile && abs > 0) return { display: 'none' };
-    if (abs > 2) return { display: 'none' };
-
-    // Mobile: card central em fluxo normal (sem absolute) para o container ter altura
     if (isMobile) {
+      // Esconde cards distantes demais (só mostra ±1)
+      if (abs > 1) return { display: 'none' };
       return {
-        position: 'relative',
-        transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
-        cursor: 'default',
+        position: 'absolute',
+        left: '50%',
+        top: 0,
+        // translateX: centraliza (-50%) + desloca pelo offset
+        transform: `translateX(calc(-50% + ${offset * 68}vw + ${offset * 16}px))`,
+        zIndex: abs === 0 ? 3 : 1,
+        opacity: abs === 0 ? 1 : 0.55,
+        transition: 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease',
+        cursor: abs !== 0 ? 'pointer' : 'default',
       };
     }
+
+    if (abs > 2) return { display: 'none' };
 
     const scale      = [1, 0.82, 0.66][abs];
     const zIndex     = [5, 4, 3][abs];
@@ -367,9 +371,10 @@ export function VendedoresSection() {
     };
   };
 
-  // Dimensões do card: maior no mobile para ocupar bem a tela
-  const cardW = isMobile ? 'min(220px, 58vw)' : 'clamp(150px, 22vw, 220px)';
-  const cardH = isMobile ? 'min(390px, 103vw)' : 'clamp(265px, 38vw, 390px)';
+  // Dimensões do card
+  const cardW = isMobile ? '68vw' : 'clamp(150px, 22vw, 220px)';
+  const cardH = isMobile ? 'min(370px, 110vw)' : 'clamp(265px, 38vw, 390px)';
+  const containerH = isMobile ? 'min(370px, 110vw)' : 'clamp(340px, 50vw, 460px)';
 
   return (
     <>
@@ -381,7 +386,7 @@ export function VendedoresSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16">
 
           {/* Header */}
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <SectionLabel>Nossos especialistas</SectionLabel>
             <h2 style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800,
@@ -405,13 +410,9 @@ export function VendedoresSection() {
           <div
             style={{
               position: 'relative',
-              height: isMobile ? 'auto' : 'clamp(340px, 50vw, 460px)',
-              marginBottom: '48px',
-              overflow: isMobile ? 'visible' : 'hidden',
-              // Mobile: flex centralizado com touch
-              display: isMobile ? 'flex' : 'block',
-              flexDirection: isMobile ? 'column' : undefined,
-              alignItems: isMobile ? 'center' : undefined,
+              height: containerH,
+              overflow: 'hidden',
+              marginBottom: '16px',
             }}
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
@@ -428,16 +429,18 @@ export function VendedoresSection() {
                   style={style}
                   onClick={() => !isCenter && setActive(i)}
                 >
-                  {/* Tópico */}
-                  <div style={{ textAlign: 'center', marginBottom: '10px' }}>
-                    <span style={{
-                      fontFamily: "'Inter', sans-serif", fontSize: '12px', fontWeight: 600,
-                      color: '#374151', background: 'rgba(0,0,0,0.07)',
-                      padding: '4px 14px', borderRadius: '999px',
-                    }}>
-                      {card.topic}
-                    </span>
-                  </div>
+                  {/* Tópico — só no desktop (no mobile fica abaixo do carrossel) */}
+                  {!isMobile && (
+                    <div style={{ textAlign: 'center', marginBottom: '10px' }}>
+                      <span style={{
+                        fontFamily: "'Inter', sans-serif", fontSize: '12px', fontWeight: 600,
+                        color: '#374151', background: 'rgba(0,0,0,0.07)',
+                        padding: '4px 14px', borderRadius: '999px',
+                      }}>
+                        {card.topic}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Card */}
                   <div style={{
@@ -481,6 +484,20 @@ export function VendedoresSection() {
               );
             })}
           </div>
+
+          {/* Tópico do card ativo — só no mobile, abaixo do carrossel */}
+          {isMobile && (
+            <div style={{ textAlign: 'center', marginBottom: '20px', minHeight: '28px' }}>
+              <span style={{
+                fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600,
+                color: '#374151', background: 'rgba(0,0,0,0.07)',
+                padding: '5px 16px', borderRadius: '999px',
+                transition: 'opacity 0.3s',
+              }}>
+                {cards[active].topic}
+              </span>
+            </div>
+          )}
 
           {/* Navegação */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', alignItems: 'center' }}>
