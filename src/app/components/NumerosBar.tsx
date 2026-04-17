@@ -69,10 +69,10 @@ function AnimatedStat({ stat, index, total }: { stat: typeof stats[number]; inde
 
 export function NumerosBar() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16" style={{ paddingTop: '64px', paddingBottom: '72px' }}>
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16" style={{ paddingTop: 'clamp(24px, 5vw, 64px)', paddingBottom: 'clamp(40px, 6vw, 72px)' }}>
       <div
         className="grid grid-cols-2 lg:grid-cols-4"
-        style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '48px', gap: '0' }}
+        style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 'clamp(24px, 4vw, 48px)', gap: '0' }}
       >
         {stats.map((s, i) => (
           <AnimatedStat key={i} stat={s} index={i} total={stats.length} />
