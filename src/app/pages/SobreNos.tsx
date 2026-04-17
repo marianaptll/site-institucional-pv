@@ -9,6 +9,7 @@ import { FAQItem } from '../components/FAQItem';
 import type { FAQEntry } from '../components/FAQItem';
 import { Users, FileText, MapPin, TrendingUp, Star, Globe, Award, BarChart2, ArrowRight } from 'lucide-react';
 import { SectionLabel } from '../components/SectionLabel';
+import { NumerosBar } from '../components/NumerosBar';
 
 const faqsSobreNos: FAQEntry[] = [
   {
@@ -375,37 +376,8 @@ export function SobreNos() {
         </section>
 
         {/* ── 4. NÚMEROS ── */}
-        <section style={{ backgroundColor: '#111827', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
-          <div className="max-w-7xl mx-auto">
-
-            {/* Título */}
-            <div style={{ marginBottom: '64px' }}>
-              <SectionLabel>Resultados</SectionLabel>
-              <h2
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontWeight: 800,
-                  fontSize: 'clamp(26px, 3vw, 42px)',
-                  lineHeight: 1.1,
-                  letterSpacing: '-0.03em',
-                  color: '#fff',
-                  marginTop: '4px',
-                }}
-              >
-                Porto Vale{' '}
-                <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>
-                  em números
-                </span>
-              </h2>
-            </div>
-
-            {/* Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ gap: '1px', background: 'rgba(255,255,255,0.06)', borderRadius: '20px', overflow: 'hidden' }}>
-              {numerosStats.map((stat, i) => (
-                <StatCard key={i} {...stat} />
-              ))}
-            </div>
-          </div>
+        <section style={{ backgroundColor: '#111827' }}>
+          <NumerosBar />
         </section>
 
         {/* ── 5. CRESCIMENTO RECENTE ── */}
