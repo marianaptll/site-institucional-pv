@@ -118,7 +118,7 @@ export function ComparisonSection() {
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontWeight: 800,
-                fontSize: 'clamp(36px, 4vw, 54px)',
+                fontSize: 'clamp(22px, 4vw, 54px)',
                 color: '#111827',
                 lineHeight: 1.1,
                 letterSpacing: '-0.03em',

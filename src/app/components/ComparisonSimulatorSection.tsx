@@ -221,7 +221,7 @@ export function ComparisonSimulatorSection() {
           {/* ══ ESQUERDA: Comparativo ══ */}
           <div>
             <SectionLabel>Comparativo</SectionLabel>
-            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(28px, 3.5vw, 50px)', color: '#111827', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: '16px' }}>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(22px, 3.5vw, 50px)', color: '#111827', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: '16px' }}>
               Consórcio ou{' '}
               <span style={{ display: 'block', fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#0055c4' }}>
                 financiamento?
@@ -244,9 +244,9 @@ export function ComparisonSimulatorSection() {
                   zIndex: 10,
                 }}
               >
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', backgroundColor: '#0055c4', borderRadius: '999px', padding: '4px 12px' }}>
-                  <span style={{ fontSize: '9px', color: '#93C5FD' }}>★</span>
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#fff' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', backgroundColor: '#0055c4', borderRadius: '8px', padding: '4px 8px', maxWidth: '100%' }}>
+                  <span style={{ fontSize: '9px', color: '#93C5FD', flexShrink: 0 }}>★</span>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(8px, 2vw, 10px)', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#fff', whiteSpace: 'nowrap' }}>
                     Melhor escolha
                   </span>
                 </div>
