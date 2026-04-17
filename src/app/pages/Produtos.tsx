@@ -1318,6 +1318,7 @@ const editorialAgro: EditorialConfig = {
   badgeTopo: 'Sem juros · Sem entrada',
   badgeInferior: { value: '26,6%', label: 'do PIB brasileiro é agro' },
   imagem: '/imagens/produto-agro.jpg',
+  imagemPosition: '70% center',
 };
 
 const tiposAgro: TipoItem[] = [
