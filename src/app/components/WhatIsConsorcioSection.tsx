@@ -209,23 +209,24 @@ function VideoCard() {
 function TextCard() {
   return (
     <div
-      className="relative rounded-3xl flex flex-col justify-between overflow-hidden"
+      className="relative rounded-3xl flex flex-col justify-between"
       style={{
         flex: '1 1 0',
         minHeight: '320px',
         background: '#0055c4',
         padding: '24px',
+        overflow: 'visible',
       }}
     >
       {/* Decorative circles */}
       <div
         style={{
           position: 'absolute',
-          top: '-48px',
-          right: '-48px',
-          width: '200px',
-          height: '200px',
-          borderRadius: '50%',
+          top: '0',
+          right: '0',
+          width: '120px',
+          height: '120px',
+          borderRadius: '0 24px 0 100%',
           background: 'rgba(255,255,255,0.05)',
           pointerEvents: 'none',
         }}
