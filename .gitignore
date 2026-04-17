@@ -6,3 +6,5 @@ dist/
 src/videos/
 public/videos/*.mp4
 public/videos/*.mov
+
+.vercel

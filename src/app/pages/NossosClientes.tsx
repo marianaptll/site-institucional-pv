@@ -6,6 +6,7 @@ import { ChatWidget } from '../components/ChatWidget';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { TestimonialsColumn } from '../components/ui/testimonials-columns';
 import { WHATSAPP_URL } from '../constants';
+import { SectionLabel } from '../components/SectionLabel';
 
 // ── Depoimentos ──────────────────────────────────────────────────────────────
 const testimonials = [
@@ -110,12 +111,7 @@ export function NossosClientes() {
           <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,156,222,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
           <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-              <div style={{ width: '28px', height: '2px', backgroundColor: '#009cde' }} />
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#009cde' }}>
-                Clientes
-              </span>
-            </div>
+            <SectionLabel center>Clientes</SectionLabel>
             <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(32px, 4vw, 64px)', lineHeight: 1.05, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 24px' }}>
               Experiência do{' '}
               <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>Cliente</span>
@@ -133,10 +129,7 @@ export function NossosClientes() {
 
               {/* Texto */}
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-                  <div style={{ width: '28px', height: '2px', backgroundColor: '#2563EB' }} />
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#2563EB' }}>Histórias reais</span>
-                </div>
+                <SectionLabel>Histórias reais</SectionLabel>
                 <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 2.8vw, 44px)', lineHeight: 1.08, letterSpacing: '-0.03em', marginBottom: '16px' }}>
                   <span style={{ color: '#111827' }}>Clientes reais,</span><br />
                   <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>conquistas </span>
@@ -221,13 +214,7 @@ export function NossosClientes() {
               viewport={{ once: true }}
               style={{ textAlign: 'center', marginBottom: '48px' }}
             >
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-                <div style={{ width: '28px', height: '2px', backgroundColor: '#2563EB' }} />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#2563EB' }}>
-                  Depoimentos
-                </span>
-                <div style={{ width: '28px', height: '2px', backgroundColor: '#2563EB' }} />
-              </div>
+              <SectionLabel>Depoimentos</SectionLabel>
               <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 42px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#111827', marginBottom: '24px' }}>
                 O que nossos clientes{' '}
                 <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>falam da gente</span>

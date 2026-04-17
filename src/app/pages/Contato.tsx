@@ -5,14 +5,15 @@ import { ChatWidget } from '../components/ChatWidget';
 import { MapaLeaflet } from '../components/MapaLeaflet';
 import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
 import { WHATSAPP_URL } from '../constants';
+import { SectionLabel } from '../components/SectionLabel';
 
 const unidades = [
   {
     city: 'São José dos Campos',
     role: 'Matriz',
     address: 'Av. Comendador Vicente de Paulo Penido, 374 — Parque Res. Aquarius, São José dos Campos, SP, 12246-856',
-    lat: -23.2193,
-    lng: -45.8888,
+    lat: -23.2174,
+    lng: -45.9028,
   },
   {
     city: 'Jacareí',
@@ -25,8 +26,8 @@ const unidades = [
     city: 'São Paulo',
     role: 'Filial',
     address: 'Av. Luiz Dumont Villares, 1160 — 11º andar, salas 111–116, Jardim São Paulo, SP, 02085-100',
-    lat: -23.4875,
-    lng: -46.6063,
+    lat: -23.4973,
+    lng: -46.6127,
   },
 ];
 
@@ -53,12 +54,7 @@ export function Contato() {
           <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,156,222,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
           <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-              <div style={{ width: '28px', height: '2px', backgroundColor: '#009cde' }} />
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#009cde' }}>
-                Fale com a gente
-              </span>
-            </div>
+            <SectionLabel center>Fale com a gente</SectionLabel>
             <h1
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -86,12 +82,7 @@ export function Contato() {
 
               {/* Esquerda — unidades + canais */}
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-                  <div style={{ width: '28px', height: '2px', backgroundColor: '#2563EB' }} />
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#2563EB' }}>
-                    Nossas unidades
-                  </span>
-                </div>
+                <SectionLabel>Nossas unidades</SectionLabel>
                 <h2
                   style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",

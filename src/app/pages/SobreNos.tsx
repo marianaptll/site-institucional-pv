@@ -1,12 +1,14 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
 const videoFachada = '/videos/video-fachada.mp4';
+import { motion } from 'motion/react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ChatWidget } from '../components/ChatWidget';
 import { FAQItem } from '../components/FAQItem';
 import type { FAQEntry } from '../components/FAQItem';
 import { Users, FileText, MapPin, TrendingUp, Star, Globe, Award, BarChart2, ArrowRight } from 'lucide-react';
+import { SectionLabel } from '../components/SectionLabel';
 
 const faqsSobreNos: FAQEntry[] = [
   {
@@ -28,10 +30,42 @@ const faqsSobreNos: FAQEntry[] = [
 ];
 
 const numerosStats = [
-  { icon: Users,      value: '+53 mil',     label: 'clientes atendidos' },
-  { icon: FileText,   value: '+80 mil',     label: 'cotas de consórcio negociadas' },
-  { icon: TrendingUp, value: '+R$ 20,5 bi', label: 'em crédito comercializado' },
-  { icon: MapPin,     value: '+3 mil',      label: 'cidades com presença no Brasil' },
+  {
+    icon: Users,
+    value: '+53 mil',
+    label: 'clientes atendidos',
+    idleAnimate: { scale: [1, 1.14, 1] } as object,
+    idleTransition: { duration: 2.2, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { scale: [1, 1.3, 1] } as object,
+    hoverTransition: { duration: 0.45, repeat: Infinity, ease: 'easeInOut' as const },
+  },
+  {
+    icon: FileText,
+    value: '+80 mil',
+    label: 'cotas de consórcio negociadas',
+    idleAnimate: { rotate: [-4, 4, -4] } as object,
+    idleTransition: { duration: 3, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { rotate: [-8, 8, -8] } as object,
+    hoverTransition: { duration: 0.6, repeat: Infinity, ease: 'easeInOut' as const },
+  },
+  {
+    icon: TrendingUp,
+    value: '+R$ 20,5 bi',
+    label: 'em crédito comercializado',
+    idleAnimate: { y: [0, -5, 0] } as object,
+    idleTransition: { duration: 2.4, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { y: [0, -9, 0] } as object,
+    hoverTransition: { duration: 0.5, repeat: Infinity, ease: 'easeInOut' as const },
+  },
+  {
+    icon: MapPin,
+    value: '+3 mil',
+    label: 'cidades com presença no Brasil',
+    idleAnimate: { y: [0, -4, 0] } as object,
+    idleTransition: { duration: 2.8, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { y: [0, -8, 0] } as object,
+    hoverTransition: { duration: 0.5, repeat: Infinity, ease: 'easeInOut' as const },
+  },
 ];
 
 const diferenciais = [
@@ -39,35 +73,128 @@ const diferenciais = [
     icon: Star,
     title: 'Especialização em consórcios e seguros',
     desc: 'Atuação focada em planejamento financeiro e aquisição de bens.',
+    idleAnimate: { scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] } as object,
+    idleTransition: { duration: 2.5, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { scale: [1, 1.4, 1], rotate: [0, 20, -20, 0] } as object,
+    hoverTransition: { duration: 0.4, repeat: Infinity, ease: 'easeInOut' as const },
   },
   {
     icon: Globe,
     title: 'Estrutura nacional',
     desc: 'Atendimento consultivo para clientes em todo o Brasil.',
+    idleAnimate: { rotate: [0, 7, -7, 0] } as object,
+    idleTransition: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { rotate: [0, 16, -16, 0] } as object,
+    hoverTransition: { duration: 0.65, repeat: Infinity, ease: 'easeInOut' as const },
   },
   {
     icon: Award,
     title: 'Maior corretora da rede Porto',
     desc: 'Acesso a soluções financeiras consolidadas no mercado.',
+    idleAnimate: { y: [0, -5, 0] } as object,
+    idleTransition: { duration: 2.2, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { y: [0, -10, 0] } as object,
+    hoverTransition: { duration: 0.45, repeat: Infinity, ease: 'easeInOut' as const },
   },
   {
     icon: BarChart2,
     title: 'Histórico consistente de resultados',
     desc: 'Reconhecimento recorrente pelo desempenho comercial.',
+    idleAnimate: { scale: [1, 1.16, 1] } as object,
+    idleTransition: { duration: 2, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { scale: [1, 1.35, 1] } as object,
+    hoverTransition: { duration: 0.4, repeat: Infinity, ease: 'easeInOut' as const },
   },
 ];
 
-function Label({ text, light }: { text: string; light?: boolean }) {
-  const color = light ? '#009cde' : '#2563EB';
+type StatItem = typeof numerosStats[number];
+type DiferencialItem = typeof diferenciais[number];
+
+function StatCard({ icon: Icon, value, label, idleAnimate, idleTransition, hoverAnimate, hoverTransition }: StatItem) {
+  const [hovered, setHovered] = useState(false);
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-      <div style={{ width: '28px', height: '2px', backgroundColor: color }} />
-      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color }}>
-        {text}
-      </span>
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        backgroundColor: hovered ? '#1a2537' : '#111827',
+        padding: 'clamp(20px, 4vw, 40px) clamp(16px, 3vw, 32px)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        transition: 'background-color 0.3s',
+        cursor: 'default',
+      }}
+    >
+      <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: hovered ? 'rgba(0,156,222,0.22)' : 'rgba(0,156,222,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.3s' }}>
+        <motion.div
+          animate={hovered ? hoverAnimate : idleAnimate}
+          transition={hovered ? hoverTransition : idleTransition}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Icon size={20} color="#009cde" strokeWidth={1.8} />
+        </motion.div>
+      </div>
+      <div
+        style={{
+          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontWeight: 800,
+          fontSize: 'clamp(26px, 3vw, 40px)',
+          letterSpacing: '-0.02em',
+          lineHeight: 1,
+          color: '#009cde',
+        }}
+      >
+        {value}
+      </div>
+      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6, margin: 0 }}>
+        {label}
+      </p>
     </div>
   );
 }
+
+function DiferencialCard({ icon: Icon, title, desc, idleAnimate, idleTransition, hoverAnimate, hoverTransition }: DiferencialItem) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: '#fff',
+        borderRadius: '20px',
+        padding: '32px 28px',
+        border: `1px solid ${hovered ? '#2563EB' : '#E5E7EB'}`,
+        boxShadow: hovered ? '0 8px 24px rgba(37,99,235,0.12)' : 'none',
+        transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
+        transition: 'border-color 0.3s, box-shadow 0.3s, transform 0.3s',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        cursor: 'default',
+      }}
+    >
+      <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <motion.div
+          animate={hovered ? hoverAnimate : idleAnimate}
+          transition={hovered ? hoverTransition : idleTransition}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Icon size={22} color="#2563EB" strokeWidth={1.6} />
+        </motion.div>
+      </div>
+      <div>
+        <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '15px', color: '#111827', lineHeight: 1.4, marginBottom: '8px' }}>
+          {title}
+        </h3>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#6B7280', lineHeight: 1.7, margin: 0 }}>
+          {desc}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 
 export function SobreNos() {
   const navigate = useNavigate();
@@ -171,7 +298,7 @@ export function SobreNos() {
           <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,156,222,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
           <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-            <Label text="Sobre a Porto Vale" light />
+            <SectionLabel center>Sobre a Porto Vale</SectionLabel>
             <h1
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -216,7 +343,7 @@ export function SobreNos() {
 
               {/* Direita — texto */}
               <div>
-                <Label text="Quem somos" />
+                <SectionLabel>Quem somos</SectionLabel>
                 <h2
                   style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -253,7 +380,7 @@ export function SobreNos() {
 
             {/* Título */}
             <div style={{ marginBottom: '64px' }}>
-              <Label text="Resultados" light />
+              <SectionLabel>Resultados</SectionLabel>
               <h2
                 style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -273,37 +400,9 @@ export function SobreNos() {
             </div>
 
             {/* Cards */}
-            <div className="grid grid-cols-2 lg:grid-cols-4" style={{ gap: '1px', background: 'rgba(255,255,255,0.06)', borderRadius: '20px', overflow: 'hidden' }}>
-              {numerosStats.map(({ icon: Icon, value, label }, i) => (
-                <div
-                  key={i}
-                  style={{
-                    backgroundColor: '#111827',
-                    padding: '40px 32px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '16px',
-                  }}
-                >
-                  <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(0,156,222,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Icon size={20} color="#009cde" strokeWidth={1.8} />
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      fontWeight: 800,
-                      fontSize: 'clamp(26px, 3vw, 40px)',
-                      letterSpacing: '-0.02em',
-                      lineHeight: 1,
-                      color: '#009cde',
-                    }}
-                  >
-                    {value}
-                  </div>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6, margin: 0 }}>
-                    {label}
-                  </p>
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ gap: '1px', background: 'rgba(255,255,255,0.06)', borderRadius: '20px', overflow: 'hidden' }}>
+              {numerosStats.map((stat, i) => (
+                <StatCard key={i} {...stat} />
               ))}
             </div>
           </div>
@@ -316,7 +415,7 @@ export function SobreNos() {
 
               {/* Esquerda */}
               <div className="lg:sticky lg:top-28">
-                <Label text="Crescimento recente" />
+                <SectionLabel>Crescimento recente</SectionLabel>
                 <h2
                   style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -362,7 +461,7 @@ export function SobreNos() {
               {/* Direita — 3 stat cards */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
-                <div style={{ background: '#111827', borderRadius: '20px', padding: '36px 32px' }}>
+                <div style={{ background: '#111827', borderRadius: '20px', padding: 'clamp(20px, 4vw, 36px) clamp(16px, 3vw, 32px)' }}>
                   <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(32px, 4vw, 52px)', lineHeight: 1, color: '#009cde', marginBottom: '8px' }}>
                     20 mil
                   </div>
@@ -375,7 +474,7 @@ export function SobreNos() {
                   </div>
                 </div>
 
-                <div style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: '20px', padding: '36px 32px' }}>
+                <div style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: '20px', padding: 'clamp(20px, 4vw, 36px) clamp(16px, 3vw, 32px)' }}>
                   <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(32px, 4vw, 52px)', lineHeight: 1, color: '#111827', marginBottom: '8px' }}>
                     R$ 5,3 bi
                   </div>
@@ -388,7 +487,7 @@ export function SobreNos() {
                   </div>
                 </div>
 
-                <div style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: '20px', padding: '36px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
+                <div style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: '20px', padding: 'clamp(20px, 4vw, 36px) clamp(16px, 3vw, 32px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
                   <div>
                     <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(32px, 4vw, 52px)', lineHeight: 1, color: '#111827', marginBottom: '8px' }}>
                       600
@@ -412,7 +511,7 @@ export function SobreNos() {
           <div className="max-w-7xl mx-auto">
 
             <div style={{ marginBottom: '56px' }}>
-              <Label text="Diferenciais" />
+              <SectionLabel>Diferenciais</SectionLabel>
               <h2
                 style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -432,31 +531,8 @@ export function SobreNos() {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4" style={{ gap: '16px' }}>
-              {diferenciais.map(({ icon: Icon, title, desc }, i) => (
-                <div
-                  key={i}
-                  style={{
-                    background: '#fff',
-                    borderRadius: '20px',
-                    padding: '32px 28px',
-                    border: '1px solid #E5E7EB',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '16px',
-                  }}
-                >
-                  <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Icon size={22} color="#2563EB" strokeWidth={1.6}/>
-                  </div>
-                  <div>
-                    <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '15px', color: '#111827', lineHeight: 1.4, marginBottom: '8px' }}>
-                      {title}
-                    </h3>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#6B7280', lineHeight: 1.7, margin: 0 }}>
-                      {desc}
-                    </p>
-                  </div>
-                </div>
+              {diferenciais.map((item, i) => (
+                <DiferencialCard key={i} {...item} />
               ))}
             </div>
           </div>
@@ -516,7 +592,7 @@ export function SobreNos() {
         <section style={{ backgroundColor: '#fff', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div style={{ maxWidth: '860px', margin: '0 auto' }}>
             <div style={{ marginBottom: '48px' }}>
-              <Label text="Perguntas frequentes" />
+              <SectionLabel>Perguntas frequentes</SectionLabel>
               <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 40px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#111827', marginTop: '4px' }}>
                 Dúvidas sobre{' '}
                 <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>

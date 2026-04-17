@@ -1,5 +1,14 @@
+import { Link } from 'react-router';
 import logoPortoBank from '../../assets/logo-portobank.png';
 import { WHATSAPP_URL } from '../constants';
+
+function FooterLink({ to, className, style, children }: { to: string; className?: string; style?: React.CSSProperties; children: React.ReactNode }) {
+  return (
+    <Link to={to} className={className} style={style} onClick={() => window.scrollTo(0, 0)}>
+      {children}
+    </Link>
+  );
+}
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -81,17 +90,25 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5">
               {[
-                'Sobre a Porto Vale',
-                'Nossa cultura',
-                'Trabalhe conosco',
-                'Nossos clientes',
-                'Portal do colaborador',
-                'Portal de transparência',
-              ].map((label) => (
+                { label: 'Sobre a Porto Vale',       to: '/sobre-nos' },
+                { label: 'Nossa cultura',             to: '/nossa-cultura' },
+                { label: 'Trabalhe conosco',          to: '/trabalhe-conosco' },
+                { label: 'Nossos clientes',           to: '/nossos-clientes' },
+                { label: 'Portal do colaborador',     to: null, href: 'https://portal.portovaleconsorcio.com.br/' },
+                { label: 'Portal de transparência',   to: '/portal-transparencia', href: undefined },
+              ].map(({ label, to, href }: { label: string; to: string | null; href?: string }) => (
                 <li key={label}>
-                  <a href="#" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif" }}>
-                    {label}
-                  </a>
+                  {href ? (
+                    <a href={href} target="_blank" rel="noopener noreferrer" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif", textDecoration: 'none' }}>
+                      {label}
+                    </a>
+                  ) : to ? (
+                    <FooterLink to={to} className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif", textDecoration: 'none' }}>
+                      {label}
+                    </FooterLink>
+                  ) : (
+                    <span className="text-[13px] text-[#6B7280]" style={{ fontFamily: "'Inter', sans-serif" }}>{label}</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -103,11 +120,20 @@ export function Footer() {
               Conteúdo
             </h4>
             <ul className="space-y-2.5">
-              {['Artigos sobre consórcios', 'Guia do Consórcio'].map((label) => (
+              {[
+                { label: 'Artigos sobre consórcios', to: '/artigos' },
+                { label: 'Guia do Consórcio',        to: '/guia-do-consorcio' },
+              ].map(({ label, to }) => (
                 <li key={label}>
-                  <a href="#" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif" }}>
-                    {label}
-                  </a>
+                  {to ? (
+                    <FooterLink to={to} className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif", textDecoration: 'none' }}>
+                      {label}
+                    </FooterLink>
+                  ) : (
+                    <a href="#" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      {label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -120,19 +146,9 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5">
               <li>
-                <a href="#" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200 font-medium" style={{ fontFamily: "'Inter', sans-serif" }}>
-                  Fale conosco
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif" }}>
-                  Endereço e filiais
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif" }}>
-                  E-mail de atendimento
-                </a>
+                <FooterLink to="/contato" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200 font-medium" style={{ fontFamily: "'Inter', sans-serif", textDecoration: 'none' }}>
+                  Fale conosco e filiais
+                </FooterLink>
               </li>
               <li>
                 <span className="text-[13px] text-[#6B7280]" style={{ fontFamily: "'Inter', sans-serif" }}>
@@ -151,11 +167,15 @@ export function Footer() {
               Imóveis
             </h4>
             <ul className="space-y-2.5 mb-8">
-              {['Consórcio de imóvel', 'Construção e reforma', 'Consórcio para terreno'].map((label) => (
+              {[
+                { label: 'Consórcio de imóvel',    to: '/consorcio-imovel' },
+                { label: 'Construção e reforma',   to: '/consorcio-construcao-reforma' },
+                { label: 'Consórcio para terreno', to: '/consorcio-terreno' },
+              ].map(({ label, to }) => (
                 <li key={label}>
-                  <a href="#" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  <FooterLink to={to} className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif", textDecoration: 'none' }}>
                     {label}
-                  </a>
+                  </FooterLink>
                 </li>
               ))}
             </ul>
@@ -163,11 +183,14 @@ export function Footer() {
               Veículos
             </h4>
             <ul className="space-y-2.5">
-              {['Consórcio de automóvel', 'Consórcio de pesados'].map((label) => (
+              {[
+                { label: 'Consórcio de automóvel', to: '/consorcio-automovel' },
+                { label: 'Consórcio de pesados',   to: '/consorcio-pesados' },
+              ].map(({ label, to }) => (
                 <li key={label}>
-                  <a href="#" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  <FooterLink to={to} className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif", textDecoration: 'none' }}>
                     {label}
-                  </a>
+                  </FooterLink>
                 </li>
               ))}
             </ul>
@@ -179,11 +202,16 @@ export function Footer() {
               Investimento
             </h4>
             <ul className="space-y-2.5">
-              {['Consórcio como investimento', 'Consórcio empresarial', 'Consórcio agro'].map((label) => (
+              {[
+                { label: 'Consórcio como investimento', to: '/consorcio-investimento' },
+                { label: 'Consórcio empresarial',       to: '/consorcio-empresarial' },
+                { label: 'Consórcio agro',              to: '/consorcio-agro' },
+                { label: 'Consórcio placa solar',       to: '/consorcio-placa-solar' },
+              ].map(({ label, to }) => (
                 <li key={label}>
-                  <a href="#" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  <FooterLink to={to} className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif", textDecoration: 'none' }}>
                     {label}
-                  </a>
+                  </FooterLink>
                 </li>
               ))}
             </ul>

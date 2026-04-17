@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Star } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { SectionLabel } from './SectionLabel';
 
 const allTestimonials = [
   [
@@ -52,10 +53,7 @@ export function ProvaSection() {
 
           {/* Esquerda: título + card Google */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-              <div style={{ width: '28px', height: '2px', backgroundColor: '#2563EB' }} />
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#2563EB' }}>Depoimentos</span>
-            </div>
+            <SectionLabel>Depoimentos</SectionLabel>
             <h2 style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontWeight: 800,
@@ -66,7 +64,7 @@ export function ProvaSection() {
             }}>
               <span style={{ color: '#111827' }}>Clientes reais,</span>
               <br />
-              <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>conquistas </span>
+              <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>conquistas </span>
               <span style={{ color: '#111827' }}>incríveis!</span>
             </h2>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', color: '#6B7280', lineHeight: 1.6, maxWidth: '400px', marginBottom: '24px' }}>
@@ -123,9 +121,9 @@ export function ProvaSection() {
 
             <a
               href="/nossos-clientes"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '16px', fontFamily: "'Inter', sans-serif", fontSize: '14px', fontWeight: 600, color: '#2563EB', textDecoration: 'none', borderBottom: '1px solid rgba(37,99,235,0.3)', paddingBottom: '2px', transition: 'color 0.2s, border-color 0.2s' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#1d4ed8'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(29,78,216,0.6)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#2563EB'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(37,99,235,0.3)'; }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '16px', fontFamily: "'Inter', sans-serif", fontSize: '14px', fontWeight: 600, color: '#009cde', textDecoration: 'none', borderBottom: '1px solid rgba(0,156,222,0.3)', paddingBottom: '2px', transition: 'color 0.2s, border-color 0.2s' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#0089c4'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(0,137,196,0.6)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#009cde'; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(0,156,222,0.3)'; }}
             >
               Ver todos os clientes
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

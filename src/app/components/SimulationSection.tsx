@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { ArrowRight, Info, TrendingDown } from 'lucide-react';
+import { SectionLabel } from './SectionLabel';
 
 type ConsorcioType = 'imovel' | 'auto' | 'moto' | 'servicos';
 
@@ -61,18 +62,13 @@ export function SimulationSection() {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <p
-            className="text-[13px] uppercase tracking-widest text-[#6B7280] dark:text-gray-400 mb-2"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
-            Simulador
-          </p>
+          <SectionLabel>Simulador</SectionLabel>
           <h2
             className="text-[36px] leading-[1.15] mb-3"
             style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800 }}
           >
             <span className="block text-[#111827] dark:text-white">Simule seu consórcio</span>
-            <span className="block text-[#2563EB]">em segundos</span>
+            <span className="block text-[#009cde]">em segundos</span>
           </h2>
           <p
             className="text-[14px] text-[#6B7280] dark:text-gray-400 max-w-sm mx-auto"
@@ -104,9 +100,9 @@ export function SimulationSection() {
                     className="rounded-xl py-2.5 px-3 text-[13px] font-medium transition-all duration-200 border"
                     style={{
                       fontFamily: "'Inter', sans-serif",
-                      backgroundColor: type === t ? '#2563EB' : '#F9FAFB',
+                      backgroundColor: type === t ? '#009cde' : '#F9FAFB',
                       color: type === t ? '#FFFFFF' : '#374151',
-                      borderColor: type === t ? '#2563EB' : '#E5E7EB',
+                      borderColor: type === t ? '#009cde' : '#E5E7EB',
                     }}
                   >
                     {configs[t].label}
@@ -125,7 +121,7 @@ export function SimulationSection() {
                   2. Valor do crédito
                 </label>
                 <span
-                  className="text-[15px] text-[#2563EB]"
+                  className="text-[15px] text-[#009cde]"
                   style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800 }}
                 >
                   {brl(safeCredit)}
@@ -143,7 +139,7 @@ export function SimulationSection() {
                   onChange={(e) => setCredit(Number(e.target.value))}
                   className="w-full h-2 rounded-full appearance-none cursor-pointer outline-none"
                   style={{
-                    background: `linear-gradient(to right, #2563EB ${sliderPct}%, #E5E7EB ${sliderPct}%)`,
+                    background: `linear-gradient(to right, #009cde ${sliderPct}%, #E5E7EB ${sliderPct}%)`,
                   }}
                 />
               </div>
@@ -202,7 +198,7 @@ export function SimulationSection() {
             {/* Main result card */}
             <div
               className="rounded-2xl p-7"
-              style={{ backgroundColor: '#2563EB' }}
+              style={{ backgroundColor: '#009cde' }}
             >
               <p
                 className="text-[12px] uppercase tracking-widest text-blue-200 mb-1"
@@ -284,7 +280,7 @@ export function SimulationSection() {
 
             {/* CTA */}
             <button
-              onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}
               className="w-full inline-flex items-center justify-center gap-2 bg-[#111827] hover:bg-[#1F2937] text-white text-[14px] font-semibold rounded-xl py-4 transition-colors duration-200"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
@@ -308,7 +304,7 @@ export function SimulationSection() {
           width: 20px;
           height: 20px;
           border-radius: 50%;
-          background: #2563EB;
+          background: #009cde;
           border: 3px solid #ffffff;
           box-shadow: 0 1px 6px rgba(37,99,235,0.4);
           cursor: pointer;
@@ -317,7 +313,7 @@ export function SimulationSection() {
           width: 20px;
           height: 20px;
           border-radius: 50%;
-          background: #2563EB;
+          background: #009cde;
           border: 3px solid #ffffff;
           box-shadow: 0 1px 6px rgba(37,99,235,0.4);
           cursor: pointer;

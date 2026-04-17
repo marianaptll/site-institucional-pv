@@ -162,7 +162,7 @@ export function SimulacaoModal({ open, onClose }: Props) {
                       Simule o seu plano por:
                     </p>
                     <div style={{
-                      display: 'flex', backgroundColor: '#eef2ff',
+                      display: 'flex', backgroundColor: '#E0F4FB',
                       borderRadius: '999px', padding: '4px',
                       maxWidth: '240px', margin: '0 auto 20px',
                     }}>

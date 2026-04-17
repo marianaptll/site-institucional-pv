@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { BookmarkIcon } from 'lucide-react';
+import { SectionLabel } from './SectionLabel';
 
 const noticias = [
   {
@@ -88,15 +89,10 @@ export function MidiaSection() {
           animate={isLoaded ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
           transition={{ type: 'spring', stiffness: 400, damping: 28 }}
         >
-          <div className="flex items-center gap-2 mb-2">
-            <div style={{ width: '20px', height: '2px', backgroundColor: '#2563EB' }} />
-            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#2563EB' }}>
-              Na mídia
-            </span>
-          </div>
+          <SectionLabel>Na mídia</SectionLabel>
           <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 2.8vw, 44px)', lineHeight: 1.08, letterSpacing: '-0.03em', color: '#111827' }}>
             Porto Vale nas{' '}
-            <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>notícias</span>
+            <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>notícias</span>
           </h2>
         </motion.div>
 

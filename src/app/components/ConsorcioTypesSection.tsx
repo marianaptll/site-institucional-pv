@@ -1,4 +1,5 @@
 import { ArrowUpRight, Home, Car, Bike, Briefcase } from 'lucide-react';
+import { SectionLabel } from './SectionLabel';
 
 const types = [
   {
@@ -132,12 +133,7 @@ export function ConsorcioTypesSection() {
         {/* Header */}
         <div className="flex items-start justify-between mb-10 flex-wrap gap-4">
           <div>
-            <p
-              className="text-[13px] uppercase tracking-widest text-[#6B7280] dark:text-gray-400 mb-2"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              Tipos de consórcio
-            </p>
+            <SectionLabel>Tipos de consórcio</SectionLabel>
             <h2
               className="text-[36px] leading-[1.15]"
               style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800 }}

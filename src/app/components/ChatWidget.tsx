@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { X, Send } from 'lucide-react';
 import { WHATSAPP_NUMBER } from '../constants';
 
@@ -96,7 +96,7 @@ export function ChatWidget() {
             {/* Header */}
             <div
               style={{
-                backgroundColor: '#0055c4',
+                backgroundColor: '#009cde',
                 padding: '14px 16px',
                 display: 'flex',
                 alignItems: 'center',
@@ -161,7 +161,7 @@ export function ChatWidget() {
                   <div
                     style={{
                       maxWidth: '78%',
-                      backgroundColor: msg.from === 'user' ? '#0055c4' : '#ffffff',
+                      backgroundColor: msg.from === 'user' ? '#009cde' : '#ffffff',
                       color: msg.from === 'user' ? '#ffffff' : '#111827',
                       borderRadius: msg.from === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
                       padding: '10px 13px',
@@ -214,7 +214,7 @@ export function ChatWidget() {
                   background: 'none',
                   border: 'none',
                   cursor: input.trim() ? 'pointer' : 'default',
-                  color: input.trim() ? '#0055c4' : '#d1d5db',
+                  color: input.trim() ? '#009cde' : '#d1d5db',
                   display: 'flex',
                   padding: '4px',
                   transition: 'color 0.2s',

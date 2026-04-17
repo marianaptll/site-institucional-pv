@@ -1,8 +1,10 @@
 import { useRef, useState } from 'react';
+import { motion } from 'motion/react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ChatWidget } from '../components/ChatWidget';
 import { Heart, TrendingUp, BookOpen, Award, Users, MapPin, ExternalLink, Briefcase, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react';
+import { SectionLabel } from '../components/SectionLabel';
 
 const beneficios = [
   {
@@ -11,6 +13,11 @@ const beneficios = [
     desc: 'Cultura baseada em valores sólidos: ética, excelência, parceria, entusiasmo e foco no cliente.',
     color: '#EFF6FF',
     iconColor: '#2563EB',
+    dark: false,
+    idleAnimate: { scale: [1, 1.22, 1, 1.22, 1] } as object,
+    idleTransition: { duration: 1.4, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { scale: [1, 1.38, 1, 1.38, 1] } as object,
+    hoverTransition: { duration: 0.7, repeat: Infinity, ease: 'easeInOut' as const },
   },
   {
     icon: TrendingUp,
@@ -19,6 +26,10 @@ const beneficios = [
     color: '#111827',
     iconColor: '#009cde',
     dark: true,
+    idleAnimate: { y: [0, -5, 0] } as object,
+    idleTransition: { duration: 2.4, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { y: [0, -9, 0] } as object,
+    hoverTransition: { duration: 0.5, repeat: Infinity, ease: 'easeInOut' as const },
   },
   {
     icon: BookOpen,
@@ -26,6 +37,11 @@ const beneficios = [
     desc: 'Programas de capacitação e desenvolvimento contínuo para todos os colaboradores.',
     color: '#f8f7f5',
     iconColor: '#2563EB',
+    dark: false,
+    idleAnimate: { rotate: [-4, 4, -4] } as object,
+    idleTransition: { duration: 3, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { rotate: [-8, 8, -8] } as object,
+    hoverTransition: { duration: 0.6, repeat: Infinity, ease: 'easeInOut' as const },
   },
   {
     icon: Award,
@@ -33,6 +49,41 @@ const beneficios = [
     desc: 'Valorização e reconhecimento do desempenho de cada colaborador ao longo da jornada.',
     color: '#EFF6FF',
     iconColor: '#2563EB',
+    dark: false,
+    idleAnimate: { y: [0, -5, 0] } as object,
+    idleTransition: { duration: 2.2, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { y: [0, -10, 0] } as object,
+    hoverTransition: { duration: 0.45, repeat: Infinity, ease: 'easeInOut' as const },
+  },
+];
+
+const equipe = [
+  {
+    icon: Users,
+    stat: '+600',
+    desc: 'colaboradores engajados em todo o Brasil',
+    idleAnimate: { scale: [1, 1.14, 1] } as object,
+    idleTransition: { duration: 2.2, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { scale: [1, 1.3, 1] } as object,
+    hoverTransition: { duration: 0.45, repeat: Infinity, ease: 'easeInOut' as const },
+  },
+  {
+    icon: MapPin,
+    stat: '3 unidades',
+    desc: 'em São José dos Campos, Jacareí e São Paulo',
+    idleAnimate: { y: [0, -4, 0] } as object,
+    idleTransition: { duration: 2.8, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { y: [0, -8, 0] } as object,
+    hoverTransition: { duration: 0.5, repeat: Infinity, ease: 'easeInOut' as const },
+  },
+  {
+    icon: Lightbulb,
+    stat: 'Projetos',
+    desc: 'internos que promovem integração, aprendizado e inovação',
+    idleAnimate: { scale: [1, 1.2, 1] } as object,
+    idleTransition: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { scale: [1, 1.35, 1] } as object,
+    hoverTransition: { duration: 0.4, repeat: Infinity, ease: 'easeInOut' as const },
   },
 ];
 
@@ -95,23 +146,83 @@ const tipoBadge: Record<string, { bg: string; color: string }> = {
   Aprendiz: { bg: '#F5F3FF', color: '#7C3AED' },
 };
 
-const equipe = [
-  { icon: Users,     stat: '+600',       desc: 'colaboradores engajados em todo o Brasil' },
-  { icon: MapPin,    stat: '3 unidades', desc: 'em São José dos Campos, Jacareí e São Paulo' },
-  { icon: Lightbulb, stat: 'Projetos',   desc: 'internos que promovem integração, aprendizado e inovação' },
-];
+type BeneficioItem = typeof beneficios[number];
+type EquipeItem = typeof equipe[number];
 
-function Label({ text, light }: { text: string; light?: boolean }) {
-  const color = light ? '#009cde' : '#2563EB';
+function BeneficioCard({ icon: Icon, title, desc, color, iconColor, dark, idleAnimate, idleTransition, hoverAnimate, hoverTransition }: BeneficioItem) {
+  const [hovered, setHovered] = useState(false);
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-      <div style={{ width: '28px', height: '2px', backgroundColor: color }} />
-      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color }}>
-        {text}
-      </span>
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: color,
+        borderRadius: '24px',
+        padding: '36px 28px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '20px',
+        position: 'relative',
+        overflow: 'hidden',
+        boxShadow: hovered ? (dark ? '0 8px 28px rgba(0,156,222,0.18)' : '0 8px 24px rgba(37,99,235,0.10)') : 'none',
+        transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
+        transition: 'box-shadow 0.3s, transform 0.3s',
+        cursor: 'default',
+      }}
+    >
+      <div style={{ position: 'absolute', bottom: '-12px', right: '-12px', opacity: dark ? 0.07 : 0.05, pointerEvents: 'none' }}>
+        <Icon size={120} color={iconColor} strokeWidth={1} />
+      </div>
+      <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: dark ? 'rgba(0,156,222,0.15)' : '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: dark ? 'none' : '0 2px 8px rgba(0,0,0,0.06)', position: 'relative', zIndex: 1 }}>
+        <motion.div
+          animate={hovered ? hoverAnimate : idleAnimate}
+          transition={hovered ? hoverTransition : idleTransition}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Icon size={22} color={iconColor} strokeWidth={1.6} />
+        </motion.div>
+      </div>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase' as const, color: dark ? '#009cde' : '#2563EB', marginBottom: '8px' }}>{title}</p>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: dark ? 'rgba(255,255,255,0.60)' : '#374151', lineHeight: 1.75, margin: 0 }}>{desc}</p>
+      </div>
     </div>
   );
 }
+
+function EquipeRow({ icon: Icon, stat, desc, idleAnimate, idleTransition, hoverAnimate, hoverTransition }: EquipeItem) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        backgroundColor: hovered ? '#1a2537' : '#111827',
+        padding: 'clamp(18px, 3vw, 28px) clamp(16px, 3vw, 32px)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '16px',
+        transition: 'background-color 0.3s',
+        cursor: 'default',
+      }}
+    >
+      <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: hovered ? 'rgba(0,156,222,0.22)' : 'rgba(0,156,222,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background 0.3s' }}>
+        <motion.div
+          animate={hovered ? hoverAnimate : idleAnimate}
+          transition={hovered ? hoverTransition : idleTransition}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Icon size={20} color="#009cde" strokeWidth={1.6} />
+        </motion.div>
+      </div>
+      <div>
+        <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '22px', color: '#009cde', lineHeight: 1 }}>{stat}</div>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'rgba(255,255,255,0.45)', margin: '4px 0 0', lineHeight: 1.5 }}>{desc}</p>
+      </div>
+    </div>
+  );
+}
+
 
 export function TrabalheConosco() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -145,7 +256,7 @@ export function TrabalheConosco() {
           <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1 }}>
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div>
-                <Label text="Carreiras" light />
+                <SectionLabel center>Carreiras</SectionLabel>
                 <h1 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(32px, 4vw, 60px)', lineHeight: 1.05, letterSpacing: '-0.03em', color: '#fff', margin: '0 0 24px' }}>
                   Venha crescer com a{' '}
                   <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>Porto Vale</span>
@@ -170,7 +281,7 @@ export function TrabalheConosco() {
         <section style={{ backgroundColor: '#fff', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div className="max-w-7xl mx-auto">
             <div style={{ marginBottom: '56px' }}>
-              <Label text="Por que a Porto Vale" />
+              <SectionLabel>Por que a Porto Vale</SectionLabel>
               <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 42px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#111827', marginTop: '4px', maxWidth: '560px' }}>
                 O que nos torna um lugar{' '}
                 <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>único para trabalhar</span>
@@ -178,19 +289,8 @@ export function TrabalheConosco() {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {beneficios.map(({ icon: Icon, title, desc, color, iconColor, dark }) => (
-                <div key={title} style={{ background: color, borderRadius: '24px', padding: '36px 28px', display: 'flex', flexDirection: 'column', gap: '20px', position: 'relative', overflow: 'hidden' }}>
-                  <div style={{ position: 'absolute', bottom: '-12px', right: '-12px', opacity: dark ? 0.07 : 0.05, pointerEvents: 'none' }}>
-                    <Icon size={120} color={iconColor} strokeWidth={1} />
-                  </div>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: dark ? 'rgba(0,156,222,0.15)' : '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: dark ? 'none' : '0 2px 8px rgba(0,0,0,0.06)', position: 'relative', zIndex: 1 }}>
-                    <Icon size={22} color={iconColor} strokeWidth={1.6} />
-                  </div>
-                  <div style={{ position: 'relative', zIndex: 1 }}>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.10em', textTransform: 'uppercase' as const, color: dark ? '#009cde' : '#2563EB', marginBottom: '8px' }}>{title}</p>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: dark ? 'rgba(255,255,255,0.60)' : '#374151', lineHeight: 1.75, margin: 0 }}>{desc}</p>
-                  </div>
-                </div>
+              {beneficios.map((b, i) => (
+                <BeneficioCard key={i} {...b} />
               ))}
             </div>
           </div>
@@ -202,23 +302,15 @@ export function TrabalheConosco() {
           <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1 }}>
             <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20 items-start">
               <div>
-                <Label text="Nossa equipe" light />
+                <SectionLabel>Nossa equipe</SectionLabel>
                 <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 42px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#fff', marginTop: '4px' }}>
                   Juntos construímos{' '}
                   <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>resultados</span>
                 </h2>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'rgba(255,255,255,0.06)', borderRadius: '20px', overflow: 'hidden' }}>
-                {equipe.map(({ icon: Icon, stat, desc }) => (
-                  <div key={stat} style={{ backgroundColor: '#111827', padding: '28px 32px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-                    <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(0,156,222,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <Icon size={20} color="#009cde" strokeWidth={1.6} />
-                    </div>
-                    <div>
-                      <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '22px', color: '#009cde', lineHeight: 1 }}>{stat}</div>
-                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'rgba(255,255,255,0.45)', margin: '4px 0 0', lineHeight: 1.5 }}>{desc}</p>
-                    </div>
-                  </div>
+                {equipe.map((item, i) => (
+                  <EquipeRow key={i} {...item} />
                 ))}
               </div>
             </div>
@@ -232,7 +324,7 @@ export function TrabalheConosco() {
             {/* Cabeçalho + setas */}
             <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '40px', flexWrap: 'wrap', gap: '16px' }}>
               <div>
-                <Label text="Vagas abertas" />
+                <SectionLabel>Vagas abertas</SectionLabel>
                 <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 42px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#111827', marginTop: '4px', marginBottom: '10px' }}>
                   Faça parte do{' '}
                   <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>nosso time</span>
@@ -284,7 +376,7 @@ export function TrabalheConosco() {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
-                      flex: '0 0 calc(33.33% - 14px)',
+                      flex: '0 0 clamp(260px, 80vw, calc(33.33% - 14px))',
                       minWidth: '260px',
                       scrollSnapAlign: 'start',
                       background: '#fff',

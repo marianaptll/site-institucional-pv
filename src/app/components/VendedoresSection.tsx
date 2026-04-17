@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { X, Play, Pause } from 'lucide-react';
+import { SectionLabel } from './SectionLabel';
 
 const videoOQueEConsorcio    = '/videos/o-que-e-consorcio.mp4';
 const videoReforma           = '/videos/consorcio-para-reforma.mp4';
@@ -346,14 +347,7 @@ export function VendedoresSection() {
 
           {/* Header */}
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <div style={{ width: '28px', height: '2px', backgroundColor: '#0055c4' }} />
-              <span style={{
-                fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700,
-                letterSpacing: '0.12em', textTransform: 'uppercase', color: '#0055c4',
-              }}>Nossos especialistas</span>
-              <div style={{ width: '28px', height: '2px', backgroundColor: '#0055c4' }} />
-            </div>
+            <SectionLabel>Nossos especialistas</SectionLabel>
             <h2 style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800,
               fontSize: 'clamp(28px, 3vw, 44px)', letterSpacing: '-0.03em',

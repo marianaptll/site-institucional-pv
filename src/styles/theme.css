@@ -132,6 +132,27 @@
     @apply border-border outline-ring/50;
   }
 
+  /* Acessibilidade: remove outline padrão e usa focus-visible customizado */
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--pv-blue);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Scroll suave global */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Prevenção de scroll horizontal em mobile */
+  body {
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-background text-foreground;
   }

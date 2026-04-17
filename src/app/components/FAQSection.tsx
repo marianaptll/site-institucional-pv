@@ -99,7 +99,7 @@ export function FAQSection() {
               style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(28px, 5vw, 40px)' }}
             >
               <span className="block text-[#111827] dark:text-white">Começando no</span>
-              <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>consórcio?</span>
+              <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>consórcio?</span>
             </h2>
             <p
               className="text-[14px] text-[#6B7280] dark:text-gray-400 max-w-xs mb-8"
@@ -108,8 +108,8 @@ export function FAQSection() {
               Confira algumas dúvidas e informações que pode achar importante para realizar o seu investimento.
             </p>
             <button
-              onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-[13px] font-medium rounded-lg px-5 py-2.5 transition-colors duration-200"
+              onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center gap-2 bg-[#009cde] hover:bg-[#0089c4] text-white text-[13px] font-medium rounded-lg px-5 py-2.5 transition-colors duration-200"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Falar com consultor

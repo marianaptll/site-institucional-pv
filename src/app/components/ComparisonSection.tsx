@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { SectionLabel } from './SectionLabel';
 
 const rows = [
   { criteria: 'Juros',               consortio: 'Zero juros',      financiamento: 'Até 18% a.a.' },
@@ -110,24 +111,7 @@ export function ComparisonSection() {
 
           {/* ── Lado esquerdo: título + stat ── */}
           <div style={{ paddingTop: '8px' }}>
-            {/* Badge */}
-            <span
-              style={{
-                display: 'inline-block',
-                padding: '4px 12px',
-                borderRadius: '999px',
-                background: 'rgba(0,156,222,0.10)',
-                color: '#009cde',
-                fontSize: '11px',
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                marginBottom: '20px',
-              }}
-            >
-              Comparativo
-            </span>
+            <SectionLabel>Comparativo</SectionLabel>
 
             {/* Título */}
             <h2

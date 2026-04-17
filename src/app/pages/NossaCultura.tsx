@@ -1,6 +1,9 @@
+import { useState } from 'react';
+import { motion } from 'motion/react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ChatWidget } from '../components/ChatWidget';
+import { SectionLabel } from '../components/SectionLabel';
 import { Target, Eye, CheckCircle2 } from 'lucide-react';
 
 const valores = [
@@ -11,19 +14,12 @@ const valores = [
   { word: 'Foco no cliente', desc: 'colocamos as necessidades e objetivos dos clientes no centro das decisões' },
 ];
 
-function Label({ text, light }: { text: string; light?: boolean }) {
-  const color = light ? '#009cde' : '#2563EB';
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-      <div style={{ width: '28px', height: '2px', backgroundColor: color }} />
-      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color }}>
-        {text}
-      </span>
-    </div>
-  );
-}
 
 export function NossaCultura() {
+  const [missaoHovered, setMissaoHovered] = useState(false);
+  const [visaoHovered, setVisaoHovered] = useState(false);
+  const [valoresHovered, setValoresHovered] = useState(false);
+
   return (
     <>
       <Header />
@@ -44,7 +40,7 @@ export function NossaCultura() {
           <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,156,222,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
           <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-            <Label text="Quem somos" light />
+            <SectionLabel center>Quem somos</SectionLabel>
             <h1
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -81,7 +77,7 @@ export function NossaCultura() {
           <div className="max-w-7xl mx-auto">
 
             <div style={{ marginBottom: '56px' }}>
-              <Label text="Identidade" />
+              <SectionLabel>Identidade</SectionLabel>
               <h2
                 style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -104,23 +100,38 @@ export function NossaCultura() {
 
               {/* MISSÃO */}
               <div
+                onMouseEnter={() => setMissaoHovered(true)}
+                onMouseLeave={() => setMissaoHovered(false)}
                 style={{
                   background: '#fff',
-                  border: '1px solid #E5E7EB',
+                  border: `1px solid ${missaoHovered ? '#2563EB' : '#E5E7EB'}`,
                   borderRadius: '24px',
-                  padding: '40px 36px',
+                  padding: 'clamp(22px, 4vw, 40px) clamp(18px, 3vw, 36px)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '20px',
                   position: 'relative',
                   overflow: 'hidden',
+                  boxShadow: missaoHovered ? '0 8px 28px rgba(37,99,235,0.12)' : 'none',
+                  transform: missaoHovered ? 'translateY(-2px)' : 'translateY(0)',
+                  transition: 'border-color 0.3s, box-shadow 0.3s, transform 0.3s',
+                  cursor: 'default',
                 }}
               >
                 <div style={{ position: 'absolute', bottom: '-16px', right: '-16px', opacity: 0.045, pointerEvents: 'none' }}>
                   <Target size={160} color="#2563EB" strokeWidth={1} />
                 </div>
                 <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
-                  <Target size={24} color="#2563EB" strokeWidth={1.6} />
+                  <motion.div
+                    animate={missaoHovered ? { rotate: [0, 12, -12, 0] } : { rotate: [0, 5, -5, 0] }}
+                    transition={missaoHovered
+                      ? { duration: 0.6, repeat: Infinity, ease: 'easeInOut' }
+                      : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }
+                    }
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >
+                    <Target size={24} color="#2563EB" strokeWidth={1.6} />
+                  </motion.div>
                 </div>
                 <div style={{ position: 'relative', zIndex: 1 }}>
                   <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#2563EB', marginBottom: '8px' }}>
@@ -137,22 +148,40 @@ export function NossaCultura() {
 
               {/* VISÃO */}
               <div
+                onMouseEnter={() => setVisaoHovered(true)}
+                onMouseLeave={() => setVisaoHovered(false)}
                 style={{
                   background: '#111827',
                   borderRadius: '24px',
-                  padding: '40px 36px',
+                  padding: 'clamp(22px, 4vw, 40px) clamp(18px, 3vw, 36px)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '20px',
                   position: 'relative',
                   overflow: 'hidden',
+                  boxShadow: visaoHovered ? '0 8px 28px rgba(0,156,222,0.20)' : 'none',
+                  transform: visaoHovered ? 'translateY(-2px)' : 'translateY(0)',
+                  transition: 'box-shadow 0.3s, transform 0.3s',
+                  cursor: 'default',
                 }}
               >
                 <div style={{ position: 'absolute', bottom: '-16px', right: '-16px', opacity: 0.07, pointerEvents: 'none' }}>
                   <Eye size={160} color="#009cde" strokeWidth={1} />
                 </div>
-                <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: 'rgba(0,156,222,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
-                  <Eye size={24} color="#009cde" strokeWidth={1.6} />
+                <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: visaoHovered ? 'rgba(0,156,222,0.25)' : 'rgba(0,156,222,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 1, transition: 'background 0.3s' }}>
+                  <motion.div
+                    animate={visaoHovered
+                      ? { scaleX: [1, 1.28, 0.82, 1.12, 1], scaleY: [1, 1.18, 0.78, 1.06, 1] }
+                      : { scaleX: [1, 1.14, 1], scaleY: [1, 0.92, 1] }
+                    }
+                    transition={visaoHovered
+                      ? { duration: 0.55, repeat: Infinity, ease: 'easeInOut' }
+                      : { duration: 2.6, repeat: Infinity, ease: 'easeInOut' }
+                    }
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >
+                    <Eye size={24} color="#009cde" strokeWidth={1.6} />
+                  </motion.div>
                 </div>
                 <div style={{ position: 'relative', zIndex: 1 }}>
                   <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#009cde', marginBottom: '8px' }}>
@@ -169,22 +198,37 @@ export function NossaCultura() {
 
               {/* VALORES */}
               <div
+                onMouseEnter={() => setValoresHovered(true)}
+                onMouseLeave={() => setValoresHovered(false)}
                 style={{
                   background: '#f8f7f5',
                   borderRadius: '24px',
-                  padding: '40px 36px',
+                  padding: 'clamp(22px, 4vw, 40px) clamp(18px, 3vw, 36px)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '20px',
                   position: 'relative',
                   overflow: 'hidden',
+                  boxShadow: valoresHovered ? '0 8px 28px rgba(37,99,235,0.10)' : 'none',
+                  transform: valoresHovered ? 'translateY(-2px)' : 'translateY(0)',
+                  transition: 'box-shadow 0.3s, transform 0.3s',
+                  cursor: 'default',
                 }}
               >
                 <div style={{ position: 'absolute', bottom: '-16px', right: '-16px', opacity: 0.06, pointerEvents: 'none' }}>
                   <CheckCircle2 size={160} color="#2563EB" strokeWidth={1} />
                 </div>
                 <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', position: 'relative', zIndex: 1 }}>
-                  <CheckCircle2 size={24} color="#2563EB" strokeWidth={1.6} />
+                  <motion.div
+                    animate={valoresHovered ? { scale: [1, 1.28, 1] } : { scale: [1, 1.14, 1] }}
+                    transition={valoresHovered
+                      ? { duration: 0.45, repeat: Infinity, ease: 'easeInOut' }
+                      : { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }
+                    }
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >
+                    <CheckCircle2 size={24} color="#2563EB" strokeWidth={1.6} />
+                  </motion.div>
                 </div>
                 <div style={{ position: 'relative', zIndex: 1 }}>
                   <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#2563EB', marginBottom: '8px' }}>
@@ -226,7 +270,7 @@ export function NossaCultura() {
 
               {/* Esquerda */}
               <div>
-                <Label text="Na prática" light />
+                <SectionLabel>Na prática</SectionLabel>
                 <h2
                   style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",

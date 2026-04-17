@@ -1,16 +1,23 @@
 import { useState } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
+import { useNavigate } from 'react-router';
 import heroImage from '../../assets/casacarroemoto.png';
+import { SectionLabel } from './SectionLabel';
 
 /* ── Card 1: Vídeo ─────────────────────────────────────────────── */
 function VideoCard() {
   return (
-    <div
+    <a
+      href="https://www.youtube.com/@portovaleconsorcio676"
+      target="_blank"
+      rel="noopener noreferrer"
       className="relative rounded-3xl overflow-hidden flex flex-col justify-end"
       style={{
         flex: '1 1 0',
         minHeight: '320px',
         background: '#111827',
+        textDecoration: 'none',
+        cursor: 'pointer',
       }}
     >
       <div className="absolute inset-0 flex items-center justify-center">
@@ -22,6 +29,7 @@ function VideoCard() {
             background: 'rgba(255,255,255,0.12)',
             border: '1.5px solid rgba(255,255,255,0.22)',
             backdropFilter: 'blur(8px)',
+            transition: 'background 0.2s, transform 0.2s',
           }}
         >
           <Play size={26} fill="white" color="white" style={{ marginLeft: '3px' }} />
@@ -68,7 +76,7 @@ function VideoCard() {
           • Vídeo · 2 min
         </p>
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -171,6 +179,8 @@ function TextCard() {
 function GuideCard() {
   const [hovered, setHovered] = useState(false);
   const expanded = hovered;
+  const navigate = useNavigate();
+  const goToGuia = () => { navigate('/guia-do-consorcio'); window.scrollTo(0, 0); };
   return (
     <div
       className="relative rounded-3xl flex flex-col justify-between p-8 overflow-hidden"
@@ -195,23 +205,7 @@ function GuideCard() {
       />
 
       <div style={{ position: 'relative', zIndex: 1 }}>
-        <span
-          style={{
-            display: 'inline-block',
-            padding: '4px 12px',
-            borderRadius: '999px',
-            background: 'rgba(0,156,222,0.10)',
-            color: '#009cde',
-            fontSize: '11px',
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 700,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            marginBottom: '28px',
-          }}
-        >
-          Guia completo
-        </span>
+        <SectionLabel>Guia completo</SectionLabel>
 
         <h2
           style={{
@@ -256,6 +250,7 @@ function GuideCard() {
         <button
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
+          onClick={goToGuia}
           className="lg:inline-flex hidden"
           style={{
             alignItems: 'center',
@@ -297,6 +292,7 @@ function GuideCard() {
         </button>
         {/* Mobile: botão sempre expandido */}
         <button
+          onClick={goToGuia}
           className="lg:hidden inline-flex"
           style={{
             alignItems: 'center',

@@ -1,4 +1,5 @@
 import { PiggyBank, Zap, Scale, CheckCircle } from 'lucide-react';
+import { SectionLabel } from './SectionLabel';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ProductCarousel } from './ProductCarousel';
@@ -129,12 +130,7 @@ export function BenefitsSection() {
         {/* ── Header benefícios ── */}
         <div className="flex items-start justify-between mb-8 flex-wrap gap-4">
           <div>
-            <p
-              className="text-[13px] uppercase tracking-widest text-[#6B7280] mb-2"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              Por que consórcio?
-            </p>
+            <SectionLabel>Por que consórcio?</SectionLabel>
             <h2
               className="text-[36px] leading-[1.15]"
               style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800 }}

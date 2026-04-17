@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { SectionLabel } from './SectionLabel';
 import { ArrowRight, TrendingDown, Info, Home, Car } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -219,9 +220,7 @@ export function ComparisonSimulatorSection() {
 
           {/* ══ ESQUERDA: Comparativo ══ */}
           <div>
-            <span style={{ display: 'inline-block', padding: '4px 12px', borderRadius: '999px', background: 'rgba(0,156,222,0.10)', color: '#009cde', fontSize: '11px', fontFamily: "'Inter', sans-serif", fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '18px' }}>
-              Comparativo
-            </span>
+            <SectionLabel>Comparativo</SectionLabel>
             <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(28px, 3.5vw, 50px)', color: '#111827', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: '16px' }}>
               Consórcio ou{' '}
               <span style={{ display: 'block', fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#0055c4' }}>

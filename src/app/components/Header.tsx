@@ -1,6 +1,6 @@
 import { Menu, X, ChevronDown, Home, Car, Truck, Building2, Sprout, TrendingUp, Zap, Briefcase, Users, Heart, Globe, Handshake, Phone, Info, MessageCircle } from 'lucide-react';
 import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import portoValeLogo from '../../assets/logo-portovale.png';
 import { WHATSAPP_URL } from '../constants';
 
@@ -24,27 +24,27 @@ const navDropdowns: NavDropdown[] = [
     id: 'imoveis',
     label: 'Consórcio de Imóveis',
     items: [
-      { icon: Home,      label: 'Imóvel',              sectionId: 'tipos' },
-      { icon: Globe,     label: 'Terreno',              sectionId: 'tipos' },
-      { icon: Building2, label: 'Construção e Reforma', sectionId: 'tipos' },
+      { icon: Home,      label: 'Imóvel',              href: '/consorcio-imovel' },
+      { icon: Globe,     label: 'Terreno',              href: '/consorcio-terreno' },
+      { icon: Building2, label: 'Construção e Reforma', href: '/consorcio-construcao-reforma' },
     ],
   },
   {
     id: 'automoveis',
     label: 'Consórcio de Automóveis',
     items: [
-      { icon: Car,   label: 'Automóvel', sectionId: 'tipos' },
-      { icon: Truck, label: 'Pesados',   sectionId: 'tipos' },
+      { icon: Car,   label: 'Automóvel', href: '/consorcio-automovel' },
+      { icon: Truck, label: 'Pesados',   href: '/consorcio-pesados' },
     ],
   },
   {
     id: 'outros',
     label: 'Outros Consórcios',
     items: [
-      { icon: Sprout,     label: 'Agro',        sectionId: 'tipos' },
-      { icon: TrendingUp, label: 'Investimento', sectionId: 'tipos' },
-      { icon: Zap,        label: 'Placa Solar',  sectionId: 'tipos' },
-      { icon: Briefcase,  label: 'Empresarial',  sectionId: 'tipos' },
+      { icon: Sprout,     label: 'Agro',        href: '/consorcio-agro' },
+      { icon: TrendingUp, label: 'Investimento', href: '/consorcio-investimento' },
+      { icon: Zap,        label: 'Placa Solar',  href: '/consorcio-placa-solar' },
+      { icon: Briefcase,  label: 'Empresarial',  href: '/consorcio-empresarial' },
     ],
   },
   {
@@ -64,10 +64,12 @@ function DropdownMenu({
   dropdown,
   onNavigate,
   onNavigatePage,
+  isActive,
 }: {
   dropdown: NavDropdown;
   onNavigate: (id?: string) => void;
   onNavigatePage: (href: string) => void;
+  isActive?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -94,7 +96,7 @@ function DropdownMenu({
         style={{
           fontFamily: "'Inter', sans-serif",
           fontWeight: 500,
-          color: open ? BLUE : undefined,
+          color: (open || isActive) ? BLUE : undefined,
         }}
         aria-expanded={open}
       >
@@ -161,6 +163,10 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<string | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isDropdownActive = (dropdown: NavDropdown) =>
+    dropdown.items.some((item) => item.href && location.pathname === item.href);
 
   const scrollToSection = (id?: string) => {
     if (!id) return;
@@ -197,10 +203,38 @@ export function Header() {
           <nav className="hidden lg:flex items-center gap-1">
             {navDropdowns.map((dd) => (
               <div key={dd.id} className="px-2">
-                <DropdownMenu dropdown={dd} onNavigate={scrollToSection} onNavigatePage={navigatePage} />
+                <DropdownMenu
+                  dropdown={dd}
+                  onNavigate={scrollToSection}
+                  onNavigatePage={navigatePage}
+                  isActive={isDropdownActive(dd)}
+                />
               </div>
             ))}
           </nav>
+
+          {/* ── Desktop CTA ── */}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden lg:inline-flex items-center gap-2 rounded-xl transition-colors duration-150"
+            style={{
+              backgroundColor: '#25D366',
+              color: '#FFFFFF',
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 600,
+              fontSize: '13px',
+              height: '38px',
+              paddingLeft: '16px',
+              paddingRight: '16px',
+              textDecoration: 'none',
+              flexShrink: 0,
+            }}
+          >
+            <MessageCircle size={15} />
+            Falar com especialista
+          </a>
 
           {/* ── Mobile hamburger ── */}
           <div className="lg:hidden flex items-center">
