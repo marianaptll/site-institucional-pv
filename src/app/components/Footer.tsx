@@ -21,7 +21,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto">
 
         {/* Topo — marca + CTA */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 py-10 border-b border-[#1F2937]">
+        <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-5 py-8 sm:py-10 border-b border-[#1F2937]">
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <img
               src="/imagens/logo-portovale-branco.png"
@@ -35,7 +35,7 @@ export function Footer() {
               style={{ height: '28px', width: 'auto', opacity: 0.85 }}
             />
           </div>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4 sm:gap-5">
             <style>{`
               .footer-social { display:flex; flex-direction:column; align-items:center; text-decoration:none; position:relative; }
               .footer-social .ic { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(4px); transition:all 0.3s ease; position:relative; }
@@ -81,14 +81,14 @@ export function Footer() {
         </div>
 
         {/* Sitemap — 5 colunas */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 sm:gap-x-8 lg:gap-x-10 py-12 border-b border-[#1F2937]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-5 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:gap-x-10 py-8 sm:py-12 border-b border-[#1F2937]">
 
           {/* Institucional */}
           <div>
-            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
+            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-3 sm:mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
               Institucional
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2 sm:space-y-2.5">
               {[
                 { label: 'Sobre a Porto Vale',       to: '/sobre-nos' },
                 { label: 'Nossa cultura',             to: '/nossa-cultura' },
@@ -116,10 +116,10 @@ export function Footer() {
 
           {/* Conteúdo */}
           <div>
-            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
+            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-3 sm:mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
               Conteúdo
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2 sm:space-y-2.5">
               {[
                 { label: 'Artigos sobre consórcios', to: '/artigos' },
                 { label: 'Guia do Consórcio',        to: '/guia-do-consorcio' },
@@ -141,10 +141,10 @@ export function Footer() {
 
           {/* Atendimento */}
           <div>
-            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
+            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-3 sm:mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
               Atendimento
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2 sm:space-y-2.5">
               <li>
                 <FooterLink to="/contato" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200 font-medium" style={{ fontFamily: "'Inter', sans-serif", textDecoration: 'none' }}>
                   Fale conosco e filiais
@@ -163,10 +163,10 @@ export function Footer() {
 
           {/* Produtos col 1 */}
           <div>
-            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
+            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-3 sm:mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
               Imóveis
             </h4>
-            <ul className="space-y-2.5 mb-8">
+            <ul className="space-y-2 sm:space-y-2.5 mb-5 sm:mb-8">
               {[
                 { label: 'Consórcio de imóvel',    to: '/consorcio-imovel' },
                 { label: 'Construção e reforma',   to: '/consorcio-construcao-reforma' },
@@ -179,10 +179,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
+            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-3 sm:mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
               Veículos
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2 sm:space-y-2.5">
               {[
                 { label: 'Consórcio de automóvel', to: '/consorcio-automovel' },
                 { label: 'Consórcio de pesados',   to: '/consorcio-pesados' },
@@ -198,10 +198,10 @@ export function Footer() {
 
           {/* Produtos col 2 */}
           <div>
-            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
+            <h4 className="text-[11px] text-[#4B5563] uppercase tracking-widest mb-3 sm:mb-4" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700 }}>
               Investimento
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2 sm:space-y-2.5">
               {[
                 { label: 'Consórcio como investimento', to: '/consorcio-investimento' },
                 { label: 'Consórcio empresarial',       to: '/consorcio-empresarial' },
