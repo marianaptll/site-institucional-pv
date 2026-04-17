@@ -696,6 +696,7 @@ interface EditorialConfig {
   stats: StatItem[];
   badgeTopo: string;
   badgeInferior: { value: string; label: string };
+  imagem?: string;
 }
 
 function EditorialProdutoSection({ cfg }: { cfg: EditorialConfig }) {
@@ -737,17 +738,27 @@ function EditorialProdutoSection({ cfg }: { cfg: EditorialConfig }) {
             </div>
           </div>
 
-          {/* Coluna direita: imagem placeholder */}
+          {/* Coluna direita: imagem */}
           <div style={{ position: 'relative', padding: '0 20px 0 0' }}>
             <div style={{ borderRadius: '32px', overflow: 'hidden', aspectRatio: '4/5', background: '#E5E7EB', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
-              </svg>
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#9CA3AF', fontWeight: 500 }}>Imagem em breve</span>
-              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to top, rgba(156,163,175,0.35) 0%, transparent 100%)', pointerEvents: 'none' }} />
+              {cfg.imagem ? (
+                <img
+                  src={cfg.imagem}
+                  alt=""
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                <>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
+                  </svg>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#9CA3AF', fontWeight: 500 }}>Imagem em breve</span>
+                </>
+              )}
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%)', pointerEvents: 'none' }} />
               <div style={{ position: 'absolute', bottom: '28px', left: '28px', right: '28px' }}>
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(14px, 1.4vw, 17px)', color: '#6B7280', margin: '0 0 4px', lineHeight: 1.3 }}>Corretora autorizada Porto Seguro</p>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: '#9CA3AF', margin: 0, lineHeight: 1.5 }}>Segurança e transparência em cada etapa</p>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 'clamp(14px, 1.4vw, 17px)', color: cfg.imagem ? '#fff' : '#6B7280', margin: '0 0 4px', lineHeight: 1.3 }}>Corretora autorizada Porto Seguro</p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: cfg.imagem ? 'rgba(255,255,255,0.7)' : '#9CA3AF', margin: 0, lineHeight: 1.5 }}>Segurança e transparência em cada etapa</p>
               </div>
             </div>
             <div className="hidden sm:flex" style={{ position: 'absolute', top: '28px', right: '-16px', background: '#fff', borderRadius: '14px', padding: '12px 18px', boxShadow: '0 8px 32px rgba(0,0,0,0.13)', alignItems: 'center', gap: '10px', zIndex: 2 }}>
@@ -827,6 +838,7 @@ const editorialImovel: EditorialConfig = {
   stats: [{ label: 'Crédito a partir de', value: 'R$ 70 mil' }, { label: 'Taxa de juros', value: '0% a.a.' }, { label: 'Contemplação', value: 'Mensal' }],
   badgeTopo: 'Sem juros · Sem entrada',
   badgeInferior: { value: '+30 anos', label: 'de experiência no mercado' },
+  imagem: '/imagens/produto-imóvel.jpg',
 };
 
 const tiposImovel: TipoItem[] = [
@@ -1089,6 +1101,7 @@ const editorialPesados: EditorialConfig = {
   ],
   badgeTopo: 'Sem juros · Sem taxa de adesão',
   badgeInferior: { value: '25% menos', label: 'nas parcelas até a contemplação' },
+  imagem: '/imagens/produto-pesados.jpg',
 };
 
 const tiposPesados: TipoItem[] = [
@@ -1215,6 +1228,7 @@ const editorialConstrucao: EditorialConfig = {
   ],
   badgeTopo: 'Sem juros · Sem entrada',
   badgeInferior: { value: 'Seu projeto', label: 'do jeito que você imaginou' },
+  imagem: '/imagens/produto-reforma.jpg',
 };
 
 const tiposConstrucao: TipoItem[] = [
@@ -1302,6 +1316,7 @@ const editorialAgro: EditorialConfig = {
   ],
   badgeTopo: 'Sem juros · Sem entrada',
   badgeInferior: { value: '26,6%', label: 'do PIB brasileiro é agro' },
+  imagem: '/imagens/produto-agro.jpg',
 };
 
 const tiposAgro: TipoItem[] = [
@@ -1349,6 +1364,7 @@ const editorialInvestimento: EditorialConfig = {
   ],
   badgeTopo: 'Rentabilidade · Segurança',
   badgeInferior: { value: 'Reajuste', label: 'anual da carta de crédito' },
+  imagem: '/imagens/produto-investimento.jpg',
 };
 
 const tiposInvestimento: TipoItem[] = [
@@ -1396,6 +1412,7 @@ const editorialPlacaSolar: EditorialConfig = {
   ],
   badgeTopo: 'Energia limpa · Sem juros',
   badgeInferior: { value: '+3.000h', label: 'de sol intenso por ano no Brasil' },
+  imagem: '/imagens/produto-energiasolar.jpg',
 };
 
 const tiposPlacaSolar: TipoItem[] = [
@@ -1550,6 +1567,7 @@ const editorialEmpresarial: EditorialConfig = {
   ],
   badgeTopo: 'Sem juros · Sem comprometer o caixa',
   badgeInferior: { value: 'Porto Seguro', label: 'referência nacional em consórcios' },
+  imagem: '/imagens/produto-empresarial.jpg',
 };
 
 const tiposEmpresarial: TipoItem[] = [
