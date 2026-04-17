@@ -671,13 +671,9 @@ function ProdutoPageBlank({ categoria, titulo, subtitulo, children }: ProdutoPag
           </section>
         )}
 
-        {/* Espaço para a barra flutuante não sobrepor o footer */}
-        <div style={{ height: '64px' }} />
-
       </main>
       <Footer />
       <ChatWidget />
-      <FloatingCTABar titulo={titulo} categoria={categoria} />
     </>
   );
 }
