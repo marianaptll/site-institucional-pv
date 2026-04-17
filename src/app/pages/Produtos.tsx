@@ -113,7 +113,7 @@ function VantagemCard({ icon: Icon, title, desc, color, iconColor, dark, idleAni
 
 function VantagensSection() {
   return (
-    <section style={{ backgroundColor: '#fff', padding: 'clamp(64px, 10vw, 104px) 24px' }}>
+    <section style={{ backgroundColor: '#fff', padding: 'clamp(48px, 6vw, 80px) 24px' }}>
       <div className="max-w-7xl mx-auto">
 
         {/* Cabeçalho */}
@@ -248,7 +248,7 @@ const etapas = [
 function EtapasSection() {
   const [hovered, setHovered] = useState<number | null>(null);
   return (
-    <section style={{ backgroundColor: '#fff', padding: 'clamp(64px, 10vw, 104px) 24px' }}>
+    <section style={{ backgroundColor: '#fff', padding: 'clamp(48px, 6vw, 80px) 24px' }}>
       <div className="max-w-7xl mx-auto">
 
         {/* Cabeçalho */}
@@ -319,7 +319,7 @@ function EtapasSection() {
 
 function DepoimentoCTASection() {
   return (
-    <section style={{ backgroundColor: '#111827', padding: 'clamp(64px, 10vw, 104px) 24px' }}>
+    <section style={{ backgroundColor: '#111827', padding: 'clamp(48px, 6vw, 80px) 24px' }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center">
 
@@ -411,7 +411,7 @@ function FAQProdutoSection() {
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
   return (
-    <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(64px, 10vw, 104px) 24px' }}>
+    <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(48px, 6vw, 80px) 24px' }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-16 items-start">
 
@@ -597,7 +597,7 @@ function ProdutoPageBlank({ categoria, titulo, subtitulo, children }: ProdutoPag
         <section
           style={{
             backgroundColor: '#111827',
-            padding: 'clamp(72px, 12vw, 120px) clamp(24px, 6vw, 96px)',
+            padding: 'clamp(48px, 6vw, 80px) clamp(24px, 6vw, 64px)',
             position: 'relative',
             overflow: 'hidden',
             borderRadius: '0 0 28px 28px',
@@ -656,7 +656,7 @@ function ProdutoPageBlank({ categoria, titulo, subtitulo, children }: ProdutoPag
 
         {/* Placeholder — exibido apenas enquanto a página não tem conteúdo próprio */}
         {!children && (
-          <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(64px, 10vw, 100px) 24px', textAlign: 'center' }}>
+          <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(48px, 6vw, 80px) 24px', textAlign: 'center' }}>
             <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '16px', background: '#fff', border: '1.5px dashed #D1D5DB', borderRadius: '20px', padding: '48px 64px' }}>
               <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -698,7 +698,7 @@ interface EditorialConfig {
 
 function EditorialProdutoSection({ cfg }: { cfg: EditorialConfig }) {
   return (
-    <section style={{ backgroundColor: '#fff', padding: 'clamp(64px, 10vw, 112px) 24px', overflow: 'hidden' }}>
+    <section style={{ backgroundColor: '#fff', padding: 'clamp(48px, 6vw, 80px) 24px', overflow: 'hidden' }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
@@ -779,7 +779,7 @@ function EditorialProdutoSection({ cfg }: { cfg: EditorialConfig }) {
 function TiposProdutoSection({ titulo, tipos }: { titulo: ReactNode; tipos: TipoItem[] }) {
   const [hovered, setHovered] = useState<number | null>(null);
   return (
-    <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(64px, 10vw, 104px) 24px' }}>
+    <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(48px, 6vw, 80px) 24px' }}>
       <div className="max-w-7xl mx-auto">
         <div style={{ marginBottom: '48px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
@@ -957,7 +957,7 @@ function OfertasProdutoSection({ ofertas, inicial = 1 }: { ofertas: Oferta[]; in
   const next = () => setCurrent((c) => (c + 1) % total);
 
   return (
-    <section style={{ backgroundColor: '#fff', padding: 'clamp(64px, 10vw, 104px) 24px' }}>
+    <section style={{ backgroundColor: '#fff', padding: 'clamp(48px, 6vw, 80px) 24px' }}>
       <div className="max-w-7xl mx-auto">
 
         {/* Cabeçalho */}
@@ -1454,7 +1454,7 @@ const beneficiosSolarAnimado = [
 function InstalacaoSolarSection() {
   const [hovered, setHovered] = useState<number | null>(null);
   return (
-    <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(64px, 10vw, 104px) 24px' }}>
+    <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(48px, 6vw, 80px) 24px' }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[1fr_1fr] gap-6 items-stretch">
 
