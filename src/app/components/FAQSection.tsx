@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FAQItem } from './FAQItem';
 import type { FAQEntry } from './FAQItem';
 
-function SourceTooltip({ href, label, onLight }: { href: string; label: string; onLight?: boolean }) {
+function SourceTooltip({ href, label, onLight }: { href?: string; label: string; onLight?: boolean }) {
   const [visible, setVisible] = useState(false);
   const iconBg = onLight ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.2)';
   const iconColor = onLight ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.7)';
@@ -39,10 +39,14 @@ function SourceTooltip({ href, label, onLight }: { href: string; label: string; 
           zIndex: 10,
         }}>
           Fonte:{' '}
-          <a href={href} target="_blank" rel="noopener noreferrer"
-            style={{ color: '#60A5FA', textDecoration: 'underline' }}>
-            {label}
-          </a>
+          {href ? (
+            <a href={href} target="_blank" rel="noopener noreferrer"
+              style={{ color: '#60A5FA', textDecoration: 'underline' }}>
+              {label}
+            </a>
+          ) : (
+            <span style={{ color: '#60A5FA' }}>{label}</span>
+          )}
           {/* seta */}
           <div style={{
             position: 'absolute', bottom: '-5px', right: '6px',
@@ -120,7 +124,7 @@ export function FAQSection() {
 
               {/* Card 1 — cinza */}
               <div style={{ backgroundColor: '#eeebe6', borderRadius: '18px', padding: '20px 22px', position: 'relative' }}>
-                <SourceTooltip href="#" label="Dados internos Porto Vale" onLight />
+                <SourceTooltip label="Dados internos Porto Vale" onLight />
                 <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(28px, 5vw, 38px)', lineHeight: 1, color: '#111827', marginBottom: '6px' }}>
                   98%
                 </div>

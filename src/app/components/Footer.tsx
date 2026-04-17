@@ -130,9 +130,9 @@ export function Footer() {
                       {label}
                     </FooterLink>
                   ) : (
-                    <a href="#" className="text-[13px] text-[#6B7280] hover:text-white transition-colors duration-200" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    <span className="text-[13px] text-[#6B7280]" style={{ fontFamily: "'Inter', sans-serif" }}>
                       {label}
-                    </a>
+                    </span>
                   )}
                 </li>
               ))}

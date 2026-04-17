@@ -11,9 +11,6 @@ const videoPreparado      = `${BASE}/voce-esta-pronto.mov`;
 const videoFrustracao     = `${BASE}/frustracao-com-consorcio.mov`;
 const videoPerfil         = `${BASE}/perfil-combina-consorcio.mov`;
 const videoSonho          = `${BASE}/todo-sonho-comeca-planejamento.mov`;
-// TODO: subir no Supabase quando disponíveis
-// const videoPoderaVista = `${BASE}/poder-de-comprar-a-vista.mov`;
-// const videoQuantoCusta = `${BASE}/quanto-custa-imovel-300k.mov`;
 
 const cards = [
   { topic: 'O que é consórcio',                      videoSrc: videoOQueEConsorcio },

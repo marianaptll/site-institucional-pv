@@ -7,7 +7,7 @@ import { Footer } from '../components/Footer';
 import { ChatWidget } from '../components/ChatWidget';
 import { FAQItem } from '../components/FAQItem';
 import type { FAQEntry } from '../components/FAQItem';
-import { Users, FileText, MapPin, TrendingUp, Star, Globe, Award, BarChart2, ArrowRight } from 'lucide-react';
+import { Users, TrendingUp, Star, Globe, Award, BarChart2, ArrowRight } from 'lucide-react';
 import { SectionLabel } from '../components/SectionLabel';
 import { NumerosBar } from '../components/NumerosBar';
 
@@ -30,44 +30,6 @@ const faqsSobreNos: FAQEntry[] = [
   },
 ];
 
-const numerosStats = [
-  {
-    icon: Users,
-    value: '+53 mil',
-    label: 'clientes atendidos',
-    idleAnimate: { scale: [1, 1.14, 1] } as object,
-    idleTransition: { duration: 2.2, repeat: Infinity, ease: 'easeInOut' as const },
-    hoverAnimate: { scale: [1, 1.3, 1] } as object,
-    hoverTransition: { duration: 0.45, repeat: Infinity, ease: 'easeInOut' as const },
-  },
-  {
-    icon: FileText,
-    value: '+80 mil',
-    label: 'cotas de consórcio negociadas',
-    idleAnimate: { rotate: [-4, 4, -4] } as object,
-    idleTransition: { duration: 3, repeat: Infinity, ease: 'easeInOut' as const },
-    hoverAnimate: { rotate: [-8, 8, -8] } as object,
-    hoverTransition: { duration: 0.6, repeat: Infinity, ease: 'easeInOut' as const },
-  },
-  {
-    icon: TrendingUp,
-    value: '+R$ 20,5 bi',
-    label: 'em crédito comercializado',
-    idleAnimate: { y: [0, -5, 0] } as object,
-    idleTransition: { duration: 2.4, repeat: Infinity, ease: 'easeInOut' as const },
-    hoverAnimate: { y: [0, -9, 0] } as object,
-    hoverTransition: { duration: 0.5, repeat: Infinity, ease: 'easeInOut' as const },
-  },
-  {
-    icon: MapPin,
-    value: '+3 mil',
-    label: 'cidades com presença no Brasil',
-    idleAnimate: { y: [0, -4, 0] } as object,
-    idleTransition: { duration: 2.8, repeat: Infinity, ease: 'easeInOut' as const },
-    hoverAnimate: { y: [0, -8, 0] } as object,
-    hoverTransition: { duration: 0.5, repeat: Infinity, ease: 'easeInOut' as const },
-  },
-];
 
 const diferenciais = [
   {
@@ -108,52 +70,7 @@ const diferenciais = [
   },
 ];
 
-type StatItem = typeof numerosStats[number];
 type DiferencialItem = typeof diferenciais[number];
-
-function StatCard({ icon: Icon, value, label, idleAnimate, idleTransition, hoverAnimate, hoverTransition }: StatItem) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        backgroundColor: hovered ? '#1a2537' : '#111827',
-        padding: 'clamp(20px, 4vw, 40px) clamp(16px, 3vw, 32px)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px',
-        transition: 'background-color 0.3s',
-        cursor: 'default',
-      }}
-    >
-      <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: hovered ? 'rgba(0,156,222,0.22)' : 'rgba(0,156,222,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.3s' }}>
-        <motion.div
-          animate={hovered ? hoverAnimate : idleAnimate}
-          transition={hovered ? hoverTransition : idleTransition}
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-          <Icon size={20} color="#009cde" strokeWidth={1.8} />
-        </motion.div>
-      </div>
-      <div
-        style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontWeight: 800,
-          fontSize: 'clamp(26px, 3vw, 40px)',
-          letterSpacing: '-0.02em',
-          lineHeight: 1,
-          color: '#009cde',
-        }}
-      >
-        {value}
-      </div>
-      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6, margin: 0 }}>
-        {label}
-      </p>
-    </div>
-  );
-}
 
 function DiferencialCard({ icon: Icon, title, desc, idleAnimate, idleTransition, hoverAnimate, hoverTransition }: DiferencialItem) {
   const [hovered, setHovered] = useState(false);
