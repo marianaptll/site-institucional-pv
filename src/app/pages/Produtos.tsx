@@ -1477,14 +1477,6 @@ function InstalacaoSolarSection() {
               </p>
             </div>
 
-            {/* Placeholder de foto/vídeo */}
-            <div style={{ borderRadius: '16px', overflow: 'hidden', aspectRatio: '16/9', background: 'rgba(0,0,0,0.25)', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px', border: '1px solid rgba(255,255,255,0.12)', cursor: 'pointer' }}>
-              {/* Botão play */}
-              <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'rgba(0,156,222,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 20px rgba(0,0,0,0.3)' }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><polygon points="5,3 19,12 5,21"/></svg>
-              </div>
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'rgba(255,255,255,0.5)', fontWeight: 500 }}>Vídeo de instalação — em breve</span>
-            </div>
           </div>
 
           {/* Direita — grid 2x2 de benefícios com ícones animados */}
