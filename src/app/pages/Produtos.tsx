@@ -1135,9 +1135,9 @@ const tiposAutomovel: TipoItem[] = [
 ];
 
 const ofertasAutomovel: Oferta[] = [
-  { media: 'photo', badge: 'Entrada acessível', credito: 'R$ 25.000',  parcela: '', prazo: '50 meses', descricao: 'Ideal para motos, carros populares ou seminovos com parcelas que cabem no orçamento.',  imagem: '/imagens/carro-60k.jpg' },
-  { media: 'photo', badge: 'Mais escolhido',    credito: 'R$ 75.000',  parcela: '', prazo: '70 meses', descricao: 'O crédito certo para hatches, sedãs e SUVs compactos novos ou seminovos premium.',    imagem: '/imagens/carro-150k.jpg' },
-  { media: 'photo', badge: 'Maior crédito',     credito: 'R$ 125.000', parcela: '', prazo: '80 meses', descricao: 'Para SUVs, picapes, utilitários ou renovação de frota com o máximo poder de compra.', imagem: '/imagens/carro-300k.jpg' },
+  { media: 'photo', badge: 'Entrada acessível', credito: 'R$ 60.000',  parcela: '', prazo: '50 meses', descricao: 'Ideal para motos, carros populares ou seminovos com parcelas que cabem no orçamento.',  imagem: '/imagens/carro-70k.jpg' },
+  { media: 'photo', badge: 'Mais escolhido',    credito: 'R$ 150.000', parcela: '', prazo: '70 meses', descricao: 'O crédito certo para hatches, sedãs e SUVs compactos novos ou seminovos premium.',    imagem: '/imagens/carro-150k.jpg' },
+  { media: 'photo', badge: 'Maior crédito',     credito: 'R$ 300.000', parcela: '', prazo: '80 meses', descricao: 'Para SUVs, picapes, utilitários ou renovação de frota com o máximo poder de compra.', imagem: '/imagens/carro-300k.jpg' },
 ];
 
 // ── Dados: Pesados ───────────────────────────────────────────────────────────
