@@ -862,7 +862,7 @@ function TiposProdutoSection({ titulo, tipos }: { titulo: ReactNode; tipos: Tipo
 
 // ── Carrossel de ofertas ─────────────────────────────────────────────────────
 
-interface Oferta { media: 'photo'; badge: string; credito: string; parcela: string; prazo: string; descricao: string; }
+interface Oferta { media: 'photo'; badge: string; credito: string; parcela: string; prazo: string; descricao: string; imagem?: string; }
 
 // ── Dados: Imóvel ────────────────────────────────────────────────────────────
 
@@ -939,13 +939,23 @@ function OfertaCard({ oferta, active }: { oferta: Oferta; active: boolean }) {
       }}
     >
       {/* Área de mídia */}
-      <div style={{ aspectRatio: '16/9', background: '#E5E7EB', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px', position: 'relative' }}>
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2" />
-          <circle cx="8.5" cy="8.5" r="1.5" />
-          <polyline points="21 15 16 10 5 21" />
-        </svg>
-        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: '#9CA3AF', fontWeight: 500 }}>Foto do imóvel</span>
+      <div style={{ aspectRatio: '16/9', background: '#E5E7EB', position: 'relative', overflow: 'hidden' }}>
+        {oferta.imagem ? (
+          <img
+            src={oferta.imagem}
+            alt={oferta.badge}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+        ) : (
+          <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: '#9CA3AF', fontWeight: 500 }}>Foto em breve</span>
+          </div>
+        )}
         {/* Badge */}
         <div style={{ position: 'absolute', top: '14px', left: '14px', background: active ? '#009cde' : '#6B7280', color: '#fff', fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, padding: '4px 12px', borderRadius: '20px', letterSpacing: '0.04em' }}>
           {oferta.badge}
@@ -1125,9 +1135,9 @@ const tiposAutomovel: TipoItem[] = [
 ];
 
 const ofertasAutomovel: Oferta[] = [
-  { media: 'photo', badge: 'Entrada acessível', credito: 'R$ 25.000',  parcela: '', prazo: '50 meses', descricao: 'Ideal para motos, carros populares ou seminovos com parcelas que cabem no orçamento.' },
-  { media: 'photo', badge: 'Mais escolhido',    credito: 'R$ 75.000',  parcela: '', prazo: '70 meses', descricao: 'O crédito certo para hatches, sedãs e SUVs compactos novos ou seminovos premium.' },
-  { media: 'photo', badge: 'Maior crédito',     credito: 'R$ 125.000', parcela: '', prazo: '80 meses', descricao: 'Para SUVs, picapes, utilitários ou renovação de frota com o máximo poder de compra.' },
+  { media: 'photo', badge: 'Entrada acessível', credito: 'R$ 25.000',  parcela: '', prazo: '50 meses', descricao: 'Ideal para motos, carros populares ou seminovos com parcelas que cabem no orçamento.',  imagem: '/imagens/carro-60k.jpg' },
+  { media: 'photo', badge: 'Mais escolhido',    credito: 'R$ 75.000',  parcela: '', prazo: '70 meses', descricao: 'O crédito certo para hatches, sedãs e SUVs compactos novos ou seminovos premium.',    imagem: '/imagens/carro-150k.jpg' },
+  { media: 'photo', badge: 'Maior crédito',     credito: 'R$ 125.000', parcela: '', prazo: '80 meses', descricao: 'Para SUVs, picapes, utilitários ou renovação de frota com o máximo poder de compra.', imagem: '/imagens/carro-300k.jpg' },
 ];
 
 // ── Dados: Pesados ───────────────────────────────────────────────────────────
