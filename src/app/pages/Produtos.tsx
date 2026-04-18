@@ -1331,7 +1331,6 @@ export function ConsorcioTerreno() {
         titulo={<>Como você pode usar a sua <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>carta de crédito</span></>}
         tipos={tiposTerreno}
       />
-      <OfertasProdutoSection ofertas={ofertasTerreno} inicial={1} />
     </ProdutoPageBlank>
   );
 }
@@ -1381,7 +1380,6 @@ export function ConsorcioConstrucaoReforma() {
         titulo={<>O que você pode <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>realizar com o crédito</span></>}
         tipos={tiposConstrucao}
       />
-      <OfertasProdutoSection ofertas={ofertasConstrucao} inicial={1} />
     </ProdutoPageBlank>
   );
 }
@@ -1420,7 +1418,6 @@ export function ConsorcioPesados() {
         tipos={tiposPesados}
       />
       <ImplementosSection />
-      <OfertasProdutoSection ofertas={ofertasPesados} inicial={1} />
     </ProdutoPageBlank>
   );
 }
