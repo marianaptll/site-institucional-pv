@@ -466,12 +466,7 @@ function FAQProdutoSection({ faqs }: { faqs: FAQEntry[] }) {
 
           {/* Esquerda — card de contato */}
           <div className="lg:sticky" style={{ top: '96px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <div style={{ width: '28px', height: '2px', backgroundColor: '#2563EB' }} />
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#2563EB' }}>
-                Dúvidas frequentes
-              </span>
-            </div>
+            <SectionLabel>Dúvidas frequentes</SectionLabel>
             <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 2.8vw, 38px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#111827', margin: '0 0 16px' }}>
               Ainda ficou com{' '}
               <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>dúvidas?</span>
@@ -658,13 +653,7 @@ function ProdutoPageBlank({ categoria, titulo, subtitulo, faqs, children }: Prod
           <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,156,222,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
           <div className="max-w-3xl mx-auto" style={{ position: 'relative', zIndex: 1 }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-              <div style={{ width: '28px', height: '2px', backgroundColor: '#009cde' }} />
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#009cde' }}>
-                {categoria}
-              </span>
-              <div style={{ width: '28px', height: '2px', backgroundColor: '#009cde' }} />
-            </div>
+            <SectionLabel center dark>{categoria}</SectionLabel>
             <h1
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -754,12 +743,6 @@ function EditorialProdutoSection({ cfg }: { cfg: EditorialConfig }) {
 
           {/* Coluna esquerda: texto */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-              <div style={{ width: '28px', height: '2px', backgroundColor: '#2563EB' }} />
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#2563EB' }}>
-                {cfg.badge}
-              </span>
-            </div>
             <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(28px, 3.2vw, 48px)', lineHeight: 1.06, letterSpacing: '-0.03em', color: '#111827', margin: '0 0 28px' }}>
               {cfg.titulo}
             </h2>
@@ -832,10 +815,7 @@ function TiposProdutoSection({ titulo, tipos }: { titulo: ReactNode; tipos: Tipo
     <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(48px, 6vw, 80px) 24px' }}>
       <div className="max-w-7xl mx-auto">
         <div style={{ marginBottom: '48px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <div style={{ width: '28px', height: '2px', backgroundColor: '#009cde' }} />
-            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#009cde' }}>Modalidades</span>
-          </div>
+          <SectionLabel>Modalidades</SectionLabel>
           <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(24px, 3vw, 42px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#111827', margin: 0 }}>
             {titulo}
           </h2>
@@ -1036,12 +1016,7 @@ function OfertasProdutoSection({ ofertas, inicial = 1 }: { ofertas: Oferta[]; in
         {/* Cabeçalho */}
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '24px', marginBottom: '40px', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-              <div style={{ width: '28px', height: '2px', backgroundColor: '#009cde' }} />
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#009cde' }}>
-                Ofertas em destaque
-              </span>
-            </div>
+            <SectionLabel>Ofertas em destaque</SectionLabel>
             <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(24px, 3vw, 40px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#111827', margin: 0 }}>
               Os{' '}
               <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>3 planos</span>
@@ -1214,12 +1189,7 @@ function ImplementosSection() {
     <section style={{ backgroundColor: '#fff', padding: 'clamp(48px, 7vw, 80px) 24px' }}>
       <div className="max-w-7xl mx-auto">
         <div style={{ marginBottom: '40px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-            <div style={{ width: '28px', height: '2px', backgroundColor: '#009cde' }} />
-            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#009cde' }}>
-              Implementos rodoviários
-            </span>
-          </div>
+          <SectionLabel>Implementos rodoviários</SectionLabel>
           <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(20px, 2.4vw, 32px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#111827', margin: 0 }}>
             Também adquira{' '}
             <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>semirreboques e implementos</span>
