@@ -1115,14 +1115,14 @@ const editorialAutomovel: EditorialConfig = {
   titulo: <>Saia de carro novo com <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>planejamento, sem juros e sem entrada</span></>,
   intro: 'O consórcio de veículos da Porto Seguro permite que você adquira um carro novo ou seminovo de maneira planejada, sem juros e com parcelas econômicas.',
   corpo1: 'Os planos variam de 50 a 80 meses, e você não precisa dar entrada para adesão ao consórcio. Com parcelas reduzidas até a contemplação e a liberdade de escolher o valor do crédito que você precisa, o consórcio da Porto Seguro oferece diversas vantagens.',
-  corpo2: 'Nossos planos oferecem créditos que vão de R$ 25 mil a R$ 125 mil, sem juros e sem entrada. Você pode escolher entre as melhores marcas e modelos, incluindo hatches, sedãs e SUVs.',
+  corpo2: 'Nossos planos oferecem créditos que vão de R$ 70 mil a R$ 300 mil, sem juros e sem entrada. Você pode escolher entre as melhores marcas e modelos, incluindo hatches, sedãs e SUVs.',
   stats: [
-    { label: 'Crédito de até', value: 'R$ 125 mil' },
+    { label: 'Crédito de até', value: 'R$ 300 mil' },
     { label: 'Prazo', value: '50–80 meses' },
     { label: 'Taxa de juros', value: '0% a.a.' },
   ],
   badgeTopo: 'Sem juros · Sem entrada',
-  badgeInferior: { value: 'Sem juros', label: 'e sem entrada' },
+  badgeInferior: { value: 'R$ 300 mil', label: 'em crédito disponível' },
   imagem: '/imagens/produto-auto.jpg',
 };
 
