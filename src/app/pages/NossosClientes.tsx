@@ -14,73 +14,73 @@ const testimonials = [
     text: 'Entrei no consórcio sem acreditar muito. Em 14 meses fui contemplado por sorteio e hoje tenho meu carro pago sem pagar um centavo de juros. Simplesmente incrível.',
     image: 'https://i.pravatar.cc/80?img=11',
     name: 'Lucas Ferreira',
-    role: 'Contemplado — Consórcio Automóvel',
+    role: 'Contemplado no Consórcio Automóvel',
   },
   {
     text: 'Comparei com o financiamento e a diferença foi absurda. Economizei muito no total. O atendimento foi excelente do começo ao fim.',
     image: 'https://i.pravatar.cc/80?img=47',
     name: 'Camila Rocha',
-    role: 'Contemplada — Consórcio Imóvel',
+    role: 'Contemplada no Consórcio Imóvel',
   },
   {
     text: 'Fiz o lance e fui contemplado no 8º mês. O processo foi transparente e a equipe me ajudou em cada passo. Recomendo para todo mundo que quer comprar sem juros.',
     image: 'https://i.pravatar.cc/80?img=52',
     name: 'Rafael Mendes',
-    role: 'Contemplado — Consórcio Automóvel',
+    role: 'Contemplado no Consórcio Automóvel',
   },
   {
     text: 'O consultor me explicou tudo com clareza, não teve nenhuma surpresa. O consórcio é realmente a forma mais inteligente de adquirir um bem.',
     image: 'https://i.pravatar.cc/80?img=25',
     name: 'Fernanda Costa',
-    role: 'Contemplada — Consórcio Imóvel',
+    role: 'Contemplada no Consórcio Imóvel',
   },
   {
     text: 'Entrei com parcelas acessíveis e em menos de um ano já estava com meu carro novo. Nunca mais vou financiar nada na vida.',
     image: 'https://i.pravatar.cc/80?img=68',
     name: 'Thiago Oliveira',
-    role: 'Contemplado — Consórcio Automóvel',
+    role: 'Contemplado no Consórcio Automóvel',
   },
   {
     text: 'Usei a carta de crédito de forma inteligente. Foi ágil, sem burocracia e o valor corrigido me permitiu fazer tudo que planejei.',
     image: 'https://i.pravatar.cc/80?img=33',
     name: 'Ana Paula Lima',
-    role: 'Contemplada — Consórcio Imóvel',
+    role: 'Contemplada no Consórcio Imóvel',
   },
   {
     text: 'A Porto Vale me deu suporte em tudo desde o primeiro contato. Senti segurança em cada etapa e o resultado foi incrível.',
     image: 'https://i.pravatar.cc/80?img=57',
     name: 'Marcos Vieira',
-    role: 'Contemplado — Consórcio Imóvel',
+    role: 'Contemplado no Consórcio Imóvel',
   },
   {
     text: 'Indiquei para minha família toda. É a melhor forma de planejar a compra de um bem sem se endividar com juros absurdos.',
     image: 'https://i.pravatar.cc/80?img=44',
     name: 'Juliana Mendonça',
-    role: 'Contemplada — Consórcio Automóvel',
+    role: 'Contemplada no Consórcio Automóvel',
   },
   {
     text: 'Já fiz dois consórcios com a Porto Vale. O atendimento é sempre impecável e a transparência faz toda a diferença na hora de decidir.',
     image: 'https://i.pravatar.cc/80?img=15',
     name: 'Eduardo Santana',
-    role: 'Contemplado — Consórcio Imóvel',
+    role: 'Contemplado no Consórcio Imóvel',
   },
   {
     text: 'Não acreditava que conseguiria minha moto tão rápido. No 6º mês fui sorteado e hoje já estou rodando sem dever nada.',
     image: 'https://i.pravatar.cc/80?img=60',
     name: 'Rodrigo Pinheiro',
-    role: 'Contemplado — Consórcio Moto',
+    role: 'Contemplado no Consórcio Moto',
   },
   {
     text: 'A equipe da Porto Vale é diferenciada. Me senti acolhida e com todas as informações claras para tomar a melhor decisão.',
     image: 'https://i.pravatar.cc/80?img=38',
     name: 'Patricia Alves',
-    role: 'Contemplada — Consórcio Imóvel',
+    role: 'Contemplada no Consórcio Imóvel',
   },
   {
     text: 'O consórcio foi a saída mais inteligente para conquistar meu apartamento. Planejei, contribuí e realizei. Obrigado Porto Vale!',
     image: 'https://i.pravatar.cc/80?img=22',
     name: 'Bruno Carvalho',
-    role: 'Contemplado — Consórcio Imóvel',
+    role: 'Contemplado no Consórcio Imóvel',
   },
 ];
 
@@ -137,7 +137,7 @@ export function NossosClientes() {
                 </h2>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', color: '#6B7280', lineHeight: 1.7, maxWidth: '420px', marginBottom: '24px' }}>
                   Pessoas reais que realizaram seus sonhos com a Porto Vale. Veja os relatos por trás de nossas{' '}
-                  <span style={{ color: '#111827', fontWeight: 500 }}>histórias de sucesso</span> — em vídeo e em texto.
+                  <span style={{ color: '#111827', fontWeight: 500 }}>histórias de sucesso</span>, em vídeo e em texto.
                 </p>
                 <a
                   href="https://www.youtube.com/@portovaleconsorcio676"

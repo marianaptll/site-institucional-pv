@@ -286,7 +286,7 @@ export default function SpaceBox({ className }: SpaceBoxProps) {
                   </span>
                 </h2>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.65)", marginTop: "4px" }}>
-                  Envie sua dúvida — um especialista vai te responder em instantes
+                  Envie sua dúvida, um especialista vai te responder em instantes
                 </p>
               </div>
 

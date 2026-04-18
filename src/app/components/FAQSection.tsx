@@ -161,7 +161,7 @@ export function FAQSection() {
                     12,2M
                   </div>
                   <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'rgba(255,255,255,0.85)', lineHeight: 1.6 }}>
-                    participantes ativos — crescimento de 10,2% em 2025
+                    participantes ativos, crescimento de 10,2% em 2025
                   </p>
                 </div>
               </div>

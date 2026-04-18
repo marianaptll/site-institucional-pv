@@ -172,7 +172,7 @@ const etapas = [
     fase: 'Adesão',
     icon: ClipboardList,
     title: 'Escolha o seu plano',
-    description: 'Com a orientação de um consultor Porto Vale, você define o valor do crédito, o prazo e as parcelas ideais para o seu perfil financeiro — tudo com transparência, sem surpresas.',
+    description: 'Com a orientação de um consultor Porto Vale, você define o valor do crédito, o prazo e as parcelas ideais para o seu perfil financeiro, tudo com transparência e sem surpresas.',
     bullets: [
       'Escolha o valor do crédito e o prazo',
       'Defina parcelas que cabem no seu orçamento',
@@ -210,7 +210,7 @@ const etapas = [
     fase: 'Contemplação',
     icon: Trophy,
     title: 'Seja contemplado',
-    description: 'A contemplação pode acontecer a qualquer momento durante a vigência do grupo — seja pelo sorteio mensal, que dá chances iguais a todos, seja antecipando com um lance livre ou fixo.',
+    description: 'A contemplação pode acontecer a qualquer momento durante a vigência do grupo, seja pelo sorteio mensal, que dá chances iguais a todos, seja antecipando com um lance livre ou fixo.',
     bullets: [
       'Sorteio mensal com chances para todos os cotistas',
       'Lance livre: oferte um percentual do crédito',
@@ -257,7 +257,7 @@ function EtapasSection() {
           <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 42px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#111827', margin: 0 }}>
             Do início à{' '}
             <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>realização</span>
-            {' '}— passo a passo
+            {' '}passo a passo
           </h2>
         </div>
 
@@ -327,7 +327,7 @@ function DepoimentoCTASection() {
           <div>
             <div style={{ fontFamily: 'Georgia, serif', fontSize: '72px', lineHeight: 0.7, color: '#009cde', opacity: 0.4, marginBottom: '24px', userSelect: 'none' }}>"</div>
             <blockquote style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: 'clamp(17px, 2vw, 24px)', color: '#fff', lineHeight: 1.7, margin: '0 0 32px', letterSpacing: '-0.01em' }}>
-              Eu não acreditava que seria tão simples. Em menos de dois anos fui contemplada e hoje tenho o apartamento que sempre sonhei — sem pagar um centavo de juros.
+              Eu não acreditava que seria tão simples. Em menos de dois anos fui contemplada e hoje tenho o apartamento que sempre sonhei, sem pagar um centavo de juros.
             </blockquote>
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
               <div style={{ width: '48px', height: '48px', borderRadius: '50%', overflow: 'hidden', background: '#374151', flexShrink: 0 }}>
@@ -477,7 +477,7 @@ function FAQProdutoSection({ faqs }: { faqs: FAQEntry[] }) {
               <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>dúvidas?</span>
             </h2>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', color: '#6B7280', lineHeight: 1.75, margin: '0 0 32px' }}>
-              Nossa equipe está disponível para responder tudo o que você precisar — sem compromisso.
+              Nossa equipe está disponível para responder tudo o que você precisar, sem compromisso.
             </p>
 
             <a
@@ -1145,7 +1145,7 @@ const editorialAutomovel: EditorialConfig = {
 };
 
 const tiposAutomovel: TipoItem[] = [
-  { icon: Car,   label: 'Carro',       desc: 'Carros novos ou seminovos das melhores marcas — hatches, sedãs, SUVs e muito mais.' },
+  { icon: Car,   label: 'Carro',       desc: 'Carros novos ou seminovos das melhores marcas: hatches, sedãs, SUVs e muito mais.' },
   { icon: Bike,  label: 'Moto',        desc: 'Adquira a moto que você quer com parcelas acessíveis e sem precisar dar entrada.' },
   { icon: Truck, label: 'Utilitário',  desc: 'Vans, picapes e utilitários para uso pessoal ou para impulsionar o seu negócio.' },
   { icon: Zap,   label: 'Elétrico / Híbrido', desc: 'Invista no futuro com consórcio para veículos elétricos e híbridos sem pagar juros.' },
@@ -1164,7 +1164,7 @@ const editorialPesados: EditorialConfig = {
   badge: 'Porto Vale × Porto Seguro',
   titulo: <>A forma mais econômica de <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>montar ou expandir sua frota</span></>,
   intro: 'O consórcio de caminhões e veículos pesados da Porto Seguro permite que empresas empreendedoras realizem, de forma planejada e programada, a montagem ou expansão de uma frota.',
-  corpo1: 'O crédito pode ser utilizado para a aquisição de ônibus, caminhões, carretas e outros veículos. São até 120 meses para pagamento, com redução de 25% nas parcelas até a contemplação — a maneira mais econômica de expandir uma frota ou iniciar um novo negócio.',
+  corpo1: 'O crédito pode ser utilizado para a aquisição de ônibus, caminhões, carretas e outros veículos. São até 120 meses para pagamento, com redução de 25% nas parcelas até a contemplação, a maneira mais econômica de expandir uma frota ou iniciar um novo negócio.',
   corpo2: 'As cartas de crédito variam de R$ 180 mil a R$ 360 mil, e as contemplações ocorrem mensalmente por lance ou sorteio. O consórcio de veículos pesados da Porto Seguro não possui taxa de adesão.',
   stats: [
     { label: 'Crédito até', value: 'R$ 360 mil' },
@@ -1321,7 +1321,7 @@ const editorialTerreno: EditorialConfig = {
   titulo: <>O primeiro passo para <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>conquistar o imóvel dos seus sonhos</span></>,
   intro: 'O consórcio de terreno do Porto permite que você utilize o crédito para a aquisição do terreno de sua preferência, com economia e planejamento.',
   corpo1: 'Os planos oferecem até R$ 240 mil e podem ser pagos em até 200 meses, sem juros e com taxas diferenciadas justas. Você pode escolher o crédito mais adequado ao seu objetivo, com a opção de parcelas reduzidas até a contemplação.',
-  corpo2: 'Com o consórcio, você adquire um terreno com total tranquilidade financeira — dando os primeiros e mais importantes passos para construir o imóvel que sempre imaginou.',
+  corpo2: 'Com o consórcio, você adquire um terreno com total tranquilidade financeira, dando os primeiros e mais importantes passos para construir o imóvel que sempre imaginou.',
   stats: [
     { label: 'Crédito de até', value: 'R$ 240 mil' },
     { label: 'Prazo de até', value: '200 meses' },
@@ -1335,7 +1335,7 @@ const editorialTerreno: EditorialConfig = {
 const tiposTerreno: TipoItem[] = [
   { icon: MapPin,     label: 'Áreas residenciais ou comerciais', desc: 'Use a carta de crédito para adquirir lotes em zonas residenciais ou comerciais de sua preferência.' },
   { icon: Home,       label: 'Lote em condomínio fechado',       desc: 'Adquira seu lote em condomínios planejados com toda a segurança e infraestrutura já garantidas.' },
-  { icon: Hammer,     label: 'Terreno para construção',          desc: 'Compre o terreno e já inicie o planejamento da obra — sem juros e com parcelas acessíveis.' },
+  { icon: Hammer,     label: 'Terreno para construção',          desc: 'Compre o terreno e já inicie o planejamento da obra, sem juros e com parcelas acessíveis.' },
   { icon: Sprout,     label: 'Área rural / Chácara',             desc: 'Invista em chácaras, sítios ou áreas rurais com o poder de compra à vista do consórcio.' },
   { icon: TrendingUp, label: 'Lote para investimento',           desc: 'Adquira terrenos em regiões de alta valorização e faça seu patrimônio crescer de forma planejada.' },
 ];
@@ -1369,7 +1369,7 @@ const editorialConstrucao: EditorialConfig = {
   badge: 'Porto Vale × Porto Seguro',
   titulo: <>Tire os planos do papel com <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>crédito para construir ou reformar</span></>,
   intro: 'Com o consórcio de imóveis da Porto, você pode utilizar os créditos para investir na construção ou reforma da sua residência, casa de praia ou outro projeto de seu interesse.',
-  corpo1: 'Com parcelas acessíveis e sem taxa de juros, o consórcio é a melhor forma de tirar os planos do papel. São créditos a partir de R$ 70 mil e até 200 meses para pagar — com total flexibilidade para usar o valor no projeto que você desejar.',
+  corpo1: 'Com parcelas acessíveis e sem taxa de juros, o consórcio é a melhor forma de tirar os planos do papel. São créditos a partir de R$ 70 mil e até 200 meses para pagar, com total flexibilidade para usar o valor no projeto que você desejar.',
   corpo2: 'Ao ser contemplado, você recebe a carta de crédito com poder de compra à vista, o que facilita a negociação com construtoras, arquitetos e fornecedores de material.',
   stats: [
     { label: 'Crédito a partir de', value: 'R$ 70 mil' },
@@ -1384,7 +1384,7 @@ const editorialConstrucao: EditorialConfig = {
 const tiposConstrucao: TipoItem[] = [
   { icon: Layers,     label: 'Construir',            desc: 'Use o crédito para construir sua residência do zero, com total liberdade de projeto e acabamento.' },
   { icon: Paintbrush, label: 'Reformar',              desc: 'Renove sua casa, apartamento ou espaço comercial com o poder de compra à vista do consórcio.' },
-  { icon: Home,       label: 'Casa de praia / Campo', desc: 'Construa ou reforma o seu refúgio ideal — consórcio sem restrição de localização do imóvel.' },
+  { icon: Home,       label: 'Casa de praia / Campo', desc: 'Construa ou reforma o seu refúgio ideal, consórcio sem restrição de localização do imóvel.' },
   { icon: Hammer,     label: 'Ampliação',             desc: 'Expanda o seu imóvel com mais quartos, garagem ou área de lazer sem comprometer o orçamento.' },
   { icon: TrendingUp, label: 'Valorização do imóvel', desc: 'Invista em melhorias que aumentam o valor de mercado do seu patrimônio de forma planejada.' },
 ];
@@ -1457,9 +1457,9 @@ export function ConsorcioPesados() {
 const editorialAgro: EditorialConfig = {
   badge: 'Porto Vale × Porto Seguro',
   titulo: <>Invista no agro com <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>planejamento, sem juros e sem entrada</span></>,
-  intro: 'O agronegócio é uma das áreas mais estratégicas para a economia e o PIB brasileiro — responsável por cerca de 10% de todos os empregos gerados no país e por 26,6% do Produto Interno Bruto do Brasil.',
+  intro: 'O agronegócio é uma das áreas mais estratégicas para a economia e o PIB brasileiro, responsável por cerca de 10% de todos os empregos gerados no país e por 26,6% do Produto Interno Bruto do Brasil.',
   corpo1: 'Uma área tão importante merece atenção e investimentos. Por isso, o consórcio agro da Porto Seguro oferece créditos para a compra de tratores, caminhões, máquinas agrícolas e outros equipamentos e implementos necessários ao desenvolvimento das atividades agropecuárias.',
-  corpo2: 'O consórcio oferece mais segurança e planejamento para o investimento de pequenos, médios e grandes produtores rurais — com parcelas acessíveis, sem taxa de juros e contemplação mensal.',
+  corpo2: 'O consórcio oferece mais segurança e planejamento para o investimento de pequenos, médios e grandes produtores rurais, com parcelas acessíveis, sem taxa de juros e contemplação mensal.',
   stats: [
     { label: 'Contemplação', value: 'Mensal' },
     { label: 'Taxa de juros', value: '0% a.a.' },
@@ -1509,7 +1509,7 @@ const editorialInvestimento: EditorialConfig = {
   titulo: <>Uma decisão <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>inteligente e estratégica</span> para o seu dinheiro</>,
   intro: 'O consórcio para investimento é uma decisão inteligente e estratégica. Na prática, o consórcio funciona como uma poupança, para a qual o consorciado destina recursos todos os meses com o objetivo de atingir uma meta predeterminada.',
   corpo1: 'Você pode aderir ao grupo de consórcio para investir seu dinheiro com garantia de rentabilidade e segurança. A modalidade é regulamentada pelo Banco Central do Brasil e o valor da carta de crédito é reajustado ao longo do período de duração do grupo.',
-  corpo2: 'Dessa forma, o poder de compra do consorciado é garantido — protegendo o seu patrimônio da inflação e permitindo a realização de objetivos financeiros de médio e longo prazo com total previsibilidade.',
+  corpo2: 'Dessa forma, o poder de compra do consorciado é garantido, protegendo o seu patrimônio da inflação e permitindo a realização de objetivos financeiros de médio e longo prazo com total previsibilidade.',
   stats: [
     { label: 'Regulamentado pelo', value: 'Banco Central' },
     { label: 'Taxa de juros', value: '0% a.a.' },
@@ -1523,7 +1523,7 @@ const editorialInvestimento: EditorialConfig = {
 const tiposInvestimento: TipoItem[] = [
   { icon: TrendingUp, label: 'Investimento',  desc: 'Use o consórcio como instrumento de investimento programado, com rentabilidade protegida e sem as taxas do mercado financeiro tradicional.' },
   { icon: HandCoins,  label: 'Economia',      desc: 'Disciplina financeira com destino certo: acumule crédito mês a mês e realize seus objetivos sem comprometer o orçamento.' },
-  { icon: PiggyBank,  label: 'Poupança',      desc: 'O consórcio funciona como uma poupança programada — com a vantagem de ter o poder de compra reajustado ao longo do tempo.' },
+  { icon: PiggyBank,  label: 'Poupança',      desc: 'O consórcio funciona como uma poupança programada, com a vantagem de ter o poder de compra reajustado ao longo do tempo.' },
   { icon: Shield,     label: 'Proteção Patrimonial', desc: 'Proteja seu patrimônio da inflação e da desvalorização com um produto regulamentado pelo Banco Central do Brasil.' },
   { icon: Coins,      label: 'Diversificação', desc: 'Combine o consórcio com outros investimentos para uma carteira mais equilibrada, segura e com objetivos de longo prazo.' },
 ];

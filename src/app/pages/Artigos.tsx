@@ -52,7 +52,7 @@ const ARTIGOS: Artigo[] = [
   {
     slug: 'tipos-de-lance-como-escolher',
     titulo: 'Quais os tipos de lance e como escolher para você?',
-    resumo: 'Lance livre, fixo ou embutido — cada modalidade tem suas vantagens. Aprenda a calcular o melhor tipo de lance para ser contemplado mais rápido no seu grupo.',
+    resumo: 'Lance livre, fixo ou embutido, cada modalidade tem suas vantagens. Aprenda a calcular o melhor tipo de lance para ser contemplado mais rápido no seu grupo.',
     categoria: 'Lances',
     data: '20/03/2026',
     leitura: 8,

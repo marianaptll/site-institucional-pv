@@ -6,7 +6,7 @@ const types = [
     icon: Home,
     label: 'Imóvel',
     maxCredit: 'Até R$ 500.000',
-    description: 'Casa, apartamento, terreno ou imóvel comercial — tudo com carta de crédito.',
+    description: 'Casa, apartamento, terreno ou imóvel comercial, tudo com carta de crédito.',
     tags: ['Residencial', 'Comercial', 'Terreno'],
     color: '#2563EB',
     large: true,

@@ -14,14 +14,14 @@ const allTestimonials = [
   [
     {
       name: 'Lucas Ferreira',
-      role: 'Contemplado — Consórcio Automóvel',
+      role: 'Contemplado no Consórcio Automóvel',
       avatar: 'https://i.pravatar.cc/80?img=11',
       content: 'Entrei no consórcio sem acreditar muito. Em 14 meses fui contemplado por sorteio e hoje tenho meu carro pago sem pagar um centavo de juros. Simplesmente incrível.',
       type: 'Automóvel',
     },
     {
       name: 'Camila Rocha',
-      role: 'Contemplada — Consórcio Imóvel',
+      role: 'Contemplada no Consórcio Imóvel',
       avatar: 'https://i.pravatar.cc/80?img=47',
       content: 'Comparei com o financiamento e a diferença foi absurda. Economizei muito no total. O atendimento foi excelente do começo ao fim.',
       type: 'Imóvel',
@@ -29,7 +29,7 @@ const allTestimonials = [
     },
     {
       name: 'Rafael Mendes',
-      role: 'Contemplado — Consórcio Automóvel',
+      role: 'Contemplado no Consórcio Automóvel',
       avatar: 'https://i.pravatar.cc/80?img=52',
       content: 'Fiz o lance e fui contemplado no 8º mês. O processo foi transparente e a equipe me ajudou em cada passo. Recomendo para todo mundo que quer comprar sem juros.',
       type: 'Automóvel',
@@ -38,14 +38,14 @@ const allTestimonials = [
   [
     {
       name: 'Fernanda Costa',
-      role: 'Contemplada — Consórcio Imóvel',
+      role: 'Contemplada no Consórcio Imóvel',
       avatar: 'https://i.pravatar.cc/80?img=25',
       content: 'O consultor me explicou tudo com clareza, não teve nenhuma surpresa. O consórcio é realmente a forma mais inteligente de adquirir um bem.',
       type: 'Imóvel',
     },
     {
       name: 'Thiago Oliveira',
-      role: 'Contemplado — Consórcio Automóvel',
+      role: 'Contemplado no Consórcio Automóvel',
       avatar: 'https://i.pravatar.cc/80?img=68',
       content: 'Entrei com parcelas acessíveis e em menos de um ano já estava com meu carro novo. Nunca mais vou financiar nada na vida.',
       type: 'Automóvel',
@@ -53,7 +53,7 @@ const allTestimonials = [
     },
     {
       name: 'Ana Paula Lima',
-      role: 'Contemplada — Consórcio Imóvel',
+      role: 'Contemplada no Consórcio Imóvel',
       avatar: 'https://i.pravatar.cc/80?img=33',
       content: 'Usei a carta de crédito de forma inteligente. Foi ágil, sem burocracia e o valor corrigido me permitiu fazer tudo que planejei. Excelente opção.',
       type: 'Imóvel',

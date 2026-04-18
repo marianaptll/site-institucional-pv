@@ -228,7 +228,7 @@ export function ComparisonSimulatorSection() {
               </span>
             </h2>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: '#6B7280', lineHeight: 1.75, maxWidth: '380px', marginBottom: '28px' }}>
-              Entender a diferença entre os dois é o primeiro passo para fazer uma escolha que cabe no seu bolso — e no seu planejamento de vida.
+              Entender a diferença entre os dois é o primeiro passo para fazer uma escolha que cabe no seu bolso e no seu planejamento de vida.
             </p>
 
             <div className="relative" style={{ paddingTop: '28px' }}>

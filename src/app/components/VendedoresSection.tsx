@@ -398,7 +398,7 @@ export function VendedoresSection() {
               fontFamily: "'Inter', sans-serif", fontSize: '16px', color: '#6B7280',
               lineHeight: 1.7, maxWidth: '480px', margin: '0 auto',
             }}>
-              Nossos consultores explicam cada detalhe do consórcio — da simulação à contemplação — para você tomar a melhor decisão.
+              Nossos consultores explicam cada detalhe do consórcio, da simulação à contemplação, para você tomar a melhor decisão.
             </p>
           </div>
 

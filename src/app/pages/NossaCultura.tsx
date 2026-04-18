@@ -242,7 +242,7 @@ export function NossaCultura() {
                       <div key={word} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
                         <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#2563EB', flexShrink: 0, marginTop: '7px' }} />
                         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#374151', lineHeight: 1.6, margin: 0 }}>
-                          <strong style={{ color: '#111827' }}>{word}</strong> — {desc}
+                          <strong style={{ color: '#111827' }}>{word}</strong>: {desc}
                         </p>
                       </div>
                     ))}

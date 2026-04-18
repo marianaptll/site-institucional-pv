@@ -108,14 +108,14 @@ function ChapterBasico() {
         </div>
 
         <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 500, fontSize: 'clamp(17px, 2.2vw, 21px)', color: '#374151', lineHeight: 1.75, maxWidth: '760px', margin: '0 auto 48px', textAlign: 'center' }}>
-          Um consórcio é uma <span style={{ color: DARK_BLUE, fontWeight: 700 }}>poupança coletiva</span> onde um grupo de pessoas contribui mensalmente para um fundo em comum — e a cada mês, uma delas é contemplada e recebe crédito para comprar o bem desejado, <span style={{ color: DARK_BLUE, fontWeight: 700 }}>sem pagar juros</span>.
+          Um consórcio é uma <span style={{ color: DARK_BLUE, fontWeight: 700 }}>poupança coletiva</span> onde um grupo de pessoas contribui mensalmente para um fundo em comum. A cada mês, uma delas é contemplada e recebe crédito para comprar o bem desejado, <span style={{ color: DARK_BLUE, fontWeight: 700 }}>sem pagar juros</span>.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
           {[
             { icon: Users, title: 'Grupo de pessoas', desc: 'Você entra em um grupo com outras pessoas que têm o mesmo objetivo de compra. Todos contribuem mensalmente para um fundo coletivo administrado por uma empresa regulamentada pelo Banco Central.', bg: '#EFF6FF', ic: DARK_BLUE },
             { icon: PiggyBank, title: 'Poupança coletiva', desc: 'As parcelas mensais formam um fundo comum. A cada assembleia mensal, uma ou mais pessoas do grupo são contempladas por sorteio ou oferta de lance, recebendo o crédito para comprar o bem.', bg: '#F0FDF4', ic: '#16A34A' },
-            { icon: FileText, title: 'Carta de crédito', desc: 'Ao ser contemplado, você recebe uma carta de crédito — um valor disponível para comprar o bem à vista. Isso te dá poder de negociação total e a possibilidade de conseguir descontos significativos.', bg: '#FFF7ED', ic: '#D97706' },
+            { icon: FileText, title: 'Carta de crédito', desc: 'Ao ser contemplado, você recebe uma carta de crédito com valor disponível para comprar o bem à vista. Isso te dá poder de negociação total e a possibilidade de conseguir descontos significativos.', bg: '#FFF7ED', ic: '#D97706' },
           ].map(({ icon: Icon, title, desc, bg, ic }) => (
             <div key={title} style={{ background: bg, borderRadius: '20px', padding: '28px', border: '1px solid rgba(0,0,0,0.04)' }}>
               <IconBox icon={Icon} bg="#fff" ic={ic} />
@@ -200,7 +200,7 @@ function ChapterBasico() {
           <SectionLabel>Modalidades</SectionLabel>
           <SectionTitle>O que você pode comprar?</SectionTitle>
           <p style={{ fontSize: '15px', color: '#6B7280', marginTop: '12px', maxWidth: '540px', margin: '12px auto 0' }}>
-            O consórcio pode ser utilizado para adquirir uma ampla variedade de bens e serviços — móveis, imóveis e muito mais.
+            O consórcio pode ser utilizado para adquirir uma ampla variedade de bens e serviços: móveis, imóveis e muito mais.
           </p>
         </div>
 
@@ -242,7 +242,7 @@ function ChapterParticipar() {
           <SectionLabel>Elegibilidade</SectionLabel>
           <SectionTitle>Quem pode participar?</SectionTitle>
           <p style={{ fontSize: '15px', color: '#6B7280', marginTop: '12px', maxWidth: '560px', margin: '12px auto 0' }}>
-            O consórcio é acessível a uma ampla gama de perfis — pessoa física ou jurídica, com renda formal ou informal.
+            O consórcio é acessível a uma ampla gama de perfis: pessoa física ou jurídica, com renda formal ou informal.
           </p>
         </div>
 
@@ -303,7 +303,7 @@ function ChapterParticipar() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div>
             <p style={{ fontSize: '15px', color: '#374151', lineHeight: 1.8, marginBottom: '20px' }}>
-              Um grupo de consórcio é formado por um conjunto de pessoas (consorciados) que têm o mesmo objetivo de aquisição — seja um imóvel, um automóvel ou outro bem. Cada grupo tem:
+              Um grupo de consórcio é formado por um conjunto de pessoas (consorciados) que têm o mesmo objetivo de aquisição, seja um imóvel, um automóvel ou outro bem. Cada grupo tem:
             </p>
             <div className="flex flex-col gap-4">
               {[
@@ -410,7 +410,7 @@ function ChapterContemplacao() {
           <SectionLabel>Jornada</SectionLabel>
           <SectionTitle>Passo a passo do consórcio</SectionTitle>
           <p style={{ fontSize: '15px', color: '#6B7280', marginTop: '12px', maxWidth: '560px', margin: '12px auto 0' }}>
-            Do momento em que você decide entrar até a entrega das chaves — entenda cada fase da jornada.
+            Do momento em que você decide entrar até a entrega das chaves, entenda cada fase da jornada.
           </p>
         </div>
 
@@ -419,7 +419,7 @@ function ChapterContemplacao() {
             { n: '01', icon: FileText, title: 'Escolha do plano', desc: 'Selecione o valor da carta de crédito e o prazo que cabem no seu orçamento. Parcelas a partir de R$ 349/mês.', bg: '#EFF6FF', ic: DARK_BLUE },
             { n: '02', icon: Users, title: 'Entrada no grupo', desc: 'Após assinar o contrato, você passa a integrar um grupo de consorciados com o mesmo perfil de compra.', bg: '#F0FDF4', ic: '#16A34A' },
             { n: '03', icon: Shuffle, title: 'Assembleias mensais', desc: 'Todo mês há sorteios e sessão de lances. Cada participante pode ser contemplado a qualquer momento.', bg: '#FFF7ED', ic: '#D97706' },
-            { n: '04', icon: Trophy, title: 'Contemplação', desc: 'Você é sorteado ou tem o maior lance aceito — e recebe a carta de crédito para comprar o seu bem.', bg: '#FDF4FF', ic: '#9333EA' },
+            { n: '04', icon: Trophy, title: 'Contemplação', desc: 'Você é sorteado ou tem o maior lance aceito e recebe a carta de crédito para comprar o seu bem.', bg: '#FDF4FF', ic: '#9333EA' },
             { n: '05', icon: Home, title: 'Aquisição do bem', desc: 'Use a carta para comprar o bem à vista. Continue pagando as parcelas restantes normalmente.', bg: '#F0FDF4', ic: '#059669' },
           ].map(({ n, icon: Icon, title, desc, bg, ic }) => (
             <div key={n} style={{ background: bg, borderRadius: '20px', padding: '24px', border: '1px solid rgba(0,0,0,0.04)', position: 'relative' }}>
@@ -448,7 +448,7 @@ function ChapterContemplacao() {
           {[
             {
               tipo: 'Sorteio', icon: Shuffle, color: DARK_BLUE, bg: '#EFF6FF',
-              desc: 'A cada assembleia, números correspondentes às cotas são sorteados aleatoriamente. Todo participante em dia com as parcelas pode ser contemplado — é a forma democrática e imparcial.',
+              desc: 'A cada assembleia, números correspondentes às cotas são sorteados aleatoriamente. Todo participante em dia com as parcelas pode ser contemplado, de forma democrática e imparcial.',
               pros: ['Não requer desembolso extra', 'Qualquer cota pode ser sorteada', 'Justo para todos os participantes', 'Pode acontecer no 1º mês'],
             },
             {
@@ -484,7 +484,7 @@ function ChapterContemplacao() {
           <SectionLabel>Modalidades de lance</SectionLabel>
           <SectionTitle>Tipos de lance</SectionTitle>
           <p style={{ fontSize: '15px', color: '#6B7280', marginTop: '12px', maxWidth: '560px', margin: '12px auto 0' }}>
-            Existem três modalidades de lance — cada uma com estratégia e impacto diferentes no seu plano.
+            Existem três modalidades de lance, cada uma com estratégia e impacto diferentes no seu plano.
           </p>
         </div>
 
@@ -502,7 +502,7 @@ function ChapterContemplacao() {
             },
             {
               tipo: 'Lance Embutido', icon: Coins, color: '#D97706', bg: '#FFF7ED',
-              desc: 'O lance é descontado da própria carta de crédito — você não precisa ter o dinheiro agora. O limite é de até 30% do valor da carta.',
+              desc: 'O lance é descontado da própria carta de crédito, sem precisar ter o dinheiro agora. O limite é de até 30% do valor da carta.',
               detail: 'Exemplo: carta de R$ 100.000 → lance embutido de R$ 30.000 → você recebe R$ 70.000 para comprar o bem.',
             },
           ].map(({ tipo, icon: Icon, color, bg, desc, detail }) => (
@@ -559,7 +559,7 @@ function ChapterCarta() {
       <section id="carta-credito">
         <div className="text-center mb-12">
           <SectionLabel>Pós-contemplação</SectionLabel>
-          <SectionTitle>Você foi contemplado — e agora?</SectionTitle>
+          <SectionTitle>Você foi contemplado. E agora?</SectionTitle>
           <p style={{ fontSize: '15px', color: '#6B7280', marginTop: '12px', maxWidth: '600px', margin: '12px auto 0' }}>
             A contemplação é o momento em que você recebe a carta de crédito. A partir daí, começa a parte mais emocionante da jornada.
           </p>
@@ -570,7 +570,7 @@ function ChapterCarta() {
           {[
             { step: '1', title: 'Notificação da contemplação', desc: 'A administradora comunica que você foi contemplado. Você receberá um comunicado oficial informando os próximos passos.', icon: MessageCircle },
             { step: '2', title: 'Análise de crédito', desc: 'A administradora analisa sua documentação financeira (comprovante de renda, certidões, etc.) para liberar a carta de crédito.', icon: FileText },
-            { step: '3', title: 'Escolha do bem', desc: 'Você tem liberdade para escolher o bem que deseja comprar — novo, usado, na planta, ou até diferente do que planejou inicialmente.', icon: Target },
+            { step: '3', title: 'Escolha do bem', desc: 'Você tem liberdade para escolher o bem que deseja comprar: novo, usado, na planta, ou até diferente do que planejou inicialmente.', icon: Target },
             { step: '4', title: 'Análise do bem', desc: 'A administradora avalia o bem escolhido (laudo de avaliação, documentação do vendedor, certidões do imóvel).', icon: Shield },
             { step: '5', title: 'Liberação da carta', desc: 'Após a aprovação de tudo, a carta de crédito é liberada e o pagamento ao vendedor é feito diretamente. Você compra à vista!', icon: CheckCircle },
           ].map(({ step, title, desc, icon: Icon }, i) => (
@@ -601,7 +601,7 @@ function ChapterCarta() {
           {[
             {
               title: 'Comprar o bem definido no plano', ok: true, bg: '#F0FDF4', color: '#15803D',
-              desc: 'Use a carta para comprar exatamente o bem escolhido ao entrar no grupo (imóvel, carro, etc). O pagamento vai direto para o vendedor — você compra à vista e tem poder de negociação.',
+              desc: 'Use a carta para comprar exatamente o bem escolhido ao entrar no grupo (imóvel, carro, etc). O pagamento vai direto para o vendedor, você compra à vista e tem poder de negociação.',
             },
             {
               title: 'Comprar um bem diferente do planejado', ok: true, bg: '#EFF6FF', color: DARK_BLUE,
@@ -609,7 +609,7 @@ function ChapterCarta() {
             },
             {
               title: 'Quitar financiamento existente', ok: true, bg: '#FFF7ED', color: '#D97706',
-              desc: 'Sim! Você pode usar a carta de crédito do consórcio para quitar um financiamento em andamento — liberando-se dos juros e reduzindo o custo total da dívida.',
+              desc: 'Sim! Você pode usar a carta de crédito do consórcio para quitar um financiamento em andamento, liberando-se dos juros e reduzindo o custo total da dívida.',
             },
             {
               title: 'Comprar imóvel na planta', ok: true, bg: '#F5F3FF', color: '#7C3AED',
@@ -648,7 +648,7 @@ function ChapterCarta() {
           <div style={{ background: '#EFF6FF', borderRadius: '20px', padding: '28px', border: '1px solid rgba(0,85,196,0.12)' }}>
             <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '17px', color: DARK_BLUE, marginBottom: '12px' }}>Reduzir o valor da carta</h3>
             <p style={{ fontSize: '14px', color: '#374151', lineHeight: 1.7, marginBottom: '14px' }}>
-              Se o bem custa menos que a carta, o saldo restante pode ser utilizado para cobrir despesas com transferência, escritura, ITBI, registro em cartório e outras despesas de aquisição do bem — maximizando o uso do crédito.
+              Se o bem custa menos que a carta, o saldo restante pode ser utilizado para cobrir despesas com transferência, escritura, ITBI, registro em cartório e outras despesas de aquisição do bem, maximizando o uso do crédito.
             </p>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
               <Info size={14} style={{ color: DARK_BLUE, marginTop: '2px', flexShrink: 0 }} />
@@ -667,7 +667,7 @@ function ChapterCarta() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div>
             <p style={{ fontSize: '15px', color: '#374151', lineHeight: 1.8, marginBottom: '16px' }}>
-              Uma <strong>carta contemplada</strong> é uma cota de consórcio que já foi contemplada — ou seja, o crédito já está disponível para uso imediato. Você pode comprar essa cota de outro consorciado no mercado secundário.
+              Uma <strong>carta contemplada</strong> é uma cota de consórcio que já foi contemplada, ou seja, o crédito já está disponível para uso imediato. Você pode comprar essa cota de outro consorciado no mercado secundário.
             </p>
             <p style={{ fontSize: '15px', color: '#374151', lineHeight: 1.8, marginBottom: '16px' }}>
               Essa é uma forma de ter acesso ao crédito do consórcio <strong>imediatamente</strong>, sem precisar esperar sorteios ou assembleias. Você assume as parcelas restantes do contrato e usa a carta para comprar o bem desejado.
@@ -722,7 +722,7 @@ function ChapterCustos() {
           <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(48px, 8vw, 80px)', color: '#fff', lineHeight: 1 }}>0%</div>
           <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '20px', color: 'rgba(255,255,255,0.9)', marginTop: '8px' }}>de juros</div>
           <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.7)', marginTop: '10px', maxWidth: '420px', margin: '10px auto 0' }}>
-            No consórcio não há cobrança de juros sobre o crédito — apenas taxas administrativas transparentes e previstas em contrato.
+            No consórcio não há cobrança de juros sobre o crédito, apenas taxas administrativas transparentes e previstas em contrato.
           </p>
         </div>
 
@@ -740,12 +740,12 @@ function ChapterCustos() {
             },
             {
               title: 'Seguro de Vida', icon: HandCoins, bg: '#FFF7ED', ic: '#D97706',
-              desc: 'Garante a quitação do saldo devedor em caso de morte ou invalidez permanente do consorciado — protegendo a família.',
+              desc: 'Garante a quitação do saldo devedor em caso de morte ou invalidez permanente do consorciado, protegendo a família.',
               valor: 'Valor variável conforme perfil',
             },
             {
               title: 'Fundo Comum', icon: Coins, bg: '#F5F3FF', ic: '#7C3AED',
-              desc: 'A maior parte da parcela vai para o fundo comum — o valor real que financia as contemplações mensais de todos os participantes do grupo.',
+              desc: 'A maior parte da parcela vai para o fundo comum, o valor real que financia as contemplações mensais de todos os participantes do grupo.',
               valor: 'Parcela principal da mensalidade',
             },
           ].map(({ title, icon: Icon, bg, ic, desc, valor }) => (
@@ -772,7 +772,7 @@ function ChapterCustos() {
             <SectionLabel>Economia</SectionLabel>
             <SectionTitle>Sem taxa de adesão</SectionTitle>
             <p style={{ fontSize: '15px', color: '#374151', lineHeight: 1.8, marginTop: '16px', marginBottom: '20px' }}>
-              Na Porto Vale, você <strong>não paga taxa de adesão</strong> para entrar em um grupo de consórcio. Diferente de algumas administradoras que cobram uma tarifa inicial, aqui você começa sem custos extras — pagando apenas a sua primeira parcela.
+              Na Porto Vale, você <strong>não paga taxa de adesão</strong> para entrar em um grupo de consórcio. Diferente de algumas administradoras que cobram uma tarifa inicial, aqui você começa sem custos extras, pagando apenas a sua primeira parcela.
             </p>
             <div className="flex flex-col gap-3">
               {[
@@ -867,22 +867,22 @@ function ChapterInvestimento() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-12">
           <div>
             <p style={{ fontSize: '15px', color: '#374151', lineHeight: 1.8, marginBottom: '20px' }}>
-              O consórcio é uma modalidade de <strong>poupança forçada com remuneração acima da inflação</strong>. Ao contrário de guardar dinheiro na poupança (que perde valor real com a inflação), o consórcio garante que seu crédito seja corrigido pelo índice do bem — geralmente INCC (imóveis) ou IPCA.
+              O consórcio é uma modalidade de <strong>poupança forçada com remuneração acima da inflação</strong>. Ao contrário de guardar dinheiro na poupança (que perde valor real com a inflação), o consórcio garante que seu crédito seja corrigido pelo índice do bem, geralmente INCC (imóveis) ou IPCA.
             </p>
             <p style={{ fontSize: '15px', color: '#374151', lineHeight: 1.8, marginBottom: '20px' }}>
-              Isso significa que se você comprar uma cota de R$ 200.000 hoje, ao longo dos anos esse valor será reajustado para acompanhar a valorização real do bem — <strong>protegendo seu poder de compra</strong>.
+              Isso significa que se você comprar uma cota de R$ 200.000 hoje, ao longo dos anos esse valor será reajustado para acompanhar a valorização real do bem, <strong>protegendo seu poder de compra</strong>.
             </p>
             <div style={{ background: '#EFF6FF', borderRadius: '16px', padding: '20px', border: `1px solid ${DARK_BLUE}22` }}>
               <p style={{ fontSize: '14px', color: DARK_BLUE, lineHeight: 1.7, fontWeight: 500 }}>
-                Além disso, quem é contemplado com uma carta de imóvel pode comprar o bem à vista e <strong>repassá-lo por um valor maior</strong> — lucrando a diferença. Essa é uma estratégia legítima de multiplicação de patrimônio.
+                Além disso, quem é contemplado com uma carta de imóvel pode comprar o bem à vista e <strong>repassá-lo por um valor maior</strong>, lucrando a diferença. Essa é uma estratégia legítima de multiplicação de patrimônio.
               </p>
             </div>
           </div>
           <div className="flex flex-col gap-4">
             {[
-              { title: 'Correção pelo índice do bem', desc: 'O crédito acompanha a valorização real do ativo — não perde para a inflação.', icon: TrendingUp, bg: '#EFF6FF', ic: DARK_BLUE },
-              { title: 'Disciplina financeira', desc: 'Parcelas mensais criam o hábito de poupança — ideal para quem tem dificuldade de guardar dinheiro.', icon: PiggyBank, bg: '#F0FDF4', ic: '#15803D' },
-              { title: 'Compra à vista = poder de negociação', desc: 'A carta de crédito tem o mesmo efeito de dinheiro em espécie — você consegue descontos reais.', icon: Wallet, bg: '#FFF7ED', ic: '#D97706' },
+              { title: 'Correção pelo índice do bem', desc: 'O crédito acompanha a valorização real do ativo e não perde para a inflação.', icon: TrendingUp, bg: '#EFF6FF', ic: DARK_BLUE },
+              { title: 'Disciplina financeira', desc: 'Parcelas mensais criam o hábito de poupança, ideal para quem tem dificuldade de guardar dinheiro.', icon: PiggyBank, bg: '#F0FDF4', ic: '#15803D' },
+              { title: 'Compra à vista = poder de negociação', desc: 'A carta de crédito tem o mesmo efeito de dinheiro em espécie, você consegue descontos reais.', icon: Wallet, bg: '#FFF7ED', ic: '#D97706' },
               { title: 'Baixo custo total', desc: 'Taxa administrativa de 19–23% ao longo de todo o plano é muito menor do que os juros de um financiamento.', icon: Coins, bg: '#F5F3FF', ic: '#7C3AED' },
             ].map(({ title, desc, icon: Icon, bg, ic }) => (
               <div key={title} style={{ background: bg, borderRadius: '16px', padding: '18px 20px', border: '1px solid rgba(0,0,0,0.04)', display: 'flex', gap: '14px' }}>
@@ -958,12 +958,12 @@ function ChapterInvestimento() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: BadgePercent, title: '0% de juros', stat: 'Economia real', desc: 'Nenhum centavo de juros. Você paga apenas a taxa administrativa — muito menor que qualquer financiamento.', bg: 'rgba(0,85,196,0.2)', ic: BLUE },
+              { icon: BadgePercent, title: '0% de juros', stat: 'Economia real', desc: 'Nenhum centavo de juros. Você paga apenas a taxa administrativa, muito menor que qualquer financiamento.', bg: 'rgba(0,85,196,0.2)', ic: BLUE },
               { icon: Shield,       title: 'Sem entrada',  stat: 'Acessibilidade',  desc: 'Não é necessário ter reserva inicial. Comece com parcelas a partir de R$ 349/mês.', bg: 'rgba(21,128,61,0.2)', ic: '#4ADE80' },
-              { icon: TrendingUp,   title: 'Correção real', stat: 'Proteção',       desc: 'Seu crédito é corrigido pelo INCC ou IPCA — mantendo o poder de compra ao longo do plano.', bg: 'rgba(217,119,6,0.2)', ic: '#FCD34D' },
+              { icon: TrendingUp,   title: 'Correção real', stat: 'Proteção',       desc: 'Seu crédito é corrigido pelo INCC ou IPCA, mantendo o poder de compra ao longo do plano.', bg: 'rgba(217,119,6,0.2)', ic: '#FCD34D' },
               { icon: Wallet,       title: 'Compra à vista', stat: 'Negociação',   desc: 'A carta de crédito tem o mesmo poder de dinheiro em espécie. Você consegue descontos que a maioria não consegue.', bg: 'rgba(124,58,237,0.2)', ic: '#C4B5FD' },
               { icon: Clock,        title: 'Até 200 meses', stat: 'Flexibilidade', desc: 'Prazos longos permitem parcelas acessíveis sem comprometer o orçamento mensal.', bg: 'rgba(0,156,222,0.2)', ic: BLUE },
-              { icon: Trophy,       title: 'Troféu Recorde 2025', stat: 'Reconhecimento', desc: 'Porto Vale: 20 mil cotas vendidas em 2025 e R$ 5,1 bilhões movimentados — um marco histórico.', bg: 'rgba(234,179,8,0.2)', ic: '#FCD34D' },
+              { icon: Trophy,       title: 'Troféu Recorde 2025', stat: 'Reconhecimento', desc: 'Porto Vale: 20 mil cotas vendidas em 2025 e R$ 5,1 bilhões movimentados, um marco histórico.', bg: 'rgba(234,179,8,0.2)', ic: '#FCD34D' },
             ].map(({ icon: Icon, title, stat, desc, bg, ic }) => (
               <div key={title} style={{ background: bg, borderRadius: '20px', padding: '24px', border: '1px solid rgba(255,255,255,0.06)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
@@ -993,7 +993,7 @@ function ChapterPortoVale() {
           <SectionLabel>Quem somos</SectionLabel>
           <SectionTitle>A Porto Vale Consórcio</SectionTitle>
           <p style={{ fontSize: '15px', color: '#6B7280', marginTop: '12px', maxWidth: '600px', margin: '12px auto 0' }}>
-            Uma empresa com a solidez da Porto Seguro e a expertise de quem faz consórcio há décadas — dedicada a ajudar você a conquistar seus objetivos.
+            Uma empresa com a solidez da Porto Seguro e a expertise de quem faz consórcio há décadas, dedicada a ajudar você a conquistar seus objetivos.
           </p>
         </div>
 
@@ -1021,7 +1021,7 @@ function ChapterPortoVale() {
               Somos uma administradora autorizada pelo Banco Central do Brasil, o que garante que todos os grupos de consórcio operam dentro das normas da Lei nº 11.795/2008. Nossa missão é fazer você conquistar o seu bem com segurança, transparência e as melhores condições do mercado.
             </p>
             <p style={{ fontSize: '15px', color: '#374151', lineHeight: 1.8 }}>
-              Em 2025, a Porto Vale atingiu um marco histórico: <strong>20.000 cotas vendidas</strong> e <strong>R$ 5,1 bilhões em créditos movimentados</strong>, conquistando o Troféu Recorde de Vendas — reconhecimento da indústria pela excelência em resultados.
+              Em 2025, a Porto Vale atingiu um marco histórico: <strong>20.000 cotas vendidas</strong> e <strong>R$ 5,1 bilhões em créditos movimentados</strong>, conquistando o Troféu Recorde de Vendas, reconhecimento da indústria pela excelência em resultados.
             </p>
           </div>
           <div style={{ background: '#F9FAFB', borderRadius: '20px', padding: '28px', border: '1px solid #E5E7EB' }}>
@@ -1061,9 +1061,9 @@ function ChapterPortoVale() {
               { year: '1967', title: 'Regulamentação inicial', desc: 'O governo federal começa a regulamentar os consórcios, estabelecendo as primeiras normas para o funcionamento dos grupos.' },
               { year: '1976', title: 'Porto Seguro entra no consórcio', desc: 'A Porto Seguro lança suas operações de consórcio, trazendo solidez e credibilidade para o setor.' },
               { year: '1991', title: 'Expansão para imóveis', desc: 'O consórcio passa a ser utilizado para a aquisição de imóveis, democratizando ainda mais o acesso à casa própria.' },
-              { year: '2008', title: 'Lei do Consórcio', desc: 'A Lei nº 11.795/2008 estabelece o marco regulatório definitivo do setor — com regras claras, direitos e deveres para todos os participantes.' },
+              { year: '2008', title: 'Lei do Consórcio', desc: 'A Lei nº 11.795/2008 estabelece o marco regulatório definitivo do setor, com regras claras, direitos e deveres para todos os participantes.' },
               { year: '2021', title: 'Expansão digital', desc: 'O consórcio se consolida no ambiente digital. Porto Vale amplia o atendimento online, facilitando a adesão de novos consorciados em todo o Brasil.' },
-              { year: '2025', title: 'Marco histórico Porto Vale', desc: '20.000 cotas vendidas, R$ 5,1 bilhões movimentados e Troféu Recorde de Vendas — o maior resultado da história da Porto Vale.' },
+              { year: '2025', title: 'Marco histórico Porto Vale', desc: '20.000 cotas vendidas, R$ 5,1 bilhões movimentados e Troféu Recorde de Vendas, o maior resultado da história da Porto Vale.' },
             ].map(({ year, title, desc }, i, arr) => (
               <div key={year} style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
@@ -1201,7 +1201,7 @@ export function GuiaConsorcio() {
             </h1>
 
             <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, maxWidth: '520px' }}>
-              Do primeiro pagamento até a conquista do seu bem — entenda cada etapa, como dar lances, o que fazer após a contemplação e por que o consórcio é um dos melhores investimentos do Brasil.
+              Do primeiro pagamento até a conquista do seu bem, entenda cada etapa, como dar lances, o que fazer após a contemplação e por que o consórcio é um dos melhores investimentos do Brasil.
             </p>
 
             {/* Stats */}
@@ -1359,7 +1359,7 @@ export function GuiaConsorcio() {
             Pronto para começar?
           </h2>
           <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, maxWidth: '480px', margin: '0 auto 36px' }}>
-            Fale com um especialista da Porto Vale e descubra qual plano é ideal para você — sem compromisso e sem taxa de adesão.
+            Fale com um especialista da Porto Vale e descubra qual plano é ideal para você, sem compromisso e sem taxa de adesão.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a

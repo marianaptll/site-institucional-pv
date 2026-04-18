@@ -150,7 +150,7 @@ export function ComparisonSection() {
                 marginBottom: '32px',
               }}
             >
-              Entender a diferença entre os dois é o primeiro passo para fazer uma escolha que cabe no seu bolso — e no seu planejamento.
+              Entender a diferença entre os dois é o primeiro passo para fazer uma escolha que cabe no seu bolso e no seu planejamento.
             </p>
 
             {/* Divisor azul */}
