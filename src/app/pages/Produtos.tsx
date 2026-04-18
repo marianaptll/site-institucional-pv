@@ -904,6 +904,7 @@ const ofertasImovel: Oferta[] = [
     parcela: '',
     prazo: '180 meses',
     descricao: 'Ideal para quem busca um apartamento compacto, terreno ou reforma. Parcelas reduzidas e contemplação mensal.',
+    imagem: '/imagens/imovel-200k.jpg',
   },
   {
     media: 'photo',
@@ -912,6 +913,7 @@ const ofertasImovel: Oferta[] = [
     parcela: '',
     prazo: '200 meses',
     descricao: 'A opção mais equilibrada para comprar casa, apartamento ou sala comercial com total flexibilidade.',
+    imagem: '/imagens/imovel-300k.jpg',
   },
   {
     media: 'photo',
@@ -920,6 +922,7 @@ const ofertasImovel: Oferta[] = [
     parcela: '',
     prazo: '220 meses',
     descricao: 'Para quem quer um imóvel maior ou deseja investir com poder de compra real no mercado imobiliário.',
+    imagem: '/imagens/imovel-500k.jpg',
   },
 ];
 
