@@ -927,18 +927,29 @@ const ofertasImovel: Oferta[] = [
 ];
 
 function OfertaCard({ oferta, active }: { oferta: Oferta; active: boolean }) {
+  const [hovered, setHovered] = useState(false);
+  const isHighlighted = active || hovered;
+
   return (
     <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         background: '#fff',
         borderRadius: '24px',
         overflow: 'hidden',
-        border: active ? '2px solid #009cde' : '1.5px solid #E5E7EB',
-        boxShadow: active ? '0 12px 40px rgba(0,156,222,0.14)' : '0 2px 12px rgba(0,0,0,0.06)',
-        transition: 'border-color 0.3s, box-shadow 0.3s',
+        border: isHighlighted ? '2px solid #009cde' : '1.5px solid #E5E7EB',
+        boxShadow: hovered
+          ? '0 20px 52px rgba(0,156,222,0.22)'
+          : active
+            ? '0 12px 40px rgba(0,156,222,0.14)'
+            : '0 2px 12px rgba(0,0,0,0.06)',
+        transition: 'border-color 0.3s, box-shadow 0.3s, transform 0.35s cubic-bezier(0.22,1,0.36,1)',
+        transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
+        cursor: 'default',
       }}
     >
       {/* Área de mídia */}
@@ -947,7 +958,11 @@ function OfertaCard({ oferta, active }: { oferta: Oferta; active: boolean }) {
           <img
             src={oferta.imagem}
             alt={oferta.badge}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            style={{
+              width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+              transition: 'transform 0.5s cubic-bezier(0.22,1,0.36,1)',
+              transform: hovered ? 'scale(1.07)' : 'scale(1)',
+            }}
           />
         ) : (
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
@@ -960,7 +975,7 @@ function OfertaCard({ oferta, active }: { oferta: Oferta; active: boolean }) {
           </div>
         )}
         {/* Badge */}
-        <div style={{ position: 'absolute', top: '14px', left: '14px', background: active ? '#009cde' : '#6B7280', color: '#fff', fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, padding: '4px 12px', borderRadius: '20px', letterSpacing: '0.04em' }}>
+        <div style={{ position: 'absolute', top: '14px', left: '14px', background: isHighlighted ? '#009cde' : '#6B7280', color: '#fff', fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, padding: '4px 12px', borderRadius: '20px', letterSpacing: '0.04em', transition: 'background 0.3s' }}>
           {oferta.badge}
         </div>
       </div>
@@ -989,8 +1004,8 @@ function OfertaCard({ oferta, active }: { oferta: Oferta; active: boolean }) {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '8px',
-            background: active ? '#009cde' : '#F3F4F6',
-            color: active ? '#fff' : '#374151',
+            background: isHighlighted ? '#009cde' : '#F3F4F6',
+            color: isHighlighted ? '#fff' : '#374151',
             fontFamily: "'Inter', sans-serif",
             fontSize: '14px',
             fontWeight: 600,
