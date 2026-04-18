@@ -28,7 +28,7 @@ export function SectionLabel({ children, center = false, dark = false, className
         textTransform: 'uppercase' as const,
         color,
         padding: '4px 10px',
-        borderRadius: '6px',
+        borderRadius: '999px',
         background: badge,
       }}>
         {children}
