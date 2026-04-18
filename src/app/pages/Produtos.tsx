@@ -385,28 +385,77 @@ function DepoimentoCTASection() {
   );
 }
 
-// ── FAQ da página de produto ─────────────────────────────────────────────────
+// ── FAQs por produto ──────────────────────────────────────────────────────────
 
-const faqsProduto: FAQEntry[] = [
-  {
-    question: 'Pergunta frequente 1 — a ser preenchida',
-    answer: 'Resposta da pergunta 1 — a ser preenchida.',
-  },
-  {
-    question: 'Pergunta frequente 2 — a ser preenchida',
-    answer: 'Resposta da pergunta 2 — a ser preenchida.',
-  },
-  {
-    question: 'Pergunta frequente 3 — a ser preenchida',
-    answer: 'Resposta da pergunta 3 — a ser preenchida.',
-  },
-  {
-    question: 'Pergunta frequente 4 — a ser preenchida',
-    answer: 'Resposta da pergunta 4 — a ser preenchida.',
-  },
+const faqsImovel: FAQEntry[] = [
+  { question: 'O que é consórcio de imóveis?', answer: 'O consórcio de imóveis é uma modalidade de compra em grupo, onde os participantes se reúnem para adquirir bens, como casas ou apartamentos, por meio de um sistema de autofinanciamento.' },
+  { question: 'Como funciona o consórcio de imóvel?', answer: 'No consórcio de imóveis, os participantes pagam mensalmente uma quantia, formando um fundo comum. Periodicamente, são realizados sorteios e lances para contemplar os membros com a carta de crédito.' },
+  { question: 'Quais são as vantagens do consórcio de imóvel?', answer: 'As vantagens incluem a possibilidade de adquirir o imóvel sem juros, a flexibilidade na escolha do bem e a chance de usar o FGTS como parte do pagamento.' },
 ];
 
-function FAQProdutoSection() {
+const faqsTerreno: FAQEntry[] = [
+  { question: 'O que é um consórcio de terreno?', answer: 'O consórcio de terreno é uma modalidade de compra em grupo, em que os participantes se unem para adquirir terrenos por meio de um sistema colaborativo, sem cobrança de juros.' },
+  { question: 'Quais as vantagens do consórcio de terreno?', answer: 'Parcelas acessíveis, sem juros, possibilidade de lances e liberdade para escolher o terreno após a contemplação. E com a Porto Vale, você conta com atendimento em todo o Brasil.' },
+  { question: 'Como funciona o consórcio de terreno?', answer: 'Funciona por meio da formação de um grupo de pessoas que pagam parcelas mensais para formar um fundo comum. Todo mês, um ou mais participantes são contemplados por sorteio ou lance e recebem uma carta de crédito para comprar o terreno.' },
+];
+
+const faqsConstrucao: FAQEntry[] = [
+  { question: 'O que é consórcio de construção ou reforma?', answer: 'É uma modalidade em que você utiliza a carta de crédito para construir ou reformar um imóvel, com parcelas acessíveis e sem juros.' },
+  { question: 'Posso usar o consórcio para construir em um terreno meu?', answer: 'Sim. Após a contemplação, você pode usar a carta de crédito para construir em um terreno de sua propriedade.' },
+  { question: 'Posso reformar qualquer tipo de imóvel?', answer: 'Sim. A carta pode ser usada para reformas em imóveis residenciais ou comerciais, desde que estejam regularizados. No caso de imóveis comerciais, geralmente é necessário apresentar projeto da obra, orçamentos e acompanhamento de um responsável técnico, como arquiteto ou engenheiro, conforme exigência da administradora.' },
+  { question: 'É necessário ter o terreno antes de entrar no consórcio?', answer: 'Não. Você pode adquirir o terreno depois, com recursos próprios, ou já tê-lo antes da contemplação.' },
+];
+
+const faqsAutomovel: FAQEntry[] = [
+  { question: 'Posso usar o consórcio para comprar qualquer modelo de carro?', answer: 'Sim, desde que seja um veículo dentro das regras da administradora, seja novo ou usado.' },
+  { question: 'O que é o lance no consórcio de automóvel?', answer: 'É uma oferta de valor que você faz para antecipar a contemplação do seu consórcio. Quem oferece o maior lance tem mais chances de ser contemplado.' },
+  { question: 'Posso transferir minha cota de consórcio de automóvel para outra pessoa?', answer: 'Sim, é possível transferir a cota, desde que haja aprovação da administradora.' },
+  { question: 'O consórcio de automóvel é mais vantajoso que o financiamento?', answer: 'Sim, porque não tem juros e permite planejamento financeiro com parcelas mais acessíveis.' },
+  { question: 'Quais documentos são necessários para contratar um consórcio de automóvel?', answer: 'RG, CPF, comprovante de residência e de renda.' },
+];
+
+const faqsPesados: FAQEntry[] = [
+  { question: 'O consórcio de veículos pesados tem a mesma dinâmica do consórcio de veículos leves?', answer: 'Sim, funciona da mesma forma: com parcelas mensais, assembleias e possibilidade de lances.' },
+  { question: 'O consórcio de veículos pesados tem alguma garantia?', answer: 'Sim, as garantias variam conforme a administradora, geralmente exigidas na contemplação.' },
+  { question: 'Posso mudar o valor do crédito após iniciar o consórcio?', answer: 'Depende da administradora. Em alguns casos, é possível ajustar o valor do crédito.' },
+  { question: 'O consórcio de veículos pesados é uma boa opção para empresas?', answer: 'Sim, é ideal para renovação ou ampliação de frota com planejamento e sem juros.' },
+  { question: 'Posso quitar o consórcio antes do prazo de adquirir o veículo?', answer: 'Sim, você pode antecipar parcelas e até ofertar um lance para ser contemplado com maior chance de antecedência!' },
+];
+
+const faqsAgro: FAQEntry[] = [
+  { question: 'Qual a diferença do consórcio no agronegócio e financiamento agrícola?', answer: 'O consórcio não tem juros e permite compras planejadas, enquanto o financiamento envolve taxas e burocracia maior.' },
+  { question: 'Posso usar o consórcio do agronegócio para comprar um imóvel rural?', answer: 'Sim, desde que o crédito e a administradora permitam esse tipo de bem.' },
+  { question: 'Posso usar o consórcio do agronegócio para adquirir sementes e insumos?', answer: 'Sim, se estiver previsto no contrato e autorizado pela administradora.' },
+  { question: 'O consórcio do agronegócio é vantajoso para empresas do setor?', answer: 'Sim, permite aquisição de bens e insumos com mais planejamento e menos custo financeiro.' },
+  { question: 'O consórcio do agronegócio é regulamentado?', answer: 'Sim, é regulamentado pelo Banco Central do Brasil e segue as mesmas regras dos demais consórcios.' },
+];
+
+const faqsInvestimento: FAQEntry[] = [
+  { question: 'O consórcio de investimento é indicado para quem?', answer: 'Para quem busca formar patrimônio de forma planejada, sem juros e com mais segurança.' },
+  { question: 'Qual a diferença entre consórcio e outros tipos de investimentos?', answer: 'O consórcio não tem juros, é uma forma de poupança programada, com parcelas fixas e possibilidade de antecipação por lance.' },
+  { question: 'Posso usar o consórcio de investimento para adquirir qualquer tipo de bem?', answer: 'Não. O crédito é destinado para aplicações específicas definidas no contrato, como investimentos financeiros.' },
+  { question: 'Posso vender minha cota no consórcio de investimento?', answer: 'Sim, a cota pode ser transferida para outra pessoa, desde que aprovada pela administradora.' },
+  { question: 'Pode ser usado para comprar ações ou ativos financeiros?', answer: 'Sim, o crédito pode ser usado para adquirir ativos financeiros, desde que esteja previsto nas regras da administradora.' },
+];
+
+const faqsSolar: FAQEntry[] = [
+  { question: 'Posso usar o consórcio para financiar um sistema de energia solar completo?', answer: 'Sim! O consórcio de placa solar permite adquirir todo o sistema de energia solar, incluindo placas, inversores e instalação.' },
+  { question: 'O consórcio de energia solar tem juros?', answer: 'Não. O consórcio não tem juros, apenas uma taxa de administração diluída nas parcelas.' },
+  { question: 'Posso instalar o sistema em qualquer imóvel?', answer: 'Sim, desde que o imóvel seja de sua propriedade, seja residencial, comercial ou rural.' },
+  { question: 'É mais vantajoso que financiamento?', answer: 'Sim. Por não ter juros, o consórcio costuma ter parcelas mais acessíveis e menor custo total.' },
+  { question: 'O que acontece se eu quiser desistir?', answer: 'Você pode vender sua cota, transferir para outra pessoa ou aguardar a contemplação para resgatar o valor investido, conforme regras do grupo.' },
+];
+
+const faqsEmpresarial: FAQEntry[] = [
+  { question: 'Para quem é indicado o consórcio empresarial?', answer: 'Para empresas que desejam investir em expansão, aquisição de equipamentos, veículos, imóveis ou energia solar, sem juros.' },
+  { question: 'Quais bens posso adquirir no consórcio empresarial?', answer: 'Veículos leves e pesados, máquinas, equipamentos, imóveis comerciais, placas solares e até reformas.' },
+  { question: 'Minha empresa pode oferecer lance?', answer: 'Sim. O lance é uma forma de antecipar a contemplação, e sua empresa pode ofertar a qualquer momento.' },
+  { question: 'Posso mudar o valor do crédito depois de contratar?', answer: 'Sim, é possível solicitar o aumento ou redução do crédito, sujeito à análise e regras do grupo.' },
+  { question: 'O consórcio empresarial é vantajoso para empresas?', answer: 'Com certeza. Permite planejamento financeiro, expansão com mais segurança e sem custos de juros.' },
+  { question: 'O consórcio empresarial é regulamentado?', answer: 'Sim. É regulamentado e fiscalizado pelo Banco Central, oferecendo segurança total para as empresas.' },
+];
+
+function FAQProdutoSection({ faqs }: { faqs: FAQEntry[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
@@ -468,7 +517,7 @@ function FAQProdutoSection() {
 
           {/* Direita — accordion */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {faqsProduto.map((faq, i) => (
+            {faqs.map((faq, i) => (
               <FAQItem
                 key={i}
                 faq={faq}
@@ -584,10 +633,11 @@ interface ProdutoPageProps {
   categoria: string;
   titulo: string;
   subtitulo: string;
+  faqs: FAQEntry[];
   children?: ReactNode;
 }
 
-function ProdutoPageBlank({ categoria, titulo, subtitulo, children }: ProdutoPageProps) {
+function ProdutoPageBlank({ categoria, titulo, subtitulo, faqs, children }: ProdutoPageProps) {
   return (
     <>
       <Header />
@@ -652,7 +702,7 @@ function ProdutoPageBlank({ categoria, titulo, subtitulo, children }: ProdutoPag
         <EtapasSection />
 
         {/* FAQ */}
-        <FAQProdutoSection />
+        <FAQProdutoSection faqs={faqs} />
 
         {/* Placeholder — exibido apenas enquanto a página não tem conteúdo próprio */}
         {!children && (
@@ -912,11 +962,6 @@ function OfertaCard({ oferta, active }: { oferta: Oferta; active: boolean }) {
           </div>
         </div>
 
-        {/* Prazo */}
-        <div>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#9CA3AF' }}>Prazo: {oferta.prazo}</span>
-        </div>
-
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#6B7280', lineHeight: 1.65, margin: 0, flexGrow: 1 }}>
           {oferta.descricao}
         </p>
@@ -1044,6 +1089,7 @@ export function ConsorcioImovel() {
       categoria="Consórcio de Imóveis"
       titulo="Consórcio de Imóvel"
       subtitulo="Realize o sonho da casa própria com planejamento, sem juros e sem entrada obrigatória."
+      faqs={faqsImovel}
     >
       <EditorialProdutoSection cfg={editorialImovel} />
       <TiposProdutoSection titulo={<>Como você pode usar a sua <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>carta de crédito</span></>} tipos={tiposImovel} />
@@ -1201,6 +1247,7 @@ export function ConsorcioTerreno() {
       categoria="Consórcio de Imóveis"
       titulo="Consórcio de Terreno"
       subtitulo="Adquira seu terreno com parcelas que cabem no seu orçamento e sem pagar juros."
+      faqs={faqsTerreno}
     >
       <EditorialProdutoSection cfg={editorialTerreno} />
       <TiposProdutoSection
@@ -1250,6 +1297,7 @@ export function ConsorcioConstrucaoReforma() {
       categoria="Consórcio de Imóveis"
       titulo="Consórcio de Construção e Reforma"
       subtitulo="Construa ou renove seu imóvel com crédito planejado e sem as taxas do financiamento tradicional."
+      faqs={faqsConstrucao}
     >
       <EditorialProdutoSection cfg={editorialConstrucao} />
       <TiposProdutoSection
@@ -1269,6 +1317,7 @@ export function ConsorcioAutomovel() {
       categoria="Consórcio de Automóveis"
       titulo="Consórcio de Automóvel"
       subtitulo="Troque de carro ou adquira o seu primeiro veículo pagando muito menos do que no financiamento."
+      faqs={faqsAutomovel}
     >
       <EditorialProdutoSection cfg={editorialAutomovel} />
       <TiposProdutoSection
@@ -1286,6 +1335,7 @@ export function ConsorcioPesados() {
       categoria="Consórcio de Automóveis"
       titulo="Consórcio de Pesados"
       subtitulo="Caminhões, ônibus e carretas com crédito planejado para montar ou expandir sua frota."
+      faqs={faqsPesados}
     >
       <EditorialProdutoSection cfg={editorialPesados} />
       <TiposProdutoSection
@@ -1339,6 +1389,7 @@ export function ConsorcioAgro() {
       categoria="Outros Consórcios"
       titulo="Consórcio Agro"
       subtitulo="Máquinas, implementos e equipamentos agrícolas com crédito acessível para o seu agronegócio."
+      faqs={faqsAgro}
     >
       <EditorialProdutoSection cfg={editorialAgro} />
       <TiposProdutoSection
@@ -1387,6 +1438,7 @@ export function ConsorcioInvestimento() {
       categoria="Outros Consórcios"
       titulo="Consórcio de Investimento"
       subtitulo="Use a carta de crédito como instrumento de investimento inteligente e rentável."
+      faqs={faqsInvestimento}
     >
       <EditorialProdutoSection cfg={editorialInvestimento} />
       <TiposProdutoSection
@@ -1533,6 +1585,7 @@ export function ConsorcioPlacaSolar() {
       categoria="Outros Consórcios"
       titulo="Consórcio de Placa Solar"
       subtitulo="Instale energia solar na sua casa ou empresa e reduza os custos com eletricidade sem pagar juros."
+      faqs={faqsSolar}
     >
       <EditorialProdutoSection cfg={editorialPlacaSolar} />
       <TiposProdutoSection
@@ -1581,6 +1634,7 @@ export function ConsorcioEmpresarial() {
       categoria="Outros Consórcios"
       titulo="Consórcio Empresarial"
       subtitulo="Soluções de crédito planejado para empresas que desejam crescer com inteligência financeira."
+      faqs={faqsEmpresarial}
     >
       <EditorialProdutoSection cfg={editorialEmpresarial} />
       <TiposProdutoSection

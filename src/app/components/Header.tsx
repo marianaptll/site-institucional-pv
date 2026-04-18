@@ -1,8 +1,9 @@
-import { Menu, X, ChevronDown, Home, Car, Truck, Building2, Sprout, TrendingUp, Zap, Briefcase, Users, Heart, Globe, Handshake, Phone, Info, MessageCircle } from 'lucide-react';
+import { Menu, X, ChevronDown, Home, Car, Truck, Building2, Sprout, TrendingUp, Zap, Briefcase, Users, Heart, Globe, Handshake, Phone, Info, Calculator } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import portoValeLogo from '../../assets/logo-portovale.png';
-import { WHATSAPP_URL } from '../constants';
+import { SimulacaoModal } from './SimulacaoModal';
+import { FlowButton } from './FlowButton';
 
 const BLUE = '#009cde';
 
@@ -162,6 +163,7 @@ function DropdownMenu({
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === '/';
@@ -231,31 +233,18 @@ export function Header() {
           </nav>
 
           {/* ── Desktop CTA ── */}
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden lg:inline-flex items-center gap-2 rounded-xl transition-colors duration-150"
+          <div
+            className="hidden lg:block"
             style={{
-              backgroundColor: '#25D366',
-              color: '#FFFFFF',
-              fontFamily: "'Inter', sans-serif",
-              fontWeight: 600,
-              fontSize: '13px',
-              height: '38px',
-              paddingLeft: '16px',
-              paddingRight: '16px',
-              textDecoration: 'none',
               flexShrink: 0,
               opacity: showCTA ? 1 : 0,
               transform: showCTA ? 'translateY(0)' : 'translateY(-6px)',
               pointerEvents: showCTA ? 'auto' : 'none',
-              transition: 'opacity 0.3s ease, transform 0.3s ease, background-color 0.15s',
+              transition: 'opacity 0.3s ease, transform 0.3s ease',
             }}
           >
-            <MessageCircle size={15} />
-            Falar com especialista
-          </a>
+            <FlowButton text="Faça sua simulação" onClick={() => setModalOpen(true)} />
+          </div>
 
           {/* ── Mobile hamburger ── */}
           <div className="lg:hidden flex items-center">
@@ -325,31 +314,29 @@ export function Header() {
                 </div>
               ))}
 
-              {/* WhatsApp mobile */}
-              <a
-                id="cta-mobile-whatsapp"
-                data-tracking="mobile_menu_whatsapp_click"
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 mt-3 mx-2 rounded-xl transition-colors duration-150"
+              {/* Simulação mobile */}
+              <button
+                onClick={() => { setIsMenuOpen(false); setModalOpen(true); }}
+                className="flex items-center justify-center gap-2 mt-3 rounded-xl transition-colors duration-150 w-full"
                 style={{
-                  backgroundColor: '#25D366',
+                  backgroundColor: BLUE,
                   color: '#FFFFFF',
                   fontFamily: "'Inter', sans-serif",
                   fontWeight: 600,
                   fontSize: '14px',
                   height: '48px',
-                  textDecoration: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
                 }}
               >
-                <MessageCircle size={17} />
-                Falar com especialista via WhatsApp
-              </a>
+                <Calculator size={17} />
+                Faça sua simulação
+              </button>
             </div>
           </nav>
         )}
       </div>
+      <SimulacaoModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </header>
   );
 }

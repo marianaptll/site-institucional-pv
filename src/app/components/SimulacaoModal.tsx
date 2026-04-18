@@ -134,7 +134,7 @@ export function SimulacaoModal({ open, onClose }: Props) {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.25 }}
-                    style={{ padding: '36px 32px 32px' }}
+                    style={{ padding: 'clamp(24px, 5vw, 36px) clamp(20px, 5vw, 32px) clamp(24px, 5vw, 32px)' }}
                   >
                     <h2 style={{
                       fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -242,7 +242,7 @@ export function SimulacaoModal({ open, onClose }: Props) {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ duration: 0.25 }}
-                    style={{ padding: '36px 32px 32px' }}
+                    style={{ padding: 'clamp(24px, 5vw, 36px) clamp(20px, 5vw, 32px) clamp(24px, 5vw, 32px)' }}
                   >
                     <h2 style={{
                       fontFamily: "'Plus Jakarta Sans', sans-serif",
