@@ -900,7 +900,7 @@ const ofertasImovel: Oferta[] = [
   {
     media: 'photo',
     badge: 'Entrada acessível',
-    credito: 'R$ 100.000',
+    credito: 'R$ 200.000',
     parcela: '',
     prazo: '180 meses',
     descricao: 'Ideal para quem busca um apartamento compacto, terreno ou reforma. Parcelas reduzidas e contemplação mensal.',
