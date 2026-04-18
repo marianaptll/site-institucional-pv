@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
-import { BadgePercent, TrendingDown, RefreshCw, Target, ClipboardList, CalendarCheck, Trophy, Key, Check, Home, Building2, Briefcase, TrendingUp, Hammer, Info, ChevronLeft, ChevronRight, Car, Truck, Zap, Shield, MapPin, Sprout, Landmark, Paintbrush, Layers, Bike, PiggyBank, Coins, HandCoins, Sun, Factory, BatteryCharging, Recycle, Globe, Lightbulb, Settings2, Store, Forklift } from 'lucide-react';
+import { BadgePercent, TrendingDown, RefreshCw, Target, ClipboardList, CalendarCheck, Trophy, Key, Check, Home, Building2, Briefcase, TrendingUp, Hammer, Info, ChevronLeft, ChevronRight, Car, Truck, Zap, Shield, MapPin, Sprout, Landmark, Paintbrush, Layers, Bike, PiggyBank, Coins, HandCoins, Sun, Factory, BatteryCharging, Recycle, Globe, Lightbulb, Settings2, Store, Forklift, Package, Snowflake, Droplets, Wheat, SlidersHorizontal, TreePine } from 'lucide-react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ChatWidget } from '../components/ChatWidget';
@@ -1162,17 +1162,30 @@ const ofertasPesados: Oferta[] = [
   { media: 'photo', badge: 'Maior crédito',    credito: 'R$ 360.000', parcela: '', prazo: '120 meses', descricao: 'Para renovação de frota completa ou aquisição de conjuntos bitrem e veículos de grande porte.' },
 ];
 
-const implementosPesados = [
-  'Base para container', 'Carrega-Tudo', 'Baú', 'Bitrem',
-  'Basculante', 'Carga Seca', 'Florestal', 'Frigorífico',
-  'Furgão', 'Graneleiro', 'Sider', 'Tanque',
+interface Implemento { label: string; icon: React.ElementType; desc: string; }
+
+const implementosPesados: Implemento[] = [
+  { label: 'Base p/ Container', icon: Layers,            desc: 'Plataforma para transporte de contêineres ISO padrão' },
+  { label: 'Carrega-Tudo',      icon: Forklift,          desc: 'Plataforma rebaixada para cargas pesadas e indivisíveis' },
+  { label: 'Baú',               icon: Package,           desc: 'Carroceria fechada para carga seca protegida' },
+  { label: 'Bitrem',            icon: Truck,             desc: 'Conjunto com dois semirreboques acoplados' },
+  { label: 'Basculante',        icon: TrendingDown,      desc: 'Descarga traseira para granéis, terra e entulho' },
+  { label: 'Carga Seca',        icon: ClipboardList,     desc: 'Transporte de mercadorias não perecíveis' },
+  { label: 'Florestal',         icon: TreePine,          desc: 'Transporte de toras, madeira e celulose' },
+  { label: 'Frigorífico',       icon: Snowflake,         desc: 'Câmara fria para alimentos e produtos perecíveis' },
+  { label: 'Furgão',            icon: Car,               desc: 'Carroceria fechada para entregas e distribuição urbana' },
+  { label: 'Graneleiro',        icon: Wheat,             desc: 'Transporte de grãos, fertilizantes e produtos a granel' },
+  { label: 'Sider',             icon: SlidersHorizontal, desc: 'Lonas laterais retráteis para carregamento lateral' },
+  { label: 'Tanque',            icon: Droplets,          desc: 'Transporte de líquidos, combustíveis e gases' },
 ];
 
 function ImplementosSection() {
+  const [hovered, setHovered] = useState<string | null>(null);
+
   return (
     <section style={{ backgroundColor: '#fff', padding: 'clamp(48px, 7vw, 80px) 24px' }}>
       <div className="max-w-7xl mx-auto">
-        <div style={{ marginBottom: '32px' }}>
+        <div style={{ marginBottom: '40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
             <div style={{ width: '28px', height: '2px', backgroundColor: '#009cde' }} />
             <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#009cde' }}>
@@ -1184,25 +1197,89 @@ function ImplementosSection() {
             <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>semirreboques e implementos</span>
           </h2>
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-          {implementosPesados.map((item) => (
-            <span
-              key={item}
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '14px',
-                fontWeight: 500,
-                color: '#374151',
-                background: '#F3F4F6',
-                border: '1.5px solid #E5E7EB',
-                borderRadius: '100px',
-                padding: '8px 20px',
-                whiteSpace: 'nowrap' as const,
-              }}
-            >
-              {item}
-            </span>
-          ))}
+
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+          {implementosPesados.map(({ label, icon: Icon, desc }) => {
+            const active = hovered === label;
+            return (
+              <div
+                key={label}
+                onMouseEnter={() => setHovered(label)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '12px',
+                  padding: '24px 12px 20px',
+                  borderRadius: '18px',
+                  border: `1.5px solid ${active ? '#009cde' : '#E5E7EB'}`,
+                  backgroundColor: active ? '#E0F4FB' : '#F9FAFB',
+                  cursor: 'default',
+                  transition: 'border-color 0.2s, background-color 0.2s, transform 0.2s, box-shadow 0.2s',
+                  transform: active ? 'translateY(-5px)' : 'translateY(0)',
+                  boxShadow: active ? '0 8px 24px rgba(0,156,222,0.15)' : 'none',
+                }}
+              >
+                {/* Ícone */}
+                <div style={{
+                  width: '52px', height: '52px', borderRadius: '14px',
+                  backgroundColor: active ? '#009cde' : '#E5E7EB',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transition: 'background-color 0.2s',
+                  flexShrink: 0,
+                }}>
+                  <Icon size={22} color={active ? '#fff' : '#6B7280'} strokeWidth={1.6} />
+                </div>
+
+                {/* Label */}
+                <span style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  color: active ? '#007aad' : '#374151',
+                  textAlign: 'center',
+                  lineHeight: 1.35,
+                  transition: 'color 0.2s',
+                }}>
+                  {label}
+                </span>
+
+                {/* Tooltip */}
+                {active && (
+                  <div style={{
+                    position: 'absolute',
+                    bottom: 'calc(100% + 10px)',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    backgroundColor: '#111827',
+                    color: '#fff',
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '12px',
+                    lineHeight: 1.5,
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    whiteSpace: 'nowrap',
+                    zIndex: 20,
+                    pointerEvents: 'none',
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.18)',
+                  }}>
+                    {desc}
+                    <div style={{
+                      position: 'absolute',
+                      top: '100%', left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: 0, height: 0,
+                      borderLeft: '6px solid transparent',
+                      borderRight: '6px solid transparent',
+                      borderTop: '6px solid #111827',
+                    }} />
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
