@@ -46,12 +46,10 @@ function HomePage() {
       <Header />
       <main>
         <HeroSection />
-        <ScrollReveal>
-          <div className="rounded-2xl sm:rounded-[32px] lg:rounded-[46px]" style={{ backgroundColor: '#eeebe6', marginTop: '-100px', position: 'relative', zIndex: 10 }}>
-            <WhatIsConsorcioSection />
-            <BenefitsSection />
-          </div>
-        </ScrollReveal>
+        <div className="rounded-2xl sm:rounded-[32px] lg:rounded-[46px]" style={{ backgroundColor: '#eeebe6', marginTop: '-100px', position: 'relative', zIndex: 10 }}>
+          <WhatIsConsorcioSection />
+          <BenefitsSection />
+        </div>
         <ScrollReveal delay={0.05}><ComparisonSimulatorSection /></ScrollReveal>
         <ScrollReveal delay={0.05}><PortoValeSection /></ScrollReveal>
         <ScrollReveal delay={0.05}><MidiaSection /></ScrollReveal>

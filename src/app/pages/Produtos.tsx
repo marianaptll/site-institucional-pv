@@ -653,7 +653,6 @@ function ProdutoPageBlank({ categoria, titulo, subtitulo, faqs, children }: Prod
           <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,156,222,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
           <div className="max-w-3xl mx-auto" style={{ position: 'relative', zIndex: 1 }}>
-            <SectionLabel center dark>{categoria}</SectionLabel>
             <h1
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
