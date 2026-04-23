@@ -42,14 +42,14 @@ export function PortoValeSection() {
               </video>
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '80px', background: 'linear-gradient(to top, rgba(17,24,39,0.6), transparent)' }} />
             </div>
-            {/* Badge "18 anos" — reposicionado para não vazar no mobile */}
+            {/* Badge "23 anos" — reposicionado para não vazar no mobile */}
             <div className="hidden sm:flex" style={{ position: 'absolute', top: '-20px', right: '-12px', zIndex: 2, background: '#fff', borderRadius: '16px', padding: '18px 22px', boxShadow: '0 8px 32px rgba(0,0,0,0.18)', alignItems: 'center', gap: '12px', minWidth: '180px' }}>
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '40px', lineHeight: 1, color: '#0055c4' }}>18</span>
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '40px', lineHeight: 1, color: '#0055c4' }}>23</span>
               <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#111827', lineHeight: 1.3 }}>Anos de<br />Experiência</span>
             </div>
-            {/* Badge "18 anos" versão mobile inline */}
+            {/* Badge "23 anos" versão mobile inline */}
             <div className="sm:hidden flex items-center gap-3 mt-4 bg-white rounded-2xl px-5 py-4" style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.14)' }}>
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '36px', lineHeight: 1, color: '#0055c4' }}>18</span>
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '36px', lineHeight: 1, color: '#0055c4' }}>23</span>
               <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#111827', lineHeight: 1.3 }}>Anos de Experiência</span>
             </div>
           </div>
