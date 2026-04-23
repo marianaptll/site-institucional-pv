@@ -3,114 +3,11 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ChatWidget } from '../components/ChatWidget';
 import { SectionLabel } from '../components/SectionLabel';
-
-// ─── DADOS DOS ARTIGOS ────────────────────────────────────────────────────────
-// Para adicionar um novo artigo: copie um objeto abaixo e preencha os campos.
-// Deixe `image: null` enquanto não tiver imagem — aparecerá um gradiente.
-// ─────────────────────────────────────────────────────────────────────────────
-
-type Artigo = {
-  slug: string;
-  titulo: string;
-  resumo: string;
-  categoria: string;
-  data: string;          // formato: 'DD/MM/AAAA'
-  leitura: number;       // minutos estimados
-  destaque?: boolean;    // true = aparece no card grande
-  image: string | null;  // caminho da imagem ou null
-};
-
-const ARTIGOS: Artigo[] = [
-  {
-    slug: 'baixa-selic-conquistar-imovel',
-    titulo: 'Como aproveitar a baixa da Selic para conquistar seu imóvel?',
-    resumo: 'Com a queda da taxa básica de juros, o consórcio imobiliário se torna ainda mais competitivo. Entenda por que este é o momento certo para planejar a compra do seu imóvel sem pagar juros.',
-    categoria: 'Imóveis',
-    data: '10/04/2026',
-    leitura: 6,
-    destaque: true,
-    image: null,
-  },
-  {
-    slug: 'poupanca-forcada-2026',
-    titulo: 'Como usar o consórcio para fazer uma poupança forçada em 2026?',
-    resumo: 'Disciplina financeira é difícil. Veja como o consórcio funciona como uma ferramenta automática de poupança que garante seu patrimônio no longo prazo.',
-    categoria: 'Planejamento',
-    data: '05/04/2026',
-    leitura: 5,
-    image: null,
-  },
-  {
-    slug: 'consorcio-casa-patrimonio-2026',
-    titulo: 'Consórcio de casa: conquiste seu patrimônio em 2026',
-    resumo: 'Descubra como planejar a compra da sua casa própria com consórcio, sem entrada e sem juros. Um guia prático para quem quer sair do aluguel este ano.',
-    categoria: 'Imóveis',
-    data: '28/03/2026',
-    leitura: 7,
-    image: null,
-  },
-  {
-    slug: 'tipos-de-lance-como-escolher',
-    titulo: 'Quais os tipos de lance e como escolher para você?',
-    resumo: 'Lance livre, fixo ou embutido, cada modalidade tem suas vantagens. Aprenda a calcular o melhor tipo de lance para ser contemplado mais rápido no seu grupo.',
-    categoria: 'Lances',
-    data: '20/03/2026',
-    leitura: 8,
-    image: null,
-  },
-  {
-    slug: 'sistema-consorcios-58-milhoes-2025',
-    titulo: 'Sistema de consórcios registra 5,8 milhões de cotas vendidas em 2025',
-    resumo: 'O mercado de consórcios bate novo recorde histórico. Veja os dados do Banco Central e o que esse crescimento significa para quem está planejando entrar em um grupo.',
-    categoria: 'Mercado',
-    data: '14/03/2026',
-    leitura: 4,
-    image: null,
-  },
-  {
-    slug: 'porto-vale-guia-consorcio',
-    titulo: 'A Porto Vale e o Guia do Consórcio: tudo que você precisa saber',
-    resumo: 'Reunimos as principais dúvidas de quem está começando no mundo dos consórcios. Um material completo para você tomar a melhor decisão.',
-    categoria: 'Guia',
-    data: '07/03/2026',
-    leitura: 10,
-    image: null,
-  },
-  // ── Adicione os demais 25 artigos abaixo seguindo o mesmo formato ──────────
-];
+import { ARTIGOS, getCor, getGradiente, type Artigo } from '../data/artigos';
 
 // ─── CATEGORIAS ──────────────────────────────────────────────────────────────
 
 const TODAS = 'Todas';
-
-const CATEGORIA_CORES: Record<string, { bg: string; text: string; dot: string }> = {
-  'Imóveis':     { bg: '#EFF6FF', text: '#1D4ED8', dot: '#3B82F6' },
-  'Planejamento':{ bg: '#F0FDF4', text: '#15803D', dot: '#22C55E' },
-  'Mercado':     { bg: '#FFF7ED', text: '#C2410C', dot: '#F97316' },
-  'Lances':      { bg: '#FDF4FF', text: '#7E22CE', dot: '#A855F7' },
-  'Veículos':    { bg: '#F0F9FF', text: '#0369A1', dot: '#0EA5E9' },
-  'Investimento':{ bg: '#FEFCE8', text: '#854D0E', dot: '#EAB308' },
-  'Guia':        { bg: '#F8FAFC', text: '#475569', dot: '#94A3B8' },
-};
-
-function getCor(cat: string) {
-  return CATEGORIA_CORES[cat] ?? { bg: '#F3F4F6', text: '#374151', dot: '#9CA3AF' };
-}
-
-// Gradientes de placeholder por categoria (enquanto não há imagem)
-const GRADIENTES: Record<string, string> = {
-  'Imóveis':     'linear-gradient(135deg, #1e3a5f 0%, #009cde 100%)',
-  'Planejamento':'linear-gradient(135deg, #064e3b 0%, #10b981 100%)',
-  'Mercado':     'linear-gradient(135deg, #7c2d12 0%, #f97316 100%)',
-  'Lances':      'linear-gradient(135deg, #4a1d96 0%, #a855f7 100%)',
-  'Veículos':    'linear-gradient(135deg, #0c4a6e 0%, #38bdf8 100%)',
-  'Investimento':'linear-gradient(135deg, #713f12 0%, #eab308 100%)',
-  'Guia':        'linear-gradient(135deg, #1e293b 0%, #475569 100%)',
-};
-
-function getGradiente(cat: string) {
-  return GRADIENTES[cat] ?? 'linear-gradient(135deg, #1e293b 0%, #334155 100%)';
-}
 
 // ─── COMPONENTES ─────────────────────────────────────────────────────────────
 
