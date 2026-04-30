@@ -50,12 +50,13 @@ export function FAQItem({
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             style={{ overflow: 'hidden' }}
           >
-            <p
-              className="px-5 pb-5 text-[13px] text-[#6B7280]"
-              style={{ fontFamily: "'Inter', sans-serif", lineHeight: '1.75' }}
-            >
-              {faq.answer}
-            </p>
+            <div className="px-5 pb-5" style={{ fontFamily: "'Inter', sans-serif", lineHeight: '1.75' }}>
+              {faq.answer.split('\n\n').map((para, i) => (
+                <p key={i} className="text-[13px] text-[#6B7280]" style={{ marginBottom: i < faq.answer.split('\n\n').length - 1 ? '12px' : 0 }}>
+                  {para}
+                </p>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

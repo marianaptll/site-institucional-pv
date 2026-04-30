@@ -14,15 +14,15 @@ import { NumerosBar } from '../components/NumerosBar';
 const faqsSobreNos: FAQEntry[] = [
   {
     question: 'Quem é a Porto Vale?',
-    answer: 'A Porto Vale é a maior corretora de consórcios da rede Porto Seguro no Brasil, fundada em 2003, com excelência reconhecida na categoria Blue.',
+    answer: 'Fundada há mais de 20 anos, a Porto Vale se consolidou como a maior corretora de consórcios e seguros do país, com operação nacional.\n\nAo longo de sua trajetória, a empresa construiu uma atuação pautada pela combinação de expertise em consórcios, soluções em seguros e um modelo de atendimento consultivo, orientado à construção de resultados consistentes e à realização dos objetivos de seus clientes. O desempenho rendeu o Troféu de Recorde de Vendas 2025, concedido pela Porto, reforçando a consistência da operação e sua posição de liderança no segmento.',
   },
   {
-    question: 'A Porto Vale faz parte da Porto Seguro?',
-    answer: 'Somos uma corretora parceira da Porto Seguro, autorizada a comercializar os consórcios da marca com atendimento exclusivo e especializado.',
+    question: 'A Porto Vale faz parte da Porto?',
+    answer: 'A Porto Vale é a única corretora exclusiva da Porto no Brasil, com atuação especializada e atendimento consultivo.',
   },
   {
     question: 'Onde a Porto Vale está localizada?',
-    answer: 'Atuamos com sede em São José dos Campos (SP) e filiais em Jacareí (SP) e na capital paulista.',
+    answer: 'A Porto Vale possui sede em São José dos Campos (SP) e filiais em Jacareí (SP) e na cidade de São Paulo, com atuação em todo o território nacional.',
   },
   {
     question: 'A Porto Vale atende clientes de todo o Brasil?',
@@ -446,7 +446,7 @@ export function SobreNos() {
               </h2>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4" style={{ gap: '16px' }}>
+            <div className="grid sm:grid-cols-3 lg:grid-cols-5" style={{ gap: '16px' }}>
               {diferenciais.map((item, i) => (
                 <DiferencialCard key={i} {...item} />
               ))}
