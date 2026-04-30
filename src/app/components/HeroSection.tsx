@@ -72,7 +72,7 @@ export function HeroSection() {
             marginTop: '32px',
           }}
         >
-          O consórcio que transforma<br />
+          A parceira que transforma<br />
           planos em realidade
         </motion.h1>
 
@@ -91,7 +91,7 @@ export function HeroSection() {
             maxWidth: '520px',
           }}
         >
-          Mais de 20 anos conectando pessoas às melhores soluções em consórcios no Brasil.
+          Mais de 20 anos conectando pessoas às melhores soluções no Brasil.
         </motion.p>
 
         {/* ── CTA ── */}
