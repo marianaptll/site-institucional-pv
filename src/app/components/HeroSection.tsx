@@ -1,9 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
-import bgBlue from '../../assets/bgazul.png';
 import portoBankLogo from '../../assets/logo-portobank.png';
-import conditionImg from '../../assets/condição.png';
 import { SimulacaoModal } from './SimulacaoModal';
 
 const BLUE = '#009cde';
@@ -20,10 +18,6 @@ const fadeUp = {
 export function HeroSection() {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const handleSimularClick = () => {
-    setModalOpen(true);
-  };
-
   return (
     <section
       id="inicio"
@@ -32,90 +26,87 @@ export function HeroSection() {
     >
       {/* ── Background ── */}
       <img
-        src={bgBlue}
+        src="/imagens/foto-banner.jpg"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      {/* ── Vignette ── */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,20,0.45) 100%)',
-        }}
-      />
+      {/* ── Overlay escuro ── */}
+      <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.50)' }} />
 
       {/* ── Content ── */}
       <div
-        className="relative z-10 flex flex-col items-center justify-center text-center px-4"
-        style={{ minHeight: 'calc(80vh + 60px)', paddingTop: '120px', paddingBottom: '160px' }}
+        className="relative z-10 flex flex-col items-start justify-center px-8 sm:px-16 lg:px-24"
+        style={{ minHeight: 'calc(80vh + 60px)', paddingTop: '120px', paddingBottom: '120px', maxWidth: '800px' }}
       >
 
-
-        {/* ── Logo + Headline ── */}
+        {/* ── Logo ── */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={0.1}
-          className="flex items-center justify-center gap-6 sm:gap-10 flex-wrap"
         >
           <img
             src={portoBankLogo}
             alt="PortoBank"
-            className="h-6 sm:h-8 w-auto object-contain flex-shrink-0"
+            className="h-6 sm:h-8 w-auto object-contain"
             style={{ opacity: 0.95 }}
           />
-
-          <div
-            className="hidden sm:block flex-shrink-0"
-            style={{ width: '1px', height: '64px', backgroundColor: 'rgba(255,255,255,0.30)' }}
-          />
-
-          <h1
-            className="text-left"
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: 'clamp(14px, 1.8vw, 22px)',
-              lineHeight: 1.15,
-              color: '#FFFFFF',
-              fontWeight: 400,
-              maxWidth: '440px',
-            }}
-          >
-            agora ficou mais fácil<br />
-            conquistar seu{' '}
-            <strong style={{ fontWeight: 900 }}>imóvel</strong>
-          </h1>
         </motion.div>
 
-        {/* ── Imagem de condição ── */}
-        <motion.img
+        {/* ── H1 ── */}
+        <motion.h1
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          custom={0.2}
-          src={conditionImg}
-          alt="45% OFF até a contemplação + 0% de adesão"
-          className="mt-10 sm:mt-12 w-full"
-          style={{ maxWidth: '600px', objectFit: 'contain' }}
-        />
+          custom={0.25}
+          style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: 'clamp(22px, 2.8vw, 38px)',
+            lineHeight: 1.1,
+            color: '#FFFFFF',
+            fontWeight: 800,
+            letterSpacing: '-0.02em',
+            marginTop: '32px',
+          }}
+        >
+          O consórcio que transforma<br />
+          planos em realidade
+        </motion.h1>
 
-        {/* ── CTAs ── */}
+        {/* ── Subtítulo ── */}
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={0.38}
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 'clamp(14px, 1.4vw, 18px)',
+            color: 'rgba(255,255,255,0.75)',
+            lineHeight: 1.6,
+            marginTop: '16px',
+            maxWidth: '520px',
+          }}
+        >
+          Mais de 20 anos conectando pessoas às melhores soluções em consórcios no Brasil.
+        </motion.p>
+
+        {/* ── CTA ── */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          custom={0.4}
-          className="mt-14 flex flex-col items-center gap-2"
+          custom={0.5}
+          className="flex flex-col gap-2"
+          style={{ marginTop: '40px' }}
         >
-          {/* CTA primário — Simulação */}
           <button
             id="cta-hero-simular"
             data-tracking="hero_simular_click"
-            onClick={handleSimularClick}
+            onClick={() => setModalOpen(true)}
             className="inline-flex items-center gap-2 text-white rounded-xl transition-all duration-200 active:scale-95"
             style={{
               backgroundColor: BLUE,
@@ -143,10 +134,9 @@ export function HeroSection() {
             Simular agora
             <ArrowRight size={18} />
           </button>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'rgba(255,255,255,0.45)', marginTop: '4px' }}>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'rgba(255,255,255,0.40)' }}>
             *Consulte condições.
           </span>
-
         </motion.div>
 
       </div>
