@@ -68,6 +68,15 @@ const diferenciais = [
     hoverAnimate: { scale: [1, 1.35, 1] } as object,
     hoverTransition: { duration: 0.4, repeat: Infinity, ease: 'easeInOut' as const },
   },
+  {
+    icon: Users,
+    title: 'Consultoria e acompanhamento personalizado',
+    desc: 'Atuação consultiva, com recomendações alinhadas ao perfil do cliente e acompanhamento em todas as etapas da jornada.',
+    idleAnimate: { scale: [1, 1.12, 1] } as object,
+    idleTransition: { duration: 2.8, repeat: Infinity, ease: 'easeInOut' as const },
+    hoverAnimate: { scale: [1, 1.3, 1] } as object,
+    hoverTransition: { duration: 0.45, repeat: Infinity, ease: 'easeInOut' as const },
+  },
 ];
 
 type DiferencialItem = typeof diferenciais[number];
@@ -174,26 +183,20 @@ export function SobreNos() {
 
               <div style={{ backgroundColor: '#fff', borderRadius: '20px', padding: '20px', boxShadow: '0 12px 48px rgba(0,0,0,0.14)', overflow: 'hidden' }}>
                 <div ref={carouselRef} style={{ display: 'flex', gap: '10px', overflowX: 'auto', scrollbarWidth: 'none' }}>
-                  {Array.from({ length: 7 }).map((_, i) => (
-                    <div
+                  {[0,1,2,3,4,5,6,7].map((i) => (
+                    <img
                       key={i}
+                      src={`/imagens/área${i}.jpeg`}
+                      alt={`Área da Porto Vale ${i + 1}`}
                       style={{
                         flexShrink: 0,
                         width: 'clamp(140px, 18vw, 200px)',
                         height: 'clamp(88px, 11vw, 120px)',
                         borderRadius: '12px',
-                        background: '#e8e4de',
-                        backgroundImage: 'repeating-linear-gradient(45deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 40%)',
-                        backgroundSize: '16px 16px',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        objectFit: 'cover',
+                        display: 'block',
                       }}
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.20)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <polyline points="21 15 16 10 5 21"/>
-                      </svg>
-                    </div>
+                    />
                   ))}
                 </div>
               </div>
@@ -237,13 +240,13 @@ export function SobreNos() {
             </h1>
             <div style={{ width: '40px', height: '1.5px', background: 'rgba(255,255,255,0.15)', marginBottom: '24px' }} />
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(15px, 1.4vw, 17px)', color: 'rgba(255,255,255,0.55)', lineHeight: 1.85, maxWidth: '560px', margin: 0 }}>
-              A Porto Vale é a maior corretora de consórcios da rede Porto, com atuação nacional e histórico de crescimento consistente no mercado de crédito planejado.
+              A Porto Vale é a maior corretora de consórcios do país, com atuação nacional e histórico de crescimento consistente no mercado de crédito planejado.
             </p>
           </div>
         </section>
 
         {/* ── 3. QUEM SOMOS ── */}
-        <section style={{ backgroundColor: '#fff', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
+        <section style={{ backgroundColor: '#fff', paddingTop: 'clamp(56px, 10vw, 96px)', paddingBottom: 'clamp(32px, 4vw, 48px)', paddingLeft: '24px', paddingRight: '24px' }}>
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
@@ -281,10 +284,10 @@ export function SobreNos() {
                 </h2>
                 <div style={{ width: '40px', height: '1.5px', background: '#e5e7eb', marginBottom: '28px' }} />
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(14px, 1.4vw, 16px)', color: '#374151', lineHeight: 1.9, marginBottom: '20px' }}>
-                  Fundada há mais de 20 anos, a Porto Vale se consolidou como a maior corretora de consórcios e seguros da Porto, com operação nacional. Desde a sua criação, a empresa se destacou por combinar expertise em consórcios, inovação em seguros e atendimento de excelência, oferecendo soluções que transformam sonhos em realizações concretas.
+                  Fundada há mais de 20 anos, a Porto Vale se consolidou como a maior corretora de consórcios e seguros do país. Ao longo da sua trajetória, a empresa combinou especialização em consórcios, evolução em soluções de seguros e um modelo de atendimento consistente, com foco em orientação qualificada e execução eficiente.
                 </p>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(14px, 1.4vw, 16px)', color: '#6B7280', lineHeight: 1.9, margin: 0 }}>
-                  Com matriz em São José dos Campos (SP) e filiais em Jacareí (SP) e São Paulo, a Porto Vale atua em todo o território nacional, mantendo credibilidade, performance e consistência em seus resultados.
+                  Com matriz em São José dos Campos (SP) e filiais em Jacareí (SP) e São Paulo (SP), a Porto Vale atende clientes em todo o território nacional, mantendo padrão de qualidade, escala operacional e consistência de resultados.
                 </p>
               </div>
 
@@ -292,7 +295,50 @@ export function SobreNos() {
           </div>
         </section>
 
-        {/* ── 4. NÚMEROS ── */}
+        {/* ── 4. LIDERANÇA ── */}
+        <section style={{ backgroundColor: '#fff', paddingTop: 'clamp(24px, 3vw, 40px)', paddingBottom: 'clamp(48px, 6vw, 80px)', paddingLeft: '24px', paddingRight: '24px' }}>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center" style={{ marginTop: '40px' }}>
+
+              {/* Texto — esquerda */}
+              <div>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#009cde', marginBottom: '12px' }}>
+                  À frente da Porto Vale
+                </p>
+                <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 2.8vw, 42px)', letterSpacing: '-0.02em', lineHeight: 1.1, color: '#111827', marginBottom: '8px' }}>
+                  Fernando Gianjiope
+                </h3>
+                <div style={{ width: '40px', height: '2px', background: '#0055c4', marginBottom: '28px' }} />
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(14px, 1.4vw, 16px)', color: '#374151', lineHeight: 1.9, margin: 0 }}>
+                  Fernando Gianjiope acumula quase três décadas de atuação nos setores de consórcios e seguros. Ao longo de sua trajetória, estruturou e expandiu operações até consolidar a empresa como a maior corretora de consórcios e seguros do país, liderando seu posicionamento e crescimento em um mercado altamente competitivo. Sua atuação é marcada pela combinação entre experiência prática de mercado e visão estratégica de longo prazo, com foco em disciplina comercial, formação de lideranças e construção de uma operação consistente e sustentável.
+                </p>
+              </div>
+
+              {/* Foto — direita */}
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div style={{
+                  borderRadius: '24px',
+                  overflow: 'hidden',
+                  background: '#f3f4f6',
+                  width: 'clamp(200px, 28vw, 320px)',
+                  aspectRatio: '3/4',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  <img
+                    src="/imagens/fernando.jpg"
+                    alt="Fernando Gianjiope"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* ── 5. NÚMEROS ── */}
         <section style={{ backgroundColor: '#111827', paddingTop: 'clamp(40px, 5vw, 56px)' }}>
           <NumerosBar />
         </section>
@@ -326,25 +372,6 @@ export function SobreNos() {
                   Esses números demonstram a fase atual de crescimento e consolidação da empresa.
                 </p>
 
-                {/* Mini gráfico */}
-                <div style={{ marginTop: '40px', background: '#fff', borderRadius: '16px', padding: '24px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#9CA3AF', marginBottom: '16px' }}>
-                    Cotas comercializadas
-                  </p>
-                  <svg width="100%" height="72" viewBox="0 0 200 72" preserveAspectRatio="none">
-                    <line x1="0" y1="71" x2="200" y2="71" stroke="#F3F4F6" strokeWidth="1"/>
-                    {[
-                      { x: 10, h: 28, label: '2023' },
-                      { x: 75, h: 45, label: '2024' },
-                      { x: 140, h: 66, label: '2025', highlight: true },
-                    ].map(({ x, h, label, highlight }) => (
-                      <g key={label}>
-                        <rect x={x} y={72 - h} width="40" height={h} rx="6" fill={highlight ? '#2563EB' : '#E5E7EB'}/>
-                        <text x={x + 20} y="71" textAnchor="middle" fontSize="9" fill="#9CA3AF" dy="10" fontFamily="Inter, sans-serif">{label}</text>
-                      </g>
-                    ))}
-                  </svg>
-                </div>
               </div>
 
               {/* Direita — 3 stat cards */}

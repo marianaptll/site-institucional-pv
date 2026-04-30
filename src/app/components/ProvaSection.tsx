@@ -24,10 +24,10 @@ const typeColors: Record<string, string> = {
 };
 
 const videoCards = [
-  { name: 'Davi Araújo',        type: 'Consórcio de Automóvel', icon: 'car',  img: '/imagens/davi-araújo.png'        },
-  { name: 'Antonieta Amarante', type: 'Consórcio de Imóvel',    icon: 'home', img: '/imagens/antonieta-amarante.png' },
-  { name: 'Brenno Tavares',     type: 'Consórcio de Automóvel', icon: 'car',  img: '/imagens/brenno-tavares.png'     },
-  { name: 'Roberto Silva',      type: 'Consórcio de Automóvel', icon: 'car',  img: '/imagens/roberto-silva.png'      },
+  { name: 'Davi Araújo',        type: 'Consórcio de automóvel', icon: 'car',  img: '/imagens/davi-araújo.png'        },
+  { name: 'Antonieta Amarante', type: 'Consórcio de imóvel',    icon: 'home', img: '/imagens/antonieta-amarante.png' },
+  { name: 'Brenno Tavares',     type: 'Consórcio de automóvel', icon: 'car',  img: '/imagens/brenno-tavares.png'     },
+  { name: 'Roberto Silva',      type: 'Consórcio de automóvel', icon: 'car',  img: '/imagens/roberto-silva.png'      },
 ];
 
 export function ProvaSection() {

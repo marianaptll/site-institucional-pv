@@ -4,10 +4,10 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 
 
 const stats = [
-  { value: '32.000+', label: 'Consorciados ativos' },
-  { value: '98%',     label: 'Índice de satisfação' },
-  { value: 'R$ 2bi+', label: 'Em créditos entregues' },
-  { value: '18 anos', label: 'De experiência' },
+  { value: '+53,3 mil',   label: 'Clientes' },
+  { value: '+80 mil',     label: 'Cotas negociadas' },
+  { value: '+R$ 20,5bi',  label: 'Em crédito comercializado' },
+  { value: '+3 mil',      label: 'Cidades atendidas' },
 ];
 
 const allTestimonials = [

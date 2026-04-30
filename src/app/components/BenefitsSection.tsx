@@ -1,6 +1,6 @@
-import { PiggyBank, Zap, Scale, CheckCircle } from 'lucide-react';
+import { PiggyBank, Zap, Scale, CheckCircle, UserCheck, Activity } from 'lucide-react';
 import { SectionLabel } from './SectionLabel';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'motion/react';
 import { ProductCarousel } from './ProductCarousel';
 
@@ -9,7 +9,7 @@ const benefits = [
     icon: PiggyBank,
     chipColor: '#DBEAFE',
     iconColor: '#0055c4',
-    title: 'Planejamento Financeiro',
+    title: 'Planejamento financeiro',
     description: 'O consórcio é uma alternativa inteligente para quem deseja se planejar financeiramente para a aquisição de bens.',
     idleAnimate: { y: [0, -5, 0] },
     idleTransition: { duration: 2.4, repeat: Infinity, ease: 'easeInOut' },
@@ -42,68 +42,112 @@ const benefits = [
     icon: CheckCircle,
     chipColor: '#BFDBFE',
     iconColor: '#009cde',
-    title: 'Sem Burocracia',
+    title: 'Sem burocracia',
     description: 'O processo é simples e direto, sem burocracia de financiamentos tradicionais, facilitando sua aquisição.',
     idleAnimate: { scale: [1, 1.14, 1] },
     idleTransition: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 },
     hoverAnimate: { scale: [1, 1.28, 1] },
     hoverTransition: { duration: 0.45, repeat: Infinity, ease: 'easeInOut' },
   },
+  {
+    icon: UserCheck,
+    chipColor: '#DBEAFE',
+    iconColor: '#0055c4',
+    title: 'Consultoria individualizada',
+    description: 'Oferecemos recomendações alinhadas ao perfil e aos objetivos de cada cliente.',
+    idleAnimate: { scale: [1, 1.1, 1] },
+    idleTransition: { duration: 2.6, repeat: Infinity, ease: 'easeInOut', delay: 0.3 },
+    hoverAnimate: { scale: [1, 1.24, 1] },
+    hoverTransition: { duration: 0.5, repeat: Infinity, ease: 'easeInOut' },
+  },
+  {
+    icon: Activity,
+    chipColor: '#BFDBFE',
+    iconColor: '#009cde',
+    title: 'Acompanhamento contínuo',
+    description: 'Atuamos em todas as etapas, do diagnóstico à pós-contemplação, com suporte próximo e consistente.',
+    idleAnimate: { x: [0, 3, -3, 0] },
+    idleTransition: { duration: 2.2, repeat: Infinity, ease: 'easeInOut' },
+    hoverAnimate: { x: [0, 5, -5, 0] },
+    hoverTransition: { duration: 0.5, repeat: Infinity, ease: 'easeInOut' },
+  },
 ];
 
 type Benefit = (typeof benefits)[number];
 
-function BenefitCard({ benefit }: { benefit: Benefit }) {
+function BenefitCard({
+  benefit,
+  isActive,
+  onClick,
+}: {
+  benefit: Benefit;
+  isActive: boolean;
+  onClick: () => void;
+}) {
   const [hovered, setHovered] = useState(false);
+  const highlighted = isActive || hovered;
   const Icon = benefit.icon;
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="rounded-xl p-6 flex flex-col gap-4 cursor-default"
+      onClick={onClick}
       style={{
-        backgroundColor: hovered ? '#0055c4' : '#FFFFFF',
-        border: `1px solid ${hovered ? '#0055c4' : '#E5E7EB'}`,
-        boxShadow: hovered ? '0 8px 32px rgba(0,85,196,0.25)' : undefined,
-        transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
-        transition: 'background-color 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.3s',
+        flex: '1 1 0',
+        minWidth: 0,
+        borderRadius: '16px',
+        padding: '22px 18px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '12px',
+        cursor: isActive ? 'default' : 'pointer',
+        backgroundColor: highlighted ? '#0055c4' : '#FFFFFF',
+        border: `1px solid ${highlighted ? '#0055c4' : '#E5E7EB'}`,
+        boxShadow: highlighted ? '0 12px 40px rgba(0,85,196,0.28)' : '0 1px 3px rgba(0,0,0,0.05)',
+        transform: highlighted ? 'translateY(-4px)' : 'translateY(0)',
+        transition: 'background-color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease, transform 0.7s ease',
+        overflow: 'hidden',
       }}
     >
       <div
-        className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0"
         style={{
-          backgroundColor: hovered ? 'rgba(255,255,255,0.18)' : benefit.chipColor,
-          transition: 'background-color 0.3s',
+          width: '44px', height: '44px', borderRadius: '10px', flexShrink: 0,
+          backgroundColor: highlighted ? 'rgba(255,255,255,0.18)' : benefit.chipColor,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          transition: 'background-color 0.85s ease',
         }}
       >
         <motion.div
-          animate={hovered ? benefit.hoverAnimate : benefit.idleAnimate}
-          transition={hovered ? benefit.hoverTransition : benefit.idleTransition}
+          animate={highlighted ? benefit.hoverAnimate : benefit.idleAnimate}
+          transition={highlighted ? benefit.hoverTransition : benefit.idleTransition}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-          <Icon size={22} color={hovered ? '#FFFFFF' : benefit.iconColor} />
+          <Icon size={22} color={highlighted ? '#FFFFFF' : benefit.iconColor} />
         </motion.div>
       </div>
 
       <h3
-        className="text-[15px]"
         style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
           fontWeight: 700,
-          color: hovered ? '#FFFFFF' : '#111827',
-          transition: 'color 0.3s',
+          fontSize: '14px',
+          lineHeight: 1.3,
+          color: highlighted ? '#FFFFFF' : '#111827',
+          transition: 'color 0.85s ease',
         }}
       >
         {benefit.title}
       </h3>
 
       <p
-        className="text-[13px] leading-relaxed flex-1"
         style={{
           fontFamily: "'Inter', sans-serif",
-          color: hovered ? 'rgba(255,255,255,0.8)' : '#6B7280',
-          transition: 'color 0.3s',
+          fontSize: '12px',
+          lineHeight: 1.65,
+          color: highlighted ? 'rgba(255,255,255,0.82)' : '#6B7280',
+          transition: 'color 0.85s ease, opacity 0.85s ease',
+          opacity: isActive ? 1 : 0.8,
         }}
       >
         {benefit.description}
@@ -113,6 +157,16 @@ function BenefitCard({ benefit }: { benefit: Benefit }) {
 }
 
 export function BenefitsSection() {
+  const [active, setActive] = useState(0);
+  const n = benefits.length;
+
+  const next = useCallback(() => setActive(p => (p + 1) % n), [n]);
+
+  useEffect(() => {
+    const t = setInterval(next, 4000);
+    return () => clearInterval(t);
+  }, [next]);
+
   return (
     <section
       id="beneficios"
@@ -141,10 +195,27 @@ export function BenefitsSection() {
           </div>
         </div>
 
-        {/* ── Grid de benefícios ── */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* ── Desktop: uma linha com destaque ── */}
+        <div className="hidden lg:flex gap-3">
           {benefits.map((b, i) => (
-            <BenefitCard key={i} benefit={b} />
+            <BenefitCard
+              key={i}
+              benefit={b}
+              isActive={active === i}
+              onClick={() => setActive(i)}
+            />
+          ))}
+        </div>
+
+        {/* ── Mobile/tablet: grid 2 colunas ── */}
+        <div className="lg:hidden grid grid-cols-2 gap-3">
+          {benefits.map((b, i) => (
+            <BenefitCard
+              key={i}
+              benefit={b}
+              isActive={active === i}
+              onClick={() => setActive(i)}
+            />
           ))}
         </div>
 

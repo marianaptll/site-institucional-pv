@@ -2,10 +2,10 @@ import { useRef, useState, useEffect } from 'react';
 import { useInView, motion } from 'motion/react';
 
 const stats = [
-  { numeric: 32000, label: 'Consorciados ativos',   format: (v: number) => `${Math.round(v).toLocaleString('pt-BR')}+`, highlighted: true  },
-  { numeric: 98,    label: 'Índice de satisfação',  format: (v: number) => `${Math.round(v)}%`,                         highlighted: false },
-  { numeric: 2,     label: 'Em créditos entregues', format: (v: number) => `R$ ${v.toFixed(v < 2 ? 1 : 0)}bi+`,        highlighted: false },
-  { numeric: 18,    label: 'De experiência',         format: (v: number) => `${Math.round(v)} anos`,                    highlighted: false },
+  { numeric: 53.3, label: 'Clientes',                 format: (v: number) => `+${v.toFixed(1).replace('.', ',')} mil`,    highlighted: true  },
+  { numeric: 80,   label: 'Cotas negociadas',          format: (v: number) => `+${Math.round(v)} mil`,                    highlighted: false },
+  { numeric: 20.5, label: 'Em crédito comercializado', format: (v: number) => `+R$ ${v.toFixed(1).replace('.', ',')}bi`,  highlighted: false },
+  { numeric: 3,    label: 'Cidades atendidas',         format: (v: number) => `+${Math.round(v)} mil`,                    highlighted: false },
 ];
 
 function AnimatedStat({ stat, index, total }: { stat: typeof stats[number]; index: number; total: number }) {

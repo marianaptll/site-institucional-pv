@@ -44,13 +44,13 @@ export function PortoValeSection() {
             </div>
             {/* Badge "23 anos" — reposicionado para não vazar no mobile */}
             <div className="hidden sm:flex" style={{ position: 'absolute', top: '-20px', right: '-12px', zIndex: 2, background: '#fff', borderRadius: '16px', padding: '18px 22px', boxShadow: '0 8px 32px rgba(0,0,0,0.18)', alignItems: 'center', gap: '12px', minWidth: '180px' }}>
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '40px', lineHeight: 1, color: '#0055c4' }}>23</span>
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#111827', lineHeight: 1.3 }}>Anos de<br />Experiência</span>
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '40px', lineHeight: 1, color: '#0055c4' }}>+20</span>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#111827', lineHeight: 1.3 }}>anos de<br />experiência</span>
             </div>
             {/* Badge "23 anos" versão mobile inline */}
             <div className="sm:hidden flex items-center gap-3 mt-4 bg-white rounded-2xl px-5 py-4" style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.14)' }}>
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '36px', lineHeight: 1, color: '#0055c4' }}>23</span>
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#111827', lineHeight: 1.3 }}>Anos de Experiência</span>
+              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '36px', lineHeight: 1, color: '#0055c4' }}>+20</span>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#111827', lineHeight: 1.3 }}>anos de experiência</span>
             </div>
           </div>
 
@@ -62,7 +62,7 @@ export function PortoValeSection() {
               <span style={{ display: 'block', color: '#fff' }}>de consórcios do Brasil.</span>
             </h2>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '16px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, maxWidth: '420px', marginBottom: '40px' }}>
-              A Porto Vale é referência em consórcio Porto Seguro, unindo inovação, segurança e excelência para transformar sonhos em realidade.
+              A Porto Vale é referência em consórcio Porto Seguro, unindo inovação, segurança e excelência para transformar planos em realidade.
             </p>
             <Link
               to="/sobre-nos"

@@ -1,51 +1,18 @@
-import { useState, useRef, useEffect } from 'react';
-import { ArrowRight, X, Play, Pause } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowRight, X, Play } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import heroImage from '../../assets/casacarroemoto.png';
 import { SectionLabel } from './SectionLabel';
 
-const VIDEO_SRC = 'https://awxqeqjaatuacnqlvxcw.supabase.co/storage/v1/object/public/videos-projeto/composicao-1_phetjC7F.mp4';
+const YOUTUBE_ID = 'FudNIyPDdY4';
 
-/* ── Modal de vídeo com som ──────────────────────────────────────── */
+/* ── Modal de vídeo — YouTube iframe ────────────────────────────── */
 function VideoModal({ onClose }: { onClose: () => void }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    const tryPlay = () => v.play().catch(() => {});
-    if (v.readyState >= 3) {
-      tryPlay();
-    } else {
-      v.addEventListener('canplay', tryPlay, { once: true });
-      return () => v.removeEventListener('canplay', tryPlay);
-    }
-  }, []);
-
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
-
-  const togglePlay = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (v.paused) { v.play(); setPlaying(true); }
-    else          { v.pause(); setPlaying(false); }
-  };
-
-  const seek = (e: React.MouseEvent<HTMLDivElement>) => {
-    const v = videoRef.current;
-    if (!v) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    v.currentTime = ((e.clientX - rect.left) / rect.width) * v.duration;
-  };
-
-  const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 
   return (
     <div
@@ -60,39 +27,26 @@ function VideoModal({ onClose }: { onClose: () => void }) {
       <div
         onClick={e => e.stopPropagation()}
         style={{
-          position: 'relative', width: '100%', maxWidth: '400px',
+          position: 'relative', width: '100%', maxWidth: '760px',
           borderRadius: '20px', overflow: 'hidden',
           backgroundColor: '#000', boxShadow: '0 32px 80px rgba(0,0,0,0.7)',
-          aspectRatio: '9/16',
+          aspectRatio: '16/9',
         }}
       >
-        <video
-          ref={videoRef}
-          src={VIDEO_SRC}
-          playsInline
-          autoPlay
-          preload="auto"
-          onClick={togglePlay}
-          onTimeUpdate={() => {
-            const v = videoRef.current;
-            if (v) setProgress(v.currentTime / (v.duration || 1));
-          }}
-          onLoadedMetadata={() => setDuration(videoRef.current?.duration ?? 0)}
-          onEnded={() => setPlaying(false)}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', cursor: 'pointer' }}
+        <iframe
+          src={`https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&rel=0`}
+          allow="autoplay; encrypted-media; fullscreen"
+          allowFullScreen
+          style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
         />
 
-        {/* Gradiente superior */}
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '80px', background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), transparent)', pointerEvents: 'none' }} />
-
-        {/* Botão fechar */}
         <button
           onClick={onClose}
           aria-label="Fechar vídeo"
           style={{
             position: 'absolute', top: '14px', right: '14px',
             width: '36px', height: '36px', borderRadius: '50%',
-            background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(6px)',
+            background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(6px)',
             border: '1px solid rgba(255,255,255,0.2)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'pointer', color: '#fff',
@@ -100,34 +54,6 @@ function VideoModal({ onClose }: { onClose: () => void }) {
         >
           <X size={16} />
         </button>
-
-        {/* Gradiente inferior + controles */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '12px 16px 18px', background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
-          <div
-            onClick={seek}
-            style={{ height: '3px', borderRadius: '2px', background: 'rgba(255,255,255,0.25)', cursor: 'pointer', marginBottom: '10px', position: 'relative' }}
-          >
-            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${progress * 100}%`, background: '#fff', borderRadius: '2px', transition: 'width 0.1s linear' }} />
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <button
-              onClick={togglePlay}
-              aria-label={playing ? 'Pausar' : 'Reproduzir'}
-              style={{
-                width: '40px', height: '40px', borderRadius: '50%',
-                background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(6px)',
-                border: '1px solid rgba(255,255,255,0.25)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer', color: '#fff', flexShrink: 0,
-              }}
-            >
-              {playing ? <Pause size={16} fill="white" color="white" /> : <Play size={16} fill="white" color="white" style={{ marginLeft: '2px' }} />}
-            </button>
-            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'rgba(255,255,255,0.75)' }}>
-              {fmt(progress * duration)} / {fmt(duration)}
-            </span>
-          </div>
-        </div>
       </div>
       <style>{`@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }`}</style>
     </div>
@@ -146,12 +72,10 @@ function VideoCard() {
         className="relative rounded-3xl overflow-hidden flex flex-col justify-end"
         style={{ flex: '1 1 0', minHeight: '320px', background: '#111827' }}
       >
-        {/* Thumbnail — vídeo pausado, sem som */}
-        <video
-          src={`${VIDEO_SRC}#t=0.001`}
-          muted
-          playsInline
-          preload="metadata"
+        {/* Capa do vídeo */}
+        <img
+          src="/imagens/capa_youtube2.png"
+          alt="Capa do vídeo"
           style={{
             position: 'absolute', inset: 0,
             width: '100%', height: '100%',
@@ -194,7 +118,7 @@ function VideoCard() {
             Porto Vale Explica
           </span>
           <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600, fontSize: '18px', color: '#fff', marginTop: '4px' }}>
-            Entenda o consórcio em<br />2 minutos
+            Entenda o consórcio em menos de 2 minutos
           </p>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginTop: '8px' }}>
             • Vídeo · 2 min

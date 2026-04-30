@@ -13,6 +13,7 @@ const noticias = [
     titulo: 'Porto Vale acelera crescimento e registra alta de 80% em março',
     href: 'https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/ep-porto-vale-consorcio/noticia/2026/04/07/porto-vale-acelera-crescimento-e-registra-alta-de-80percent-em-marco.ghtml',
     imagem: '/imagens/materia1.jpg',
+    objectPosition: 'center',
     gradientColors: ['from-blue-500/20', 'to-indigo-500/20'],
   },
   {
@@ -24,6 +25,7 @@ const noticias = [
     titulo: 'Copom reduz Selic e consórcio se mantém como estratégia para a casa própria',
     href: 'https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/ep-porto-vale-consorcio/noticia/2026/03/22/copom-reduz-selic-e-consorcio-se-mantem-como-estrategia-para-a-casa-propria.ghtml',
     imagem: '/imagens/materia2.jpg',
+    objectPosition: 'center 80%',
     gradientColors: ['from-green-500/20', 'to-teal-500/20'],
   },
   {
@@ -35,6 +37,7 @@ const noticias = [
     titulo: 'De 4 a 600 colaboradores: Porto Vale reforça liderança em consórcios e seguros',
     href: 'https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/ep-porto-vale-consorcio/noticia/2026/03/09/de-4-a-600-colaboradores-porto-vale-reforca-lideranca-em-consorcios-e-seguros.ghtml',
     imagem: '/imagens/materia3.jpg',
+    objectPosition: 'center',
     gradientColors: ['from-orange-500/20', 'to-red-500/20'],
   },
 ];
@@ -89,10 +92,10 @@ export function MidiaSection() {
           animate={isLoaded ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
           transition={{ type: 'spring', stiffness: 400, damping: 28 }}
         >
-          <SectionLabel>Na mídia</SectionLabel>
+          <SectionLabel>Notícias</SectionLabel>
           <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 2.8vw, 44px)', lineHeight: 1.08, letterSpacing: '-0.03em', color: '#111827' }}>
-            Porto Vale nas{' '}
-            <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>notícias</span>
+            Porto Vale na{' '}
+            <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>Imprensa</span>
           </h2>
         </motion.div>
 
@@ -116,12 +119,17 @@ export function MidiaSection() {
             >
               {/* Imagem */}
               <div className="relative overflow-hidden" style={{ height: '160px' }}>
-                <img
-                  src={card.imagem}
-                  alt={card.titulo}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/60 to-transparent" />
+                <picture className="w-full h-full">
+                  <source srcSet={card.imagem.replace('.jpg', '.avif')} type="image/avif" />
+                  <img
+                    src={card.imagem}
+                    alt={card.titulo}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    style={{ objectPosition: card.objectPosition }}
+                  />
+                </picture>
+                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent" />
 
                 {/* Bookmark */}
                 <motion.div
