@@ -26,6 +26,7 @@ const PortalColaborador   = lazy(() => import('./pages/PortalColaborador').then(
 const PortalTransparencia = lazy(() => import('./pages/PortalTransparencia').then(m => ({ default: m.PortalTransparencia })));
 const Artigos             = lazy(() => import('./pages/Artigos').then(m => ({ default: m.Artigos })));
 const ArtigoDetalhe       = lazy(() => import('./pages/ArtigoDetalhe').then(m => ({ default: m.ArtigoDetalhe })));
+const Noticias            = lazy(() => import('./pages/Noticias').then(m => ({ default: m.Noticias })));
 
 // Lazy load: páginas de produto (todas do mesmo chunk — Vite de-duplica o módulo)
 const ConsorcioImovel            = lazy(() => import('./pages/Produtos').then(m => ({ default: m.ConsorcioImovel })));
@@ -98,6 +99,7 @@ export default function App() {
         <Route path="/portal-transparencia" element={<PortalTransparencia />} />
         <Route path="/artigos" element={<Artigos />} />
         <Route path="/artigos/:slug" element={<ArtigoDetalhe />} />
+        <Route path="/noticias" element={<Noticias />} />
         <Route path="/consorcio-imovel"             element={<ConsorcioImovel />} />
         <Route path="/consorcio-terreno"            element={<ConsorcioTerreno />} />
         <Route path="/consorcio-construcao-reforma" element={<ConsorcioConstrucaoReforma />} />

@@ -122,6 +122,7 @@ export function Footer() {
             <ul className="space-y-2 sm:space-y-2.5">
               {[
                 { label: 'Artigos sobre consórcios', to: '/artigos' },
+                { label: 'Notícias na Imprensa',     to: '/noticias' },
                 { label: 'Guia do Consórcio',        to: '/guia-do-consorcio' },
               ].map(({ label, to }) => (
                 <li key={label}>

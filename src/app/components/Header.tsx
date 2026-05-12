@@ -1,4 +1,4 @@
-import { Menu, X, ChevronDown, Home, Car, Truck, Building2, Sprout, TrendingUp, Zap, Briefcase, Users, Heart, Globe, Handshake, Phone, Info, Calculator, BookOpen } from 'lucide-react';
+import { Menu, X, ChevronDown, Home, Car, Truck, Building2, Sprout, TrendingUp, Zap, Briefcase, Users, Heart, Globe, Handshake, Phone, Info, Calculator, BookOpen, Newspaper } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import portoValeLogo from '../../assets/logo-portovale.png';
@@ -58,6 +58,7 @@ const navDropdowns: NavDropdown[] = [
       { icon: Handshake, label: 'Trabalhe Conosco', href: '/trabalhe-conosco' },
       { icon: Phone,     label: 'Contato',          href: '/contato' },
       { icon: BookOpen,  label: 'Artigos sobre Consórcio', href: '/artigos' },
+      { icon: Newspaper, label: 'Notícias na Imprensa',    href: '/noticias' },
     ],
   },
 ];

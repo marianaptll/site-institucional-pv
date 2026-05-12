@@ -1,85 +1,32 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { BookmarkIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router';
 import { SectionLabel } from './SectionLabel';
+import { NOTICIAS } from '../data/noticias';
 
-const noticias = [
-  {
-    id: '1',
-    veiculo: 'G1 Globo',
-    tag: 'Especial Publicitário',
-    data: '7 Abr 2026',
-    local: 'Vale do Paraíba, SP',
-    titulo: 'Porto Vale acelera crescimento e registra alta de 80% em março',
-    href: 'https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/ep-porto-vale-consorcio/noticia/2026/04/07/porto-vale-acelera-crescimento-e-registra-alta-de-80percent-em-marco.ghtml',
-    imagem: '/imagens/materia1.jpg',
-    objectPosition: 'center',
-    gradientColors: ['from-blue-500/20', 'to-indigo-500/20'],
-  },
-  {
-    id: '2',
-    veiculo: 'G1 Globo',
-    tag: 'Especial Publicitário',
-    data: '22 Mar 2026',
-    local: 'Vale do Paraíba, SP',
-    titulo: 'Copom reduz Selic e consórcio se mantém como estratégia para a casa própria',
-    href: 'https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/ep-porto-vale-consorcio/noticia/2026/03/22/copom-reduz-selic-e-consorcio-se-mantem-como-estrategia-para-a-casa-propria.ghtml',
-    imagem: '/imagens/materia2.jpg',
-    objectPosition: 'center 80%',
-    gradientColors: ['from-green-500/20', 'to-teal-500/20'],
-  },
-  {
-    id: '3',
-    veiculo: 'G1 Globo',
-    tag: 'Especial Publicitário',
-    data: '9 Mar 2026',
-    local: 'Vale do Paraíba, SP',
-    titulo: 'De 4 a 600 colaboradores: Porto Vale reforça liderança em consórcios e seguros',
-    href: 'https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/ep-porto-vale-consorcio/noticia/2026/03/09/de-4-a-600-colaboradores-porto-vale-reforca-lideranca-em-consorcios-e-seguros.ghtml',
-    imagem: '/imagens/materia3.jpg',
-    objectPosition: 'center',
-    gradientColors: ['from-orange-500/20', 'to-red-500/20'],
-  },
-];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.8 } },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.9, filter: 'blur(6px)' },
-  visible: {
-    opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
-    transition: { type: 'spring', stiffness: 300, damping: 28, mass: 0.8 },
-  },
-};
-
-const statusBars = [
-  { id: '1', width: '100%', opacity: 1 },
-  { id: '2', width: '66%',  opacity: 0.6 },
-  { id: '3', width: '33%',  opacity: 0.35 },
-];
+const VISIBLE = 3;
 
 export function MidiaSection() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [bookmarked, setBookmarked] = useState<Set<string>>(new Set());
+  const [current, setCurrent] = useState(0);
   const shouldReduceMotion = useReducedMotion();
   const shouldAnimate = !shouldReduceMotion;
+
+  const total = NOTICIAS.length;
+  const maxIndex = Math.max(0, total - VISIBLE);
+  const canPrev = current > 0;
+  const canNext = current < maxIndex;
 
   useEffect(() => {
     const t = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(t);
   }, []);
 
-  const toggleBookmark = (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setBookmarked(prev => {
-      const s = new Set(prev);
-      s.has(id) ? s.delete(id) : s.add(id);
-      return s;
-    });
-  };
+  function prev() { setCurrent(i => Math.max(0, i - 1)); }
+  function next() { setCurrent(i => Math.min(maxIndex, i + 1)); }
+
+  const visible = NOTICIAS.slice(current, current + VISIBLE);
 
   return (
     <section className="py-16 px-4 sm:px-8 lg:px-16 bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -87,67 +34,89 @@ export function MidiaSection() {
 
         {/* Header */}
         <motion.div
-          className="mb-10"
+          className="mb-10 flex items-end justify-between gap-4 flex-wrap"
           initial={shouldAnimate ? { opacity: 0, y: -20, filter: 'blur(4px)' } : false}
           animate={isLoaded ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
           transition={{ type: 'spring', stiffness: 400, damping: 28 }}
         >
-          <SectionLabel>Notícias</SectionLabel>
-          <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 2.8vw, 44px)', lineHeight: 1.08, letterSpacing: '-0.03em', color: '#111827' }}>
-            Porto Vale na{' '}
-            <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>Imprensa</span>
-          </h2>
+          <div>
+            <SectionLabel>Notícias</SectionLabel>
+            <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 2.8vw, 44px)', lineHeight: 1.08, letterSpacing: '-0.03em', color: '#111827', margin: 0 }}>
+              Porto Vale na{' '}
+              <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#009cde' }}>Imprensa</span>
+            </h2>
+          </div>
+
+          {/* Setas (só aparecem quando há mais que VISIBLE itens) */}
+          {total > VISIBLE && (
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button
+                onClick={prev}
+                disabled={!canPrev}
+                style={{
+                  width: '40px', height: '40px', borderRadius: '50%',
+                  border: '1px solid #E5E7EB', background: canPrev ? '#111827' : '#F3F4F6',
+                  color: canPrev ? '#fff' : '#D1D5DB', cursor: canPrev ? 'pointer' : 'not-allowed',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={next}
+                disabled={!canNext}
+                style={{
+                  width: '40px', height: '40px', borderRadius: '50%',
+                  border: '1px solid #E5E7EB', background: canNext ? '#111827' : '#F3F4F6',
+                  color: canNext ? '#fff' : '#D1D5DB', cursor: canNext ? 'pointer' : 'not-allowed',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          )}
         </motion.div>
 
         {/* Cards */}
         <motion.div
+          key={current}
           className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8"
-          variants={shouldAnimate ? containerVariants : {}}
-          initial="hidden"
-          animate={isLoaded ? 'visible' : 'hidden'}
+          initial={shouldAnimate ? { opacity: 0, x: 24 } : false}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         >
-          {noticias.map((card) => (
-            <motion.a
+          {visible.map((card) => (
+            <a
               key={card.id}
               href={card.href}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden group"
-              variants={shouldAnimate ? cardVariants : {}}
-              whileHover={shouldAnimate ? { y: -4, scale: 1.01, transition: { type: 'spring', stiffness: 400, damping: 25 } } : {}}
-              style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.06)', textDecoration: 'none', display: 'block' }}
+              style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.06)', textDecoration: 'none', display: 'block', transition: 'box-shadow 0.2s, transform 0.2s' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,156,222,0.12)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 4px rgba(0,0,0,0.06)'; }}
             >
               {/* Imagem */}
               <div className="relative overflow-hidden" style={{ height: '160px' }}>
-                <picture className="w-full h-full">
-                  <source srcSet={card.imagem.replace('.jpg', '.avif')} type="image/avif" />
+                {card.imagem ? (
                   <img
                     src={card.imagem}
                     alt={card.titulo}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    style={{ objectPosition: card.objectPosition }}
+                    style={{ objectPosition: card.objectPosition ?? 'center' }}
                   />
-                </picture>
+                ) : (
+                  <div className="w-full h-full" style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #009cde 100%)' }} />
+                )}
                 <div className="absolute inset-0 bg-black/40" />
                 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent" />
 
-                {/* Bookmark */}
-                <motion.div
-                  className="absolute top-3 right-3"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.6, type: 'spring', stiffness: 400, damping: 25 }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={(e) => toggleBookmark(card.id, e)}
-                >
-                  <BookmarkIcon className={`w-5 h-5 cursor-pointer transition-colors drop-shadow ${bookmarked.has(card.id) ? 'text-yellow-400 fill-yellow-400' : 'text-white/80 hover:text-white'}`} />
-                </motion.div>
-
-                {/* Tag + data */}
                 <div className="absolute bottom-3 left-3 text-white">
                   <div className="text-xs mb-0.5 opacity-90" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>
-                    {card.veiculo}, {card.tag}
+                    {card.veiculo}
                   </div>
                   <div className="text-xs opacity-70" style={{ fontFamily: "'Inter', sans-serif" }}>
                     {card.data} · {card.local}
@@ -164,8 +133,51 @@ export function MidiaSection() {
                   {card.titulo}
                 </h3>
               </div>
-            </motion.a>
+            </a>
           ))}
+        </motion.div>
+
+        {/* Dots (quando há mais que VISIBLE) */}
+        {total > VISIBLE && (
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginTop: '24px' }}>
+            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                style={{
+                  width: i === current ? '24px' : '8px',
+                  height: '8px', borderRadius: '999px', border: 'none',
+                  background: i === current ? '#009cde' : '#D1D5DB',
+                  cursor: 'pointer', padding: 0, transition: 'all 0.3s',
+                }}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* CTA */}
+        <motion.div
+          className="mt-10 flex justify-center"
+          initial={shouldAnimate ? { opacity: 0, y: 12 } : false}
+          animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.4 }}
+        >
+          <Link
+            to="/noticias"
+            onClick={() => window.scrollTo(0, 0)}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '14px',
+              color: '#111827', border: '1px solid #E5E7EB', borderRadius: '12px',
+              padding: '12px 24px', textDecoration: 'none', background: '#fff',
+              transition: 'all 0.2s', boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#111827'; (e.currentTarget as HTMLElement).style.color = '#fff'; (e.currentTarget as HTMLElement).style.borderColor = '#111827'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = '#fff'; (e.currentTarget as HTMLElement).style.color = '#111827'; (e.currentTarget as HTMLElement).style.borderColor = '#E5E7EB'; }}
+          >
+            Ver todas as notícias
+            <ArrowRight size={16} />
+          </Link>
         </motion.div>
 
       </div>

@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ChatWidget } from '../components/ChatWidget';
-import { Heart, TrendingUp, BookOpen, Award, Users, MapPin, ExternalLink, Briefcase, Lightbulb, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Heart, TrendingUp, BookOpen, Award, Users, MapPin, ExternalLink, Lightbulb, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SectionLabel } from '../components/SectionLabel';
 
 const beneficios = [
@@ -87,57 +87,14 @@ const equipe = [
   },
 ];
 
-// ── Adicione ou remova vagas aqui ──
+const SOLIDES_URL = 'https://portovaleconsorcios.vagas.solides.com.br/';
+
+// ── Atualize as vagas aqui sempre que houver mudanças ──
 const vagas = [
-  {
-    titulo: 'Analista de Marketing (Social Media)',
-    local: 'São José dos Campos, SP',
-    tipo: 'CLT',
-    area: 'Marketing',
-    link: 'https://portovaleconsorcio.gupy.io/jobs/11074104?jobBoardSource=gupy_public_page',
-  },
-  {
-    titulo: 'Analista de Recursos Humanos (Recrutamento e Seleção)',
-    local: 'São José dos Campos, SP',
-    tipo: 'CLT',
-    area: 'Recursos Humanos',
-    link: 'https://portovaleconsorcio.gupy.io/jobs/11029524?jobBoardSource=gupy_public_page',
-  },
-  {
-    titulo: 'Assistente de Departamento Pessoal (Ponto Eletrônico)',
-    local: 'São José dos Campos, SP',
-    tipo: 'CLT',
-    area: 'Dep. Pessoal',
-    link: 'https://portovaleconsorcio.gupy.io/jobs/11126148?jobBoardSource=gupy_public_page',
-  },
-  {
-    titulo: 'Auxiliar Administrativo',
-    local: 'São José dos Campos, SP',
-    tipo: 'PCD',
-    area: 'Administrativo',
-    link: 'https://portovaleconsorcio.gupy.io/jobs/10723375?jobBoardSource=gupy_public_page',
-  },
-  {
-    titulo: 'Jovem Aprendiz SDR',
-    local: 'São José dos Campos, SP',
-    tipo: 'Aprendiz',
-    area: 'Comercial',
-    link: 'https://portovaleconsorcio.gupy.io/jobs/11076866?jobBoardSource=gupy_public_page',
-  },
-  {
-    titulo: 'Vendedor de Consórcios Presencial',
-    local: 'São José dos Campos, SP',
-    tipo: 'CLT',
-    area: 'Comercial',
-    link: 'https://portovaleconsorcio.gupy.io/jobs/10989025?jobBoardSource=gupy_public_page',
-  },
-  {
-    titulo: 'Vendedor de Consórcios Presencial',
-    local: 'São Paulo, Zona Norte',
-    tipo: 'CLT',
-    area: 'Comercial',
-    link: 'https://portovaleconsorcio.gupy.io/jobs/10967391?jobBoardSource=gupy_public_page',
-  },
+  { titulo: 'Auxiliar Administrativo',                                                    area: 'Administrativo', tipo: 'CLT', local: 'São José dos Campos, SP', salario: 'R$ 2.100', modalidade: 'Presencial' },
+  { titulo: 'Vendedor de Consórcios Presencial',                                          area: 'Comercial',      tipo: 'CLT', local: 'São Paulo, Zona Norte',    salario: 'R$ 2.100', modalidade: 'Presencial' },
+  { titulo: 'Auxiliar Administrativo — Exclusiva para Pessoas com Deficiência (PCD)',     area: 'Administrativo', tipo: 'PCD', local: 'São José dos Campos, SP', salario: 'R$ 1.980', modalidade: 'Presencial' },
+  { titulo: 'Vendedor de Consórcios Presencial',                                          area: 'Comercial',      tipo: 'CLT', local: 'São José dos Campos, SP', salario: 'R$ 2.100', modalidade: 'Presencial' },
 ];
 
 const tipoBadge: Record<string, { bg: string; color: string }> = {
@@ -225,22 +182,12 @@ function EquipeRow({ icon: Icon, stat, desc, idleAnimate, idleTransition, hoverA
 
 
 export function TrabalheConosco() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(true);
-
-  const handleScroll = () => {
-    if (!scrollRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-    setCanPrev(scrollLeft > 4);
-    setCanNext(scrollLeft < scrollWidth - clientWidth - 4);
-  };
-
-  const scroll = (dir: 'prev' | 'next') => {
-    if (!scrollRef.current) return;
-    const w = scrollRef.current.clientWidth;
-    scrollRef.current.scrollBy({ left: dir === 'next' ? w : -w, behavior: 'smooth' });
-  };
+  const [current, setCurrent] = useState(0);
+  const perPage = 3;
+  const maxPage = Math.ceil(vagas.length / perPage) - 1;
+  const canPrev = current > 0;
+  const canNext = current < maxPage;
+  const visiveis = vagas.slice(current * perPage, current * perPage + perPage);
 
   return (
     <>
@@ -321,111 +268,86 @@ export function TrabalheConosco() {
         <section style={{ backgroundColor: '#f8f7f5', padding: 'clamp(56px, 10vw, 96px) 24px' }}>
           <div className="max-w-7xl mx-auto">
 
-            {/* Cabeçalho + setas */}
-            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '40px', flexWrap: 'wrap', gap: '16px' }}>
-              <div>
-                <SectionLabel>Vagas abertas</SectionLabel>
-                <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 42px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#111827', marginTop: '4px', marginBottom: '10px' }}>
-                  Faça parte do{' '}
-                  <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>nosso time</span>
-                </h2>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', color: '#6B7280', lineHeight: 1.7, maxWidth: '480px', margin: 0 }}>
-                  Confira as oportunidades disponíveis e candidate-se diretamente pelo Gupy.
-                </p>
-              </div>
+            <div style={{ marginBottom: '40px' }}>
+              <SectionLabel>Vagas abertas</SectionLabel>
+              <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 42px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: '#111827', marginTop: '4px', marginBottom: '10px' }}>
+                Faça parte do{' '}
+                <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>nosso time</span>
+              </h2>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', color: '#6B7280', lineHeight: 1.7, maxWidth: '480px', margin: 0 }}>
+                Confira as oportunidades disponíveis e candidate-se diretamente pelo Sólides.
+              </p>
+            </div>
 
-              {/* Botões de navegação */}
-              <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+            {/* Navegação */}
+            {vagas.length > perPage && (
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
                 <button
-                  onClick={() => scroll('prev')}
+                  onClick={() => setCurrent(i => Math.max(0, i - 1))}
                   disabled={!canPrev}
                   style={{ width: '44px', height: '44px', borderRadius: '12px', border: '1.5px solid', borderColor: canPrev ? '#D1D5DB' : '#E5E7EB', background: canPrev ? '#fff' : '#F9FAFB', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: canPrev ? 'pointer' : 'default', transition: 'all 0.2s' }}
                 >
                   <ChevronLeft size={18} color={canPrev ? '#374151' : '#D1D5DB'} strokeWidth={2} />
                 </button>
                 <button
-                  onClick={() => scroll('next')}
+                  onClick={() => setCurrent(i => Math.min(maxPage, i + 1))}
                   disabled={!canNext}
                   style={{ width: '44px', height: '44px', borderRadius: '12px', border: '1.5px solid', borderColor: canNext ? '#D1D5DB' : '#E5E7EB', background: canNext ? '#fff' : '#F9FAFB', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: canNext ? 'pointer' : 'default', transition: 'all 0.2s' }}
                 >
                   <ChevronRight size={18} color={canNext ? '#374151' : '#D1D5DB'} strokeWidth={2} />
                 </button>
               </div>
-            </div>
+            )}
 
-            {/* Carrossel */}
-            <div
-              ref={scrollRef}
-              onScroll={handleScroll}
-              style={{
-                display: 'flex',
-                gap: '20px',
-                overflowX: 'auto',
-                scrollSnapType: 'x mandatory',
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none',
-                paddingBottom: '4px',
-              }}
-            >
-              {vagas.map((vaga) => {
+            {/* Cards de vagas */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(280px, 100%), 1fr))', gap: '20px' }}>
+              {visiveis.map((vaga, i) => {
                 const badge = tipoBadge[vaga.tipo] ?? tipoBadge.CLT;
                 return (
                   <a
-                    key={vaga.link}
-                    href={vaga.link}
+                    key={i}
+                    href={SOLIDES_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{
-                      flex: '0 0 clamp(260px, 80vw, calc(33.33% - 14px))',
-                      minWidth: '260px',
-                      scrollSnapAlign: 'start',
-                      background: '#fff',
-                      borderRadius: '20px',
-                      padding: '28px 24px',
-                      border: '1px solid #E5E7EB',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '16px',
-                      textDecoration: 'none',
-                      transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-                    }}
-                    onMouseEnter={e => {
-                      (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px rgba(0,0,0,0.09)';
-                      (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
-                    }}
-                    onMouseLeave={e => {
-                      (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                      (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-                    }}
+                    style={{ background: '#fff', borderRadius: '20px', padding: '28px 24px', border: '1px solid #E5E7EB', display: 'flex', flexDirection: 'column', gap: '16px', textDecoration: 'none', transition: 'box-shadow 0.2s, transform 0.2s, border-color 0.2s' }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = '0 8px 24px rgba(37,99,235,0.10)'; el.style.transform = 'translateY(-3px)'; el.style.borderColor = '#93C5FD'; }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = 'none'; el.style.transform = 'translateY(0)'; el.style.borderColor = '#E5E7EB'; }}
                   >
-                    {/* Topo: ícone + tipo */}
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
-                      <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Briefcase size={20} color="#2563EB" strokeWidth={1.6} />
                       </div>
-                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, color: badge.color, background: badge.bg, padding: '4px 10px', borderRadius: '20px', whiteSpace: 'nowrap' as const }}>
+                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, color: badge.color, background: badge.bg, padding: '4px 10px', borderRadius: '20px' }}>
                         {vaga.tipo}
                       </span>
                     </div>
 
-                    {/* Área */}
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: '#9CA3AF', margin: 0 }}>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9CA3AF', margin: 0 }}>
                       {vaga.area}
                     </p>
 
-                    {/* Título */}
                     <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '15px', color: '#111827', margin: 0, lineHeight: 1.4 }}>
                       {vaga.titulo}
                     </p>
 
-                    {/* Local */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <MapPin size={12} color="#9CA3AF" strokeWidth={2} />
-                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#6B7280' }}>{vaga.local}</span>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                        <MapPin size={12} color="#9CA3AF" strokeWidth={2} />
+                        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#6B7280' }}>{vaga.local}</span>
+                      </div>
+                      {vaga.salario && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#6B7280' }}>💰 {vaga.salario}</span>
+                        </div>
+                      )}
+                    </div>
+                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', fontWeight: 600, color: '#2563EB', background: '#EFF6FF', padding: '3px 10px', borderRadius: '999px' }}>
+                        {vaga.modalidade}
+                      </span>
                     </div>
 
-                    {/* CTA */}
-                    <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '6px', paddingTop: '8px', borderTop: '1px solid #F3F4F6' }}>
+                    <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '6px', paddingTop: '12px', borderTop: '1px solid #F3F4F6' }}>
                       <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#2563EB' }}>Ver vaga</span>
                       <ExternalLink size={12} color="#2563EB" strokeWidth={2} />
                     </div>
@@ -448,12 +370,12 @@ export function TrabalheConosco() {
 
             <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <a
-                href="https://portovaleconsorcio.gupy.io"
+                href="https://portovaleconsorcios.vagas.solides.com.br/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#009cde', color: '#fff', fontFamily: "'Inter', sans-serif", fontSize: '15px', fontWeight: 600, padding: '14px 32px', borderRadius: '12px', textDecoration: 'none', letterSpacing: '0.01em' }}
               >
-                Ver todas as vagas no Gupy
+                Ver todas as vagas no Sólides
                 <ExternalLink size={15} strokeWidth={2} />
               </a>
               <a
