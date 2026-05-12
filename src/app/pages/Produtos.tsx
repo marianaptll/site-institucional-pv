@@ -882,7 +882,7 @@ const ofertasImovel: Oferta[] = [
     credito: 'R$ 200.000',
     parcela: '',
     prazo: '180 meses',
-    descricao: 'Ideal para quem busca um apartamento compacto, terreno ou reforma. Parcelas reduzidas e contemplação mensal.',
+    descricao: 'Ideal para quem busca um apartamento compacto, terreno ou reforma. Contemplação mensal.',
     imagem: '/imagens/imovel-200k.jpg',
   },
   {
@@ -1106,7 +1106,7 @@ const editorialAutomovel: EditorialConfig = {
   badge: 'Porto Vale × Porto Seguro',
   titulo: <>Saia de carro novo com <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>planejamento, sem juros e sem entrada</span></>,
   intro: 'O consórcio de veículos da Porto Seguro permite que você adquira um carro novo ou seminovo de maneira planejada, sem juros e com parcelas econômicas.',
-  corpo1: 'Os planos variam de 50 a 80 meses, e você não precisa dar entrada para adesão ao consórcio. Com parcelas reduzidas até a contemplação e a liberdade de escolher o valor do crédito que você precisa, o consórcio da Porto Seguro oferece diversas vantagens.',
+  corpo1: 'Os planos variam de 50 a 80 meses, e você não precisa dar entrada para adesão ao consórcio. Com a liberdade de escolher o valor do crédito que você precisa, o consórcio da Porto Seguro oferece diversas vantagens.',
   corpo2: 'Nossos planos oferecem créditos flexíveis, sem juros e sem entrada. Você pode escolher entre as melhores marcas e modelos, incluindo hatches, sedãs e SUVs.',
   stats: [
     { label: 'Crédito', value: 'Flexível' },
@@ -1138,20 +1138,20 @@ const editorialPesados: EditorialConfig = {
   badge: 'Porto Vale × Porto Seguro',
   titulo: <>A forma mais econômica de <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>montar ou expandir sua frota</span></>,
   intro: 'O consórcio de caminhões e veículos pesados da Porto Seguro permite que empresas empreendedoras realizem, de forma planejada e programada, a montagem ou expansão de uma frota.',
-  corpo1: 'O crédito pode ser utilizado para a aquisição de ônibus, caminhões, carretas e outros veículos. São até 120 meses para pagamento, com redução de 25% nas parcelas até a contemplação, a maneira mais econômica de expandir uma frota ou iniciar um novo negócio.',
-  corpo2: 'As cartas de crédito variam de R$ 180 mil a R$ 360 mil, e as contemplações ocorrem mensalmente por lance ou sorteio. O consórcio de veículos pesados da Porto Seguro não possui taxa de adesão.',
+  corpo1: 'O crédito pode ser utilizado para a aquisição de ônibus, caminhões, carretas e outros veículos. São até 120 meses para pagamento, a maneira mais econômica de expandir uma frota ou iniciar um novo negócio.',
+  corpo2: 'As cartas de crédito variam de R$ 180 mil a R$ 360 mil, e as contemplações ocorrem mensalmente por lance ou sorteio.',
   stats: [
     { label: 'Crédito até', value: 'R$ 360 mil' },
     { label: 'Prazo de até', value: '120 meses' },
-    { label: 'Sem taxa', value: 'de adesão' },
+    { label: 'Taxa de juros', value: '0% a.a.' },
   ],
-  badgeTopo: 'Sem juros · Sem taxa de adesão',
-  badgeInferior: { value: '25% menos', label: 'nas parcelas até a contemplação' },
+  badgeTopo: 'Sem juros · Sem entrada',
+  badgeInferior: { value: 'Contemplação', label: 'mensal por lance ou sorteio' },
   imagem: '/imagens/produto-pesados.jpg',
 };
 
 const tiposPesados: TipoItem[] = [
-  { icon: Truck,      label: 'Caminhão',         desc: 'Renove ou amplie sua frota de caminhões com parcelas fixas, zero juros e sem taxa de adesão.' },
+  { icon: Truck,      label: 'Caminhão',         desc: 'Renove ou amplie sua frota de caminhões com parcelas fixas e zero juros.' },
   { icon: TrendingUp, label: 'Carreta / Bitrem',  desc: 'Crédito para carretas, biterms e conjuntos de veículos de carga de grande porte.' },
   { icon: Building2,  label: 'Ônibus',            desc: 'Para transportadoras e empresas de turismo que precisam renovar a frota de passageiros.' },
   { icon: Briefcase,  label: 'Frota Empresarial', desc: 'Monte ou expanda a frota do seu negócio com planejamento e sem imobilizar capital de giro.' },
@@ -1159,7 +1159,7 @@ const tiposPesados: TipoItem[] = [
 ];
 
 const ofertasPesados: Oferta[] = [
-  { media: 'photo', badge: 'Início de frota',  credito: 'R$ 180.000', parcela: '', prazo: '90 meses',  descricao: 'Ideal para caminhões leves, ônibus ou início de frota com parcelas reduzidas.' },
+  { media: 'photo', badge: 'Início de frota',  credito: 'R$ 180.000', parcela: '', prazo: '90 meses',  descricao: 'Ideal para caminhões leves, ônibus ou início de frota.' },
   { media: 'photo', badge: 'Mais escolhido',   credito: 'R$ 270.000', parcela: '', prazo: '100 meses', descricao: 'O equilíbrio perfeito entre crédito e prazo para caminhões, carretas e implementos.' },
   { media: 'photo', badge: 'Maior crédito',    credito: 'R$ 360.000', parcela: '', prazo: '120 meses', descricao: 'Para renovação de frota completa ou aquisição de conjuntos bitrem e veículos de grande porte.' },
 ];
@@ -1289,7 +1289,7 @@ const editorialTerreno: EditorialConfig = {
   badge: 'Porto Vale × Porto Seguro',
   titulo: <>O primeiro passo para <span style={{ fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', color: '#2563EB' }}>conquistar o imóvel dos seus sonhos</span></>,
   intro: 'O consórcio de terreno do Porto permite que você utilize o crédito para a aquisição do terreno de sua preferência, com economia e planejamento.',
-  corpo1: 'Os planos oferecem até R$ 240 mil e podem ser pagos em até 200 meses, sem juros e com taxas diferenciadas justas. Você pode escolher o crédito mais adequado ao seu objetivo, com a opção de parcelas reduzidas até a contemplação.',
+  corpo1: 'Os planos oferecem até R$ 240 mil e podem ser pagos em até 200 meses, sem juros. Você pode escolher o crédito mais adequado ao seu objetivo.',
   corpo2: 'Com o consórcio, você adquire um terreno com total tranquilidade financeira, dando os primeiros e mais importantes passos para construir o imóvel que sempre imaginou.',
   stats: [
     { label: 'Crédito de até', value: 'R$ 240 mil' },
@@ -1297,7 +1297,7 @@ const editorialTerreno: EditorialConfig = {
     { label: 'Taxa de juros', value: '0% a.a.' },
   ],
   badgeTopo: 'Sem juros · Sem entrada',
-  badgeInferior: { value: 'Parcela', label: 'reduzida até a contemplação' },
+  badgeInferior: { value: 'Contemplação', label: 'mensal por lance ou sorteio' },
   imagem: '/imagens/produto-terreno.jpg',
 };
 
@@ -1310,7 +1310,7 @@ const tiposTerreno: TipoItem[] = [
 ];
 
 const ofertasTerreno: Oferta[] = [
-  { media: 'photo', badge: 'Entrada acessível', credito: 'R$ 80.000',  parcela: '', prazo: '160 meses', descricao: 'Ideal para terrenos residenciais em regiões em crescimento, com parcelas reduzidas.' },
+  { media: 'photo', badge: 'Entrada acessível', credito: 'R$ 80.000',  parcela: '', prazo: '160 meses', descricao: 'Ideal para terrenos residenciais em regiões em crescimento.' },
   { media: 'photo', badge: 'Mais escolhido',    credito: 'R$ 160.000', parcela: '', prazo: '180 meses', descricao: 'O equilíbrio perfeito entre crédito e prazo para lotes residenciais ou comerciais.' },
   { media: 'photo', badge: 'Maior crédito',     credito: 'R$ 240.000', parcela: '', prazo: '200 meses', descricao: 'Para quem busca terrenos maiores, em melhores localizações ou para fins de investimento.' },
 ];
@@ -1432,7 +1432,7 @@ const editorialAgro: EditorialConfig = {
   stats: [
     { label: 'Contemplação', value: 'Mensal' },
     { label: 'Taxa de juros', value: '0% a.a.' },
-    { label: 'Sem taxa', value: 'de adesão' },
+    { label: 'Sem entrada', value: 'para aderir' },
   ],
   badgeTopo: 'Sem juros · Sem entrada',
   badgeInferior: { value: '26,6%', label: 'do PIB brasileiro é agro' },
