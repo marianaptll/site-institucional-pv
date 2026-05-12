@@ -66,8 +66,7 @@ export function HeroSection() {
               marginTop: '32px',
             }}
           >
-            A parceira que transforma<br />
-            planos em realidade
+            O primeiro passo
           </motion.h1>
 
           <motion.p
@@ -84,7 +83,7 @@ export function HeroSection() {
               maxWidth: '520px',
             }}
           >
-            Mais de 20 anos conectando pessoas às melhores soluções no Brasil.
+            Comprar o seu imóvel é mais simples do que você imagina, simule agora!
           </motion.p>
 
           <motion.div

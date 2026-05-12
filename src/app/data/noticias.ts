@@ -20,7 +20,8 @@ export const NOTICIAS: Noticia[] = [
     local: 'São José dos Campos, SP',
     titulo: 'Empresa de consórcios abre vagas para vendedores em São José dos Campos',
     href: 'https://www.cbnvale.com.br/empresa-de-consorcios-abre-vagas-para-vendedores-em-sao-jose-dos-campos/',
-    imagem: null,
+    imagem: 'https://www.cbnvale.com.br/wp-content/uploads/2026/04/site-CBN-foto-34-1024x683.png',
+    objectPosition: 'center',
   },
   {
     id: '2',
@@ -30,7 +31,8 @@ export const NOTICIAS: Noticia[] = [
     local: 'São José dos Campos, SP',
     titulo: 'Corretora Porto Vale abre 120 vagas para vendedores em São José',
     href: 'https://sampi.net.br/ovale/noticias/2974241/cidades/2026/04/corretora-porto-vale-abre-120-vagas-para-vendedores-em-sao-jose',
-    imagem: null,
+    imagem: 'https://sampi.net.br/dir-arquivo-imagem/2026/04/5f05beefdddaecbbf0154d6da5834ffb.jpeg',
+    objectPosition: 'center',
   },
   {
     id: '3',
@@ -73,7 +75,8 @@ export const NOTICIAS: Noticia[] = [
     local: 'São José dos Campos, SP',
     titulo: 'Porto Vale alcança 600 colaboradores e registra crescimento de 54% em créditos de consórcio',
     href: 'https://www.meon.com.br/noticias/vale-do-paraiba-regiao/sao-jose-dos-campos/porto-vale-alcanca-600-colaboradores-e-registra-crescimento-de-54-em-creditos-de-consorcio',
-    imagem: null,
+    imagem: 'https://www.meon.com.br/source/files/c/207099/porto_vale-802830_1536-1024-0-0.jpg',
+    objectPosition: 'center',
   },
   {
     id: '7',
@@ -104,7 +107,7 @@ export const NOTICIAS: Noticia[] = [
     local: 'São José dos Campos, SP',
     titulo: 'Aqui Empreende com Fernando Gianjiope — Porto Vale Consórcio',
     href: 'https://www.youtube.com/watch?v=pwPQD-DZU3s',
-    imagem: '/imagens/capa_youtube2.png',
+    imagem: 'https://img.youtube.com/vi/pwPQD-DZU3s/maxresdefault.jpg',
     objectPosition: 'center',
   },
 ];
