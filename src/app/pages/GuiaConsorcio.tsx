@@ -1167,7 +1167,6 @@ export function GuiaConsorcio() {
   };
 
   const current = CHAPTERS[chapter];
-  const ChapterComponent = current.component;
 
   return (
     <div className="min-h-screen" style={{ fontFamily: "'Inter', sans-serif", backgroundColor: '#F9FAFB' }}>
@@ -1294,8 +1293,15 @@ export function GuiaConsorcio() {
             </div>
           </div>
 
-          {/* Chapter content */}
-          <ChapterComponent />
+          {/* Chapter content — todos renderizados no DOM para SEO, apenas o ativo visível */}
+          {CHAPTERS.map((ch) => {
+            const Comp = ch.component;
+            return (
+              <div key={ch.id} style={{ display: ch.id === chapter ? 'block' : 'none' }} aria-hidden={ch.id !== chapter}>
+                <Comp />
+              </div>
+            );
+          })}
 
           {/* Navigation buttons */}
           <div style={{ marginTop: '64px', paddingTop: '32px', borderTop: '1px solid #E5E7EB', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>

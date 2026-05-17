@@ -17,7 +17,7 @@ interface TypeConfig {
 }
 
 const configs: Record<ConsorcioType, TypeConfig> = {
-  imovel: { label: 'Imóvel',    icon: '', creditMin: 100000, creditMax: 1000000, creditStep: 10000, adminRate: 0.18, duration: 100 },
+  imovel: { label: 'Imóvel',    icon: '', creditMin: 100000, creditMax: 1000000, creditStep: 10000, adminRate: 0.18, duration: 180 },
   auto:   { label: 'Automóvel', icon: '', creditMin: 100000, creditMax: 1000000, creditStep: 10000, adminRate: 0.22, duration: 60  },
 };
 
@@ -166,14 +166,17 @@ export function ComparisonSimulatorSection() {
   const safeParcela    = Math.min(Math.max(parcela === 0 ? defaultParcela : parcela, pr.min), pr.max);
 
   const { savingsVsFinancing } = useMemo(() => {
+    const r = 0.0083;
     if (mode === 'credito') {
       const totalCost      = safeCredit * (1 + cfg.adminRate);
-      const financingTotal = safeCredit * Math.pow(1 + 0.017, cfg.duration);
+      const pmt            = safeCredit * r / (1 - Math.pow(1 + r, -cfg.duration));
+      const financingTotal = pmt * cfg.duration;
       return { savingsVsFinancing: financingTotal - totalCost };
     } else {
       const totalCost      = safeParcela * cfg.duration;
       const derivedCredit  = totalCost / (1 + cfg.adminRate);
-      const financingTotal = derivedCredit * Math.pow(1 + 0.017, cfg.duration);
+      const pmt            = derivedCredit * r / (1 - Math.pow(1 + r, -cfg.duration));
+      const financingTotal = pmt * cfg.duration;
       return { savingsVsFinancing: financingTotal - totalCost };
     }
   }, [mode, safeCredit, safeParcela, cfg]);
@@ -376,7 +379,7 @@ export function ComparisonSimulatorSection() {
                 <div className="flex items-start gap-2">
                   <Info size={11} color="rgba(255,255,255,0.3)" style={{ marginTop: '2px', flexShrink: 0 }} />
                   <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'rgba(255,255,255,0.35)', lineHeight: 1.6 }}>
-                    *Comparado a financiamento com taxa de 1,7% a.m. Valores sujeitos a ajuste pelo índice de correção contratual.
+                    *Comparado a financiamento com taxa de 0,83% a.m. (≈10,5% a.a.). Valores sujeitos a ajuste pelo índice de correção contratual.
                   </p>
                 </div>
 

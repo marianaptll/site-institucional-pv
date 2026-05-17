@@ -203,7 +203,7 @@ export function ProductCarousel() {
     <div
       className="relative z-20 py-4"
       style={{
-        marginBottom: '24px',
+        marginBottom: '8px',
         overflowX: 'clip',
         overflowY: 'visible',
         cursor: isDragging ? 'grabbing' : 'grab',

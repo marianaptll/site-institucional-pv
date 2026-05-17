@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import logoPortoBank from '../../assets/logo-portobank.png';
 import { WHATSAPP_URL } from '../constants';
+import { ExperienceBadge } from './ExperienceBadge';
 
 function FooterLink({ to, className, style, children }: { to: string; className?: string; style?: React.CSSProperties; children: React.ReactNode }) {
   return (
@@ -23,17 +24,21 @@ export function Footer() {
         {/* Topo — marca + CTA */}
         <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-5 py-8 sm:py-10 border-b border-[#1F2937]">
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <img
-              src="/imagens/logo-portovale-branco.png"
-              alt="Porto Vale Consórcios"
-              style={{ height: '28px', width: 'auto' }}
-            />
+            <Link to="/" onClick={() => window.scrollTo(0, 0)}>
+              <img
+                src="/imagens/logo-portovale-branco.png"
+                alt="Porto Vale Consórcios"
+                style={{ height: '28px', width: 'auto', display: 'block' }}
+              />
+            </Link>
             <div style={{ width: '1px', height: '24px', backgroundColor: '#1F2937' }} />
-            <img
-              src={logoPortoBank}
-              alt="Porto Bank"
-              style={{ height: '28px', width: 'auto', opacity: 0.85 }}
-            />
+            <a href="https://www.portoseguro.com.br/bank" target="_blank" rel="noopener noreferrer">
+              <img
+                src={logoPortoBank}
+                alt="Porto Bank"
+                style={{ height: '28px', width: 'auto', opacity: 0.85, display: 'block' }}
+              />
+            </a>
           </div>
           <div className="flex items-center gap-4 sm:gap-5">
             <style>{`
@@ -222,9 +227,44 @@ export function Footer() {
 
         {/* Selos de aprovação */}
         <div className="py-8 border-b border-[#1F2937] flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
+          <style>{`
+            @keyframes holoLineShift {
+              0%   { background-position: 0% 50%; }
+              100% { background-position: 200% 50%; }
+            }
+            .seal-holo {
+              position: relative;
+              border-radius: 14px;
+            }
+            .seal-holo::before {
+              content: '';
+              position: absolute;
+              inset: 0;
+              border-radius: 14px;
+              padding: 1.5px;
+              background: linear-gradient(90deg,
+                hsl(210,100%,45%),
+                hsl(195,100%,50%),
+                hsl(180,90%,45%),
+                hsl(165,80%,48%),
+                hsl(185,100%,60%),
+                hsl(200,70%,40%),
+                hsl(210,100%,45%)
+              );
+              background-size: 200% 100%;
+              -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+              -webkit-mask-composite: xor;
+              mask-composite: exclude;
+              opacity: 0;
+              transition: opacity 0.4s ease;
+              animation: holoLineShift 3s linear infinite;
+              pointer-events: none;
+            }
+            .seal-holo:hover::before { opacity: 1; }
+          `}</style>
 
           {/* Selo Banco Central */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', backgroundColor: '#161D2A', border: '1px solid #1F2937', borderRadius: '14px', padding: '14px 20px' }}>
+          <a href="https://www.bcb.gov.br/" target="_blank" rel="noopener noreferrer" className="seal-holo" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', backgroundColor: '#161D2A', border: '1px solid #1F2937', borderRadius: '14px', padding: '14px 20px', textDecoration: 'none', cursor: 'pointer' }}>
             <img src="/imagens/logo-bancocentral.png" alt="Banco Central do Brasil" style={{ height: '34px', width: 'auto', objectFit: 'contain', opacity: 0.9 }} />
             <div style={{ width: '1px', height: '34px', backgroundColor: '#1F2937' }} />
             <div>
@@ -235,10 +275,10 @@ export function Footer() {
                 Instituição autorizada e fiscalizada pelo BCB
               </p>
             </div>
-          </div>
+          </a>
 
           {/* Selo ABAC */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', backgroundColor: '#161D2A', border: '1px solid #1F2937', borderRadius: '14px', padding: '14px 20px' }}>
+          <a href="https://abac.org.br/" target="_blank" rel="noopener noreferrer" className="seal-holo" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', backgroundColor: '#161D2A', border: '1px solid #1F2937', borderRadius: '14px', padding: '14px 20px', textDecoration: 'none', cursor: 'pointer' }}>
             <img src="/imagens/selo-abac-branco.png" alt="ABAC — Associação Brasileira de Administradoras de Consórcios" style={{ height: '34px', width: 'auto', objectFit: 'contain', opacity: 0.9 }} />
             <div style={{ width: '1px', height: '34px', backgroundColor: '#1F2937' }} />
             <div>
@@ -249,7 +289,12 @@ export function Footer() {
                 Associação Brasileira de Consórcios
               </p>
             </div>
-          </div>
+          </a>
+
+          {/* Selo +20 anos */}
+          <Link to="/" onClick={() => window.scrollTo(0, 0)} style={{ textDecoration: 'none' }}>
+            <ExperienceBadge variant="inline" />
+          </Link>
 
         </div>
 

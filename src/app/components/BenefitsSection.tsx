@@ -172,7 +172,7 @@ export function BenefitsSection() {
       id="beneficios"
       className="relative z-10 px-4 sm:px-8 lg:px-16"
       style={{
-        paddingTop: 'clamp(48px, 6vw, 64px)',
+        paddingTop: 'clamp(24px, 3vw, 32px)',
         paddingBottom: 'clamp(56px, 7vw, 80px)',
       }}
     >

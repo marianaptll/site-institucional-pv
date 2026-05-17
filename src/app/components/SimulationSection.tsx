@@ -27,7 +27,7 @@ const brl = (v: number) =>
 export function SimulationSection() {
   const [type, setType]         = useState<ConsorcioType>('imovel');
   const [credit, setCredit]     = useState(200000);
-  const [duration, setDuration] = useState(100);
+  const [duration, setDuration] = useState(180);
 
   const cfg = configs[type];
 
@@ -38,8 +38,9 @@ export function SimulationSection() {
   const { monthlyInstallment, totalCost, savingsVsFinancing } = useMemo(() => {
     const totalCost          = safeCredit * (1 + cfg.adminRate);
     const monthlyInstallment = totalCost / safeDuration;
-    // financing estimate: ~2% monthly interest
-    const financingTotal     = safeCredit * Math.pow(1 + 0.017, safeDuration);
+    const r = 0.0083;
+    const pmt = safeCredit * r / (1 - Math.pow(1 + r, -safeDuration));
+    const financingTotal     = pmt * safeDuration;
     const savingsVsFinancing = financingTotal - totalCost;
     return { monthlyInstallment, totalCost, savingsVsFinancing };
   }, [safeCredit, safeDuration, cfg]);
@@ -273,7 +274,7 @@ export function SimulationSection() {
                   className="text-[11px] text-[#9CA3AF]"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
-                  *Comparado a financiamento com taxa de 1,7% a.m.
+                  *Comparado a financiamento com taxa de 0,83% a.m. (≈10,5% a.a.)
                 </div>
               </div>
             </div>

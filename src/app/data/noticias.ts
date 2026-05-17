@@ -54,7 +54,7 @@ export const NOTICIAS: Noticia[] = [
     local: 'Vale do Paraíba, SP',
     titulo: 'Mudanças no Minha Casa Minha Vida ampliam acesso à casa própria',
     href: 'https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/ep-porto-vale-consorcio/noticia/2026/03/27/mudancas-no-minha-casa-minha-vida-ampliam-acesso-a-casa-propria.ghtml',
-    imagem: null,
+    imagem: 'https://s2-g1.glbimg.com/E5fGhiJ8xqDXLYOSji1PeVUaiU8=/0x0:1600x900/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/z/G/ZLwz2lTkKmstQj53TdAA/whatsapp-image-2026-03-26-at-16.45.55.jpeg',
   },
   {
     id: '5',
@@ -75,7 +75,7 @@ export const NOTICIAS: Noticia[] = [
     local: 'São José dos Campos, SP',
     titulo: 'Porto Vale alcança 600 colaboradores e registra crescimento de 54% em créditos de consórcio',
     href: 'https://www.meon.com.br/noticias/vale-do-paraiba-regiao/sao-jose-dos-campos/porto-vale-alcanca-600-colaboradores-e-registra-crescimento-de-54-em-creditos-de-consorcio',
-    imagem: 'https://www.meon.com.br/source/files/c/207099/porto_vale-802830_1536-1024-0-0.jpg',
+    imagem: 'https://media.meon.com.br/meon-media/wp-content/uploads/2026/04/porto-vale-902076.avif',
     objectPosition: 'center',
   },
   {
@@ -97,7 +97,7 @@ export const NOTICIAS: Noticia[] = [
     local: 'Vale do Paraíba, SP',
     titulo: 'Porto Vale chega a 600 colaboradores e amplia operação no país',
     href: 'https://portalaquivale.com.br/porto-vale-chega-a-600-colaboradores-e-amplia-operacao-no-pais/',
-    imagem: null,
+    imagem: 'https://portalaquivale.com.br/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-09-at-10.51.05.webp',
   },
   {
     id: '9',
