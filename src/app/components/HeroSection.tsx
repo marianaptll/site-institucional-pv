@@ -14,7 +14,9 @@ interface Slide {
   id: number;
   color: string;
   image?: string;
+  imageMobile?: string;
   imagePosition?: string;
+  imagePositionMobile?: string;
   label: string;
   title: string;
   description: string;
@@ -28,6 +30,8 @@ const SLIDES: Slide[] = [
     id: 0,
     color: '#0D2137',
     image: '/imagens/banner-imovel.png',
+    imageMobile: '/imagens/banner-imovel-mobile.png',
+    imagePositionMobile: 'center 70%',
     label: 'Consórcio de Imóvel',
     title: 'O primeiro passo',
     description: 'Comprar o seu imóvel é mais simples do que você imagina, conheça nossos planos personalizados!',
@@ -38,6 +42,8 @@ const SLIDES: Slide[] = [
     id: 1,
     color: '#0A1D2E',
     image: '/imagens/banner-carro.png',
+    imageMobile: '/imagens/banner-carro-mobile.png',
+    imagePositionMobile: 'center 70%',
     label: 'Consórcio de Automóvel',
     title: 'Carro novo na hora certa',
     description: 'Parcelas planejadas que se encaixam perfeitamente no seu orçamento.',
@@ -46,27 +52,10 @@ const SLIDES: Slide[] = [
   },
   {
     id: 2,
-    color: '#161D2A',
-    image: '/imagens/banner-pesados.png',
-    label: 'Consórcio de Pesados',
-    title: 'Sua frota mais forte',
-    description: 'Amplie sua capacidade de operação pagando menos',
-    cta: 'Fale conosco',
-    ctaHref: '/contato',
-    secondaryHref: '/consorcio-pesados',
-  },
-  {
-    id: 3,
-    color: '#1A1147',
-    label: 'Porto Vale Consórcios',
-    title: 'Tudo o que você planeja, a Porto Vale ajuda a realizar',
-    description: 'A segurança e credibilidade que você procura para investir no que importa.',
-    cta: 'Simular consórcio',
-  },
-  {
-    id: 4,
     color: '#0D2B1E',
     image: '/imagens/banner-investir.png',
+    imageMobile: '/imagens/banner-investir-mobile.png',
+    imagePositionMobile: 'center 70%',
     imagePosition: 'right center',
     label: 'Investimento',
     title: 'Pensando em investir?',
@@ -74,58 +63,91 @@ const SLIDES: Slide[] = [
     cta: 'Conheça nossos planos',
     secondaryHref: '/consorcio-investimento',
   },
+  {
+    id: 3,
+    color: '#161D2A',
+    image: '/imagens/banner-pesados.png',
+    imageMobile: '/imagens/banner-pesados-mobile.png',
+    imagePositionMobile: 'center 70%',
+    label: 'Consórcio de Pesados',
+    title: 'Sua frota mais forte',
+    description: 'Amplie sua capacidade de operação pagando menos.',
+    cta: 'Fale conosco',
+    ctaHref: '/contato',
+    secondaryHref: '/consorcio-pesados',
+  },
+  {
+    id: 4,
+    color: '#1A1147',
+    image: '/imagens/banner-geral.png',
+    imageMobile: '/imagens/banner-geral-mobile.png',
+    imagePositionMobile: 'center 70%',
+    label: 'Porto Vale Consórcios',
+    title: 'Tudo o que você planeja, a Porto Vale ajuda a realizar',
+    description: 'A segurança e credibilidade que você procura para investir no que importa.',
+    cta: 'Simular consórcio',
+  },
 ];
 
 const N = SLIDES.length;
 const THUMB_GRAD = 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, transparent 100%)';
 const NAV_H = 68; // header height in px (position: fixed)
 
-interface ExpandState { clipStart: string; slideId: number }
+interface ExpandState { cx: number; cy: number; r0: number; slideId: number }
 
 export function HeroSection() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    SLIDES.forEach(slide => {
+      if (slide.image)       { const i = new Image(); i.src = slide.image;       preloadedImages.current.push(i); }
+      if (slide.imageMobile) { const i = new Image(); i.src = slide.imageMobile; preloadedImages.current.push(i); }
+    });
+  }, []);
+
   const [current,     setCurrent]     = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [expandState, setExpandState] = useState<ExpandState | null>(null);
   const [modalOpen,   setModalOpen]   = useState(false);
   const [textVisible, setTextVisible] = useState(true);
-  const [sectionBg,   setSectionBg]   = useState(SLIDES[0].color);
-  const [secHover,    setSecHover]    = useState(false);
-  const [isPaused,    setIsPaused]    = useState(false);
+  const [secHover,  setSecHover]  = useState(false);
+  const [isPaused,  setIsPaused]  = useState(false);
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const thumbRefs    = useRef<(HTMLDivElement | null)[]>([]);
-  const timerRef     = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const preExitRef   = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const containerRef    = useRef<HTMLDivElement>(null);
+  const thumbRefs       = useRef<(HTMLDivElement | null)[]>([]);
+  const timerRef        = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const preExitRef      = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const preloadedImages = useRef<HTMLImageElement[]>([]);
 
   // fila: os N-1 próximos slides (todos exceto o atual)
   const queue = Array.from({ length: N - 1 }, (_, i) => SLIDES[(current + i + 1) % N]);
 
-  const getClip = (thumb: HTMLDivElement | null): string => {
+  const getThumbExpand = (thumb: HTMLDivElement | null): { cx: number; cy: number; r0: number } => {
     const ctnr = containerRef.current;
-    if (!ctnr || !thumb) return 'inset(80% 2% 2% 76% round 10px)';
+    if (!ctnr) return { cx: 0, cy: 0, r0: 60 };
     const cr = ctnr.getBoundingClientRect();
+    if (!thumb) return { cx: cr.width * 0.88, cy: cr.height * 0.90, r0: 60 };
     const tr = thumb.getBoundingClientRect();
-    const top    = ((tr.top    - cr.top)    / cr.height * 100).toFixed(2);
-    const right  = ((cr.right  - tr.right)  / cr.width  * 100).toFixed(2);
-    const bottom = ((cr.bottom - tr.bottom) / cr.height * 100).toFixed(2);
-    const left   = ((tr.left   - cr.left)   / cr.width  * 100).toFixed(2);
-    return `inset(${top}% ${right}% ${bottom}% ${left}% round 10px)`;
+    const cx = tr.left - cr.left + tr.width  / 2;
+    const cy = tr.top  - cr.top  + tr.height / 2;
+    const r0 = Math.sqrt(tr.width ** 2 + tr.height ** 2) / 2 + 6;
+    return { cx, cy, r0 };
   };
 
   const advance = useCallback(() => {
     if (isAnimating) return;
-    const nextId    = (current + 1) % N;
-    const clipStart = getClip(thumbRefs.current[0]);
-    setSectionBg(SLIDES[nextId].color);
+    const nextId = (current + 1) % N;
+    const exp    = getThumbExpand(thumbRefs.current[0]);
     setTextVisible(false);
-    setExpandState({ clipStart, slideId: nextId });
+    setExpandState({ ...exp, slideId: nextId });
     setIsAnimating(true);
     setTimeout(() => {
       setCurrent(nextId);
-      setExpandState(null);
-      setTimeout(() => setTextVisible(true), 60);
-      setTimeout(() => setIsAnimating(false), 280);
+      requestAnimationFrame(() => {
+        setExpandState(null);
+        setTimeout(() => setTextVisible(true), 60);
+        setTimeout(() => setIsAnimating(false), 280);
+      });
     }, EXPAND_MS);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current, isAnimating]);
@@ -154,51 +176,23 @@ export function HeroSection() {
     // Para cliques nos cards 2 e 3, avança diretamente ignorando os intermediários
     if (preExitRef.current) clearTimeout(preExitRef.current);
     if (timerRef.current)   clearTimeout(timerRef.current);
-    const targetId  = (current + slideOffset + 1) % N;
-    const clipStart = getClip(thumbRefs.current[slideOffset]);
-    setSectionBg(SLIDES[targetId].color);
+    const targetId = (current + slideOffset + 1) % N;
+    const exp      = getThumbExpand(thumbRefs.current[slideOffset]);
     setTextVisible(false);
-    setExpandState({ clipStart, slideId: targetId });
+    setExpandState({ ...exp, slideId: targetId });
     setIsAnimating(true);
     setTimeout(() => {
       setCurrent(targetId);
-      setExpandState(null);
-      setTimeout(() => setTextVisible(true), 60);
-      setTimeout(() => setIsAnimating(false), 280);
+      requestAnimationFrame(() => {
+        setExpandState(null);
+        setTimeout(() => setTextVisible(true), 60);
+        setTimeout(() => setIsAnimating(false), 280);
+      });
     }, EXPAND_MS);
   };
 
   return (
-    <section id="inicio" className="w-full relative overflow-hidden" style={{ height: '92vh', paddingTop: '10px', paddingBottom: '60px', backgroundColor: sectionBg }}>
-
-      {/* ── Imagem de fundo ao nível da section (inclui o gap do paddingBottom) ── */}
-      <AnimatePresence>
-        {SLIDES[current].image && (
-          <motion.img
-            key={`img-${current}`}
-            src={SLIDES[current].image}
-            aria-hidden="true"
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              position: 'absolute', inset: 0, width: '100%', height: '100%',
-              objectFit: 'cover', objectPosition: SLIDES[current].imagePosition ?? 'center',
-              zIndex: 1, pointerEvents: 'none',
-            }}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* ── Gradiente de legibilidade (cobre imagem + gap uniformemente) ── */}
-      {SLIDES[current].image && (
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{ zIndex: 2, background: 'linear-gradient(to right, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.28) 50%, rgba(0,0,0,0.10) 100%), linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 40%)' }}
-        />
-      )}
+    <section id="inicio" className="w-full relative overflow-hidden" style={{ height: '82vh', paddingTop: '10px' }}>
 
       {/* ── Botão play/pause ── */}
       <button
@@ -236,49 +230,95 @@ export function HeroSection() {
       <div ref={containerRef} className="relative w-full h-full overflow-hidden rounded-t-2xl" style={{ clipPath: 'inset(0% 0% 0% 0% round 1rem 1rem 0 0)', zIndex: 15 }}>
 
         {/* ── Background — cor sólida ── */}
-        <motion.div
-          key={`bg-${current}`}
+        <div
           aria-hidden="true"
           className="absolute inset-0 w-full h-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: SLIDES[current].image ? 0 : 1 }}
-          transition={{ duration: 0.6 }}
           style={{ zIndex: 0, backgroundColor: SLIDES[current].color }}
         />
 
+        {/* ── Imagem do slide atual ── */}
+        {SLIDES[current].image && (
+          <>
+            {/* Desktop */}
+            <img
+              key={`desk-${current}`}
+              src={SLIDES[current].image}
+              aria-hidden="true"
+              className="hidden sm:block"
+              style={{
+                position: 'absolute', inset: 0, width: '100%', height: '100%',
+                objectFit: 'cover', objectPosition: SLIDES[current].imagePosition ?? 'center',
+                zIndex: 1, pointerEvents: 'none',
+              }}
+            />
+            {/* Mobile */}
+            {SLIDES[current].imageMobile && (
+              <img
+                key={`mob-${current}`}
+                src={SLIDES[current].imageMobile}
+                aria-hidden="true"
+                className="sm:hidden"
+                style={{
+                  position: 'absolute', inset: 0, width: '100%', height: '100%',
+                  objectFit: 'cover', objectPosition: SLIDES[current].imagePositionMobile ?? SLIDES[current].imagePosition ?? 'center',
+                  zIndex: 1, pointerEvents: 'none',
+                }}
+              />
+            )}
+          </>
+        )}
 
+        {/* ── Gradiente de legibilidade ── */}
+        {SLIDES[current].image && (
+          <div
+            aria-hidden="true"
+            style={{
+              position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
+              background: 'linear-gradient(to right, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.28) 50%, rgba(0,0,0,0.10) 100%), linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 40%)',
+            }}
+          />
+        )}
 
-        {/* ── Painel expansivo (clip-path) ── */}
+        {/* ── Painel expansivo ── */}
         <AnimatePresence>
           {expandState && (
             <motion.div
               key={`expand-${expandState.slideId}`}
-              className="absolute inset-0 overflow-hidden"
-              style={{ zIndex: 28 }}
-              initial={{ clipPath: expandState.clipStart }}
-              animate={{ clipPath: 'inset(0% 0% 0% 0% round 0px)' }}
+              style={{ position: 'absolute', inset: 0, zIndex: 28, overflow: 'hidden' }}
+              initial={{ clipPath: `circle(${expandState.r0}px at ${expandState.cx}px ${expandState.cy}px)` }}
+              animate={{ clipPath: `circle(200% at ${expandState.cx}px ${expandState.cy}px)` }}
               exit={{ opacity: 0 }}
               transition={{
                 clipPath: { duration: EXPAND_MS / 1000, ease: [0.65, 0, 0.35, 1] },
-                opacity:  { duration: 0.28 },
+                opacity:  { duration: 0.12 },
               }}
             >
               <div className="absolute inset-0 w-full h-full" style={{ backgroundColor: SLIDES[expandState.slideId].color }} />
               {SLIDES[expandState.slideId].image && (
                 <>
-                  <motion.img
-                    src={SLIDES[expandState.slideId].image}
-                    aria-hidden="true"
+                  <motion.div
                     initial={{ scale: 1.5 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: EXPAND_MS / 1000, ease: [0.65, 0, 0.35, 1] }}
-                    style={{
-                      position: 'absolute', inset: 0, width: '100%', height: '100%',
-                      objectFit: 'cover', objectPosition: SLIDES[expandState.slideId].imagePosition ?? 'center',
-                      transformOrigin: 'center center',
-                      zIndex: 1, pointerEvents: 'none',
-                    }}
-                  />
+                    style={{ position: 'absolute', inset: 0, transformOrigin: 'center center', zIndex: 1, pointerEvents: 'none' }}
+                  >
+                    {/* Desktop */}
+                    <img
+                      src={SLIDES[expandState.slideId].image}
+                      aria-hidden="true"
+                      className="hidden sm:block"
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: SLIDES[expandState.slideId].imagePosition ?? 'center' }}
+                    />
+                    {/* Mobile */}
+                    {SLIDES[expandState.slideId].imageMobile && (
+                      <img
+                        src={SLIDES[expandState.slideId].imageMobile}
+                        aria-hidden="true"
+                        className="sm:hidden"
+                        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: SLIDES[expandState.slideId].imagePositionMobile ?? SLIDES[expandState.slideId].imagePosition ?? 'center' }}
+                      />
+                    )}
+                  </motion.div>
                   <div
                     aria-hidden="true"
                     style={{
@@ -294,7 +334,7 @@ export function HeroSection() {
 
         {/* ── Texto esquerda ── */}
         <div
-          className="absolute inset-0 flex flex-col items-start justify-end sm:justify-center px-8 sm:px-16 lg:px-24 pb-36 sm:pb-10"
+          className="absolute inset-0 flex flex-col items-start justify-end sm:justify-center px-8 sm:px-16 lg:px-24 pb-16 sm:pb-10"
           style={{ maxWidth: '800px', paddingTop: 'clamp(40px, 8vh, 80px)', zIndex: 20 }}
         >
           <img src={portoBankLogo} alt="PortoBank" className="h-5 sm:h-6 w-auto object-contain" style={{ opacity: 0.95 }} />
@@ -306,10 +346,10 @@ export function HeroSection() {
             transition={{ duration: textVisible ? 0.52 : 0.32, ease: [0.22, 1, 0.36, 1] }}
             style={{ marginTop: '32px' }}
           >
-            <h1 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 'clamp(22px,2.8vw,38px)', lineHeight: 1.1, color: '#fff', fontWeight: 800, letterSpacing: '-0.02em' }}>
+            <h1 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 'clamp(22px,2.8vw,38px)', lineHeight: 1.15, color: '#fff', fontWeight: 800, letterSpacing: '-0.02em', maxWidth: '520px' }}>
               {SLIDES[current].title}
             </h1>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(14px,1.4vw,18px)', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginTop: '16px', maxWidth: '520px' }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(14px,1.4vw,18px)', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, marginTop: '16px', maxWidth: '520px', textWrap: 'balance' } as React.CSSProperties}>
               {SLIDES[current].description}
             </p>
           </motion.div>

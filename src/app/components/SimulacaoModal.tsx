@@ -17,7 +17,7 @@ interface Props {
 }
 
 type Tab = 'credito' | 'parcelas';
-type Step = 'produto' | 'formulario';
+type Step = 'produto' | 'formulario' | 'sucesso';
 
 const PRODUCTS = [
   {
@@ -108,35 +108,31 @@ function ProductCard({ product, onSelect, featured = false }: { product: Product
         gap: '12px',
         padding: '11px 14px',
         borderRadius: '12px',
-        border: `1.5px solid ${hovered ? '#0055c4' : '#f0f0f0'}`,
-        backgroundColor: hovered ? '#0055c4' : '#fafafa',
+        border: `1.5px solid ${hovered ? '#009cde' : 'transparent'}`,
+        backgroundColor: hovered ? '#EFF8FE' : '#ffffff',
         cursor: 'pointer',
         width: '100%',
         textAlign: 'left',
         transition: 'background-color 0.22s ease, border-color 0.22s ease',
       }}
-      className={
-        featured
-          ? 'sm:flex-col sm:items-center sm:justify-center sm:text-center sm:gap-3 sm:p-4 sm:h-[130px]'
-          : 'sm:flex-col sm:items-center sm:justify-center sm:text-center sm:gap-2 sm:p-3 sm:h-[88px]'
-      }
+      className="sm:flex-col sm:items-center sm:justify-center sm:text-center sm:gap-2 sm:p-4 sm:h-[100px]"
     >
       <div
         style={{
           width: '40px', height: '40px',
           borderRadius: '10px', flexShrink: 0,
-          backgroundColor: hovered ? 'rgba(255,255,255,0.18)' : '#e0f4fb',
+          backgroundColor: hovered ? '#C5E8F8' : '#EFF8FE',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           transition: 'background-color 0.3s ease',
         }}
-        className={featured ? 'sm:w-12 sm:h-12 sm:rounded-xl' : 'sm:w-9 sm:h-9 sm:rounded-lg'}
+        className="sm:w-12 sm:h-12 sm:rounded-xl"
       >
         <motion.div
           animate={hovered ? product.hoverAnimate : product.idleAnimate}
           transition={hovered ? product.hoverTransition : product.idleTransition}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-          <Icon size={20} color={hovered ? '#fff' : '#0055c4'} />
+          <Icon size={22} color="#0055c4" />
         </motion.div>
       </div>
 
@@ -144,16 +140,16 @@ function ProductCard({ product, onSelect, featured = false }: { product: Product
         style={{
           flex: 1,
           fontFamily: "'Inter', sans-serif",
-          fontWeight: featured ? 600 : 500,
+          fontWeight: 600,
           fontSize: '13px',
-          color: hovered ? '#fff' : '#111827',
+          color: hovered ? '#0055c4' : '#111827',
           lineHeight: 1.3,
           transition: 'color 0.22s ease',
         }}
         className="sm:flex-none sm:text-center sm:leading-tight"
       >
         <span className="sm:hidden">{product.fullLabel}</span>
-        <span className="hidden sm:inline" style={{ fontSize: featured ? '13px' : '11px' }}>{product.label}</span>
+        <span className="hidden sm:inline">{product.label}</span>
       </span>
 
       <ChevronRight
@@ -162,6 +158,52 @@ function ProductCard({ product, onSelect, featured = false }: { product: Product
         className="sm:hidden flex-shrink-0"
         style={{ transition: 'color 0.22s ease' }}
       />
+    </motion.button>
+  );
+}
+
+function ProductListItem({ product, onSelect }: { product: Product; onSelect: () => void }) {
+  const [hovered, setHovered] = useState(false);
+  const Icon = product.Icon;
+
+  return (
+    <motion.button
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onClick={onSelect}
+      whileTap={{ scale: 0.97 }}
+      style={{
+        display: 'flex', alignItems: 'center', gap: '10px',
+        padding: '9px 12px', borderRadius: '10px',
+        border: `1.5px solid ${hovered ? '#009cde' : 'transparent'}`,
+        backgroundColor: hovered ? '#EFF8FE' : '#ffffff',
+        cursor: 'pointer', width: '100%', textAlign: 'left',
+        transition: 'background-color 0.18s ease, border-color 0.18s ease',
+      }}
+    >
+      <div style={{
+        width: '32px', height: '32px', borderRadius: '8px', flexShrink: 0,
+        backgroundColor: hovered ? '#C5E8F8' : '#EFF8FE',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        transition: 'background-color 0.18s ease',
+      }}>
+        <motion.div
+          animate={hovered ? product.hoverAnimate : product.idleAnimate}
+          transition={hovered ? product.hoverTransition : product.idleTransition}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Icon size={15} color="#0055c4" />
+        </motion.div>
+      </div>
+      <span style={{
+        flex: 1,
+        fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '13px',
+        color: hovered ? '#0055c4' : '#374151',
+        transition: 'color 0.18s ease',
+      }}>
+        {product.label}
+      </span>
+      <ChevronRight size={14} color={hovered ? '#0055c4' : '#d1d5db'} style={{ transition: 'color 0.18s ease' }} />
     </motion.button>
   );
 }
@@ -197,13 +239,7 @@ export function SimulacaoModal({ open, onClose }: Props) {
 
   const handleEnviar = () => {
     if (!nome.trim() || telefone.replace(/\D/g, '').length < 10) return;
-    const msg =
-      `Olá! Quero simular um consórcio.\n` +
-      `Tipo: ${produto?.fullLabel}\n` +
-      `${tab === 'parcelas' ? 'Parcela desejada' : 'Crédito desejado'}: ${formatValue(valor)}\n` +
-      `Nome: ${nome}\nTelefone: ${telefone}`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
-    handleClose();
+    setStep('sucesso');
   };
 
   const handleClose = () => {
@@ -263,16 +299,17 @@ export function SimulacaoModal({ open, onClose }: Props) {
               className="w-full max-w-[480px] sm:max-w-[580px]"
             >
               <div style={{
-                backgroundColor: '#fff',
+                backgroundColor: step === 'sucesso' ? '#fff' : '#F1F3F5',
                 borderRadius: '20px',
                 overflow: 'hidden',
-                boxShadow: '0 24px 64px rgba(0,0,0,0.25)',
+                boxShadow: step === 'sucesso' ? '0 24px 64px rgba(0,0,0,0.18)' : '0 24px 64px rgba(0,0,0,0.25)',
+                border: step === 'sucesso' ? '2px solid #009cde' : 'none',
                 position: 'relative',
               }}>
 
                 {/* Header: dots + close */}
                 <div style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  display: step === 'sucesso' ? 'none' : 'flex', alignItems: 'center', justifyContent: 'space-between',
                   padding: '16px 20px 0',
                 }}>
                   <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
@@ -334,7 +371,7 @@ export function SimulacaoModal({ open, onClose }: Props) {
                         ))}
                       </div>
 
-                      {/* Desktop: grid em dois níveis */}
+                      {/* Desktop: featured cards + lista secundária */}
                       <div className="hidden sm:block">
                         <p style={SECTION_LABEL_STYLE}>Mais procurados</p>
                         <div className="grid grid-cols-2 gap-3" style={{ marginBottom: '16px' }}>
@@ -343,9 +380,9 @@ export function SimulacaoModal({ open, onClose }: Props) {
                           ))}
                         </div>
                         <p style={SECTION_LABEL_STYLE}>Outros consórcios</p>
-                        <div className="grid grid-cols-4 gap-2">
+                        <div className="grid grid-cols-2 gap-x-2 gap-y-1">
                           {secondaryProducts.map(p => (
-                            <ProductCard key={p.id} product={p} onSelect={() => handleSelectProduto(p)} />
+                            <ProductListItem key={p.id} product={p} onSelect={() => handleSelectProduto(p)} />
                           ))}
                         </div>
                       </div>
@@ -400,66 +437,10 @@ export function SimulacaoModal({ open, onClose }: Props) {
                         </div>
                       )}
 
-                      {/* — Personalizar — */}
-                      <p style={SECTION_LABEL_STYLE}>Personalizar</p>
-
-                      <div style={{
-                        display: 'flex', backgroundColor: '#E0F4FB',
-                        borderRadius: '999px', padding: '4px',
-                        maxWidth: '220px', marginBottom: '16px',
-                      }}>
-                        {(['parcelas', 'credito'] as const).map(t => (
-                          <motion.button
-                            key={t}
-                            onClick={() => handleTabChange(t)}
-                            whileTap={{ scale: 0.96 }}
-                            style={{
-                              flex: 1, padding: '7px 0', borderRadius: '999px',
-                              border: 'none', cursor: 'pointer', fontFamily: "'Inter', sans-serif",
-                              fontSize: '13px', fontWeight: 600,
-                              backgroundColor: tab === t ? '#0055c4' : 'transparent',
-                              color: tab === t ? '#fff' : '#374151',
-                              transition: 'background-color 0.2s, color 0.2s',
-                            }}
-                          >
-                            {t === 'credito' ? 'Crédito' : 'Parcelas'}
-                          </motion.button>
-                        ))}
-                      </div>
-
-                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>
-                        {tab === 'parcelas' ? 'Parcela desejada:' : 'Crédito desejado:'}
-                      </p>
-                      <p style={{
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        fontWeight: 800, fontSize: '26px', color: '#111827', marginBottom: '10px',
-                      }}>
-                        {formatValue(valor)}
-                      </p>
-
-                      <div style={{ position: 'relative', marginBottom: '4px' }}>
-                        <input
-                          type="range"
-                          min={min} max={max} step={stepSlider}
-                          value={valor}
-                          onChange={e => setValor(Number(e.target.value))}
-                          style={{
-                            width: '100%', height: '6px', borderRadius: '999px',
-                            appearance: 'none', outline: 'none', cursor: 'pointer',
-                            background: `linear-gradient(to right, #009cde ${pct}%, #e5e7eb ${pct}%)`,
-                          }}
-                        />
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'Inter', sans-serif", fontSize: '11px', color: '#9ca3af', marginBottom: '20px' }}>
-                        <span>{formatValue(min)}</span>
-                        <span>{formatValue(max)}</span>
-                      </div>
-
                       {/* — Seus dados — */}
-                      <div style={{ height: '1px', backgroundColor: '#f3f4f6', marginBottom: '16px' }} />
                       <p style={SECTION_LABEL_STYLE}>Seus dados</p>
 
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      <div style={{ backgroundColor: '#fff', borderRadius: '14px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                         <div>
                           <label style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#374151', display: 'block', marginBottom: '5px' }}>
                             Nome
@@ -474,6 +455,7 @@ export function SimulacaoModal({ open, onClose }: Props) {
                               border: '1.5px solid #e5e7eb', borderRadius: '10px',
                               fontFamily: "'Inter', sans-serif", fontSize: '14px', color: '#111827',
                               outline: 'none', boxSizing: 'border-box', transition: 'border 0.2s',
+                              backgroundColor: '#F9FAFB',
                             }}
                             onFocus={e => (e.currentTarget.style.borderColor = '#009cde')}
                             onBlur={e => (e.currentTarget.style.borderColor = '#e5e7eb')}
@@ -493,6 +475,7 @@ export function SimulacaoModal({ open, onClose }: Props) {
                               border: '1.5px solid #e5e7eb', borderRadius: '10px',
                               fontFamily: "'Inter', sans-serif", fontSize: '14px', color: '#111827',
                               outline: 'none', boxSizing: 'border-box', transition: 'border 0.2s',
+                              backgroundColor: '#F9FAFB',
                             }}
                             onFocus={e => (e.currentTarget.style.borderColor = '#009cde')}
                             onBlur={e => (e.currentTarget.style.borderColor = '#e5e7eb')}
@@ -515,7 +498,81 @@ export function SimulacaoModal({ open, onClose }: Props) {
                           opacity: !nome.trim() || telefone.replace(/\D/g, '').length < 10 ? 0.45 : 1,
                         }}
                       >
-                        FALAR COM CONSULTOR
+                        ENVIAR
+                      </motion.button>
+                    </motion.div>
+                  )}
+
+                  {/* ── PASSO 3: SUCESSO ── */}
+                  {step === 'sucesso' && (
+                    <motion.div
+                      key="sucesso"
+                      initial={{ opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      style={{
+                        padding: '48px 32px 48px',
+                        background: '#ffffff',
+                        display: 'flex', flexDirection: 'column',
+                        alignItems: 'center', justifyContent: 'center',
+                        textAlign: 'center', gap: '16px',
+                      }}
+                    >
+                      <motion.div
+                        initial={{ scale: 0, rotate: -20 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ delay: 0.15, type: 'spring', stiffness: 300, damping: 18 }}
+                        style={{
+                          width: '64px', height: '64px', borderRadius: '50%',
+                          backgroundColor: '#EFF8FE',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          fontSize: '28px',
+                        }}
+                      >
+                        🎉
+                      </motion.div>
+
+                      <motion.div
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.25, duration: 0.4, ease: 'easeOut' }}
+                      >
+                        <h2 style={{
+                          fontFamily: 'Georgia, serif',
+                          fontStyle: 'italic',
+                          fontWeight: 400, fontSize: '52px', color: '#009cde',
+                          marginBottom: '10px',
+                        }}>
+                          Parabéns!
+                        </h2>
+                        <p style={{
+                          fontFamily: "'Inter', sans-serif",
+                          fontSize: '14px', color: '#374151',
+                          lineHeight: 1.6, maxWidth: '320px',
+                        }}>
+                          Um especialista em crédito entrará em contato com você para montar um plano personalizado.
+                        </p>
+                      </motion.div>
+
+                      <motion.button
+                        onClick={handleClose}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.45 }}
+                        whileHover={{ opacity: 0.6 }}
+                        whileTap={{ scale: 0.96 }}
+                        style={{
+                          marginTop: '8px', padding: '4px',
+                          borderRadius: '50%',
+                          border: 'none',
+                          backgroundColor: 'transparent',
+                          color: '#009cde', cursor: 'pointer',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          transition: 'opacity 0.2s',
+                        }}
+                      >
+                        <X size={16} />
                       </motion.button>
                     </motion.div>
                   )}
