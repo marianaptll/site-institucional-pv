@@ -13,6 +13,8 @@ const PRE_EXIT_MS   = 450;
 interface Slide {
   id: number;
   color: string;
+  image?: string;
+  imagePosition?: string;
   label: string;
   title: string;
   description: string;
@@ -25,6 +27,7 @@ const SLIDES: Slide[] = [
   {
     id: 0,
     color: '#0D2137',
+    image: '/imagens/banner-imovel.png',
     label: 'Consórcio de Imóvel',
     title: 'O primeiro passo',
     description: 'Comprar o seu imóvel é mais simples do que você imagina, conheça nossos planos personalizados!',
@@ -34,6 +37,7 @@ const SLIDES: Slide[] = [
   {
     id: 1,
     color: '#0A1D2E',
+    image: '/imagens/banner-carro.png',
     label: 'Consórcio de Automóvel',
     title: 'Carro novo na hora certa',
     description: 'Parcelas planejadas que se encaixam perfeitamente no seu orçamento.',
@@ -43,6 +47,7 @@ const SLIDES: Slide[] = [
   {
     id: 2,
     color: '#161D2A',
+    image: '/imagens/banner-pesados.png',
     label: 'Consórcio de Pesados',
     title: 'Sua frota mais forte',
     description: 'Amplie sua capacidade de operação pagando menos',
@@ -61,6 +66,8 @@ const SLIDES: Slide[] = [
   {
     id: 4,
     color: '#0D2B1E',
+    image: '/imagens/banner-investir.png',
+    imagePosition: 'right center',
     label: 'Investimento',
     title: 'Pensando em investir?',
     description: 'Multiplique o seu capital de forma segura, planejada e sem juros.',
@@ -86,18 +93,16 @@ export function HeroSection() {
   const [secHover,    setSecHover]    = useState(false);
   const [isPaused,    setIsPaused]    = useState(false);
 
-  const containerRef  = useRef<HTMLDivElement>(null);
-  // ref para o primeiro card da fila (o que vai expandir)
-  const firstThumbRef = useRef<HTMLDivElement | null>(null);
-  const timerRef      = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const preExitRef    = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const thumbRefs    = useRef<(HTMLDivElement | null)[]>([]);
+  const timerRef     = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const preExitRef   = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // fila: os N-1 próximos slides (todos exceto o atual)
   const queue = Array.from({ length: N - 1 }, (_, i) => SLIDES[(current + i + 1) % N]);
 
-  const getClip = (): string => {
-    const ctnr  = containerRef.current;
-    const thumb = firstThumbRef.current;
+  const getClip = (thumb: HTMLDivElement | null): string => {
+    const ctnr = containerRef.current;
     if (!ctnr || !thumb) return 'inset(80% 2% 2% 76% round 10px)';
     const cr = ctnr.getBoundingClientRect();
     const tr = thumb.getBoundingClientRect();
@@ -111,7 +116,7 @@ export function HeroSection() {
   const advance = useCallback(() => {
     if (isAnimating) return;
     const nextId    = (current + 1) % N;
-    const clipStart = getClip();
+    const clipStart = getClip(thumbRefs.current[0]);
     setSectionBg(SLIDES[nextId].color);
     setTextVisible(false);
     setExpandState({ clipStart, slideId: nextId });
@@ -150,7 +155,7 @@ export function HeroSection() {
     if (preExitRef.current) clearTimeout(preExitRef.current);
     if (timerRef.current)   clearTimeout(timerRef.current);
     const targetId  = (current + slideOffset + 1) % N;
-    const clipStart = getClip();
+    const clipStart = getClip(thumbRefs.current[slideOffset]);
     setSectionBg(SLIDES[targetId].color);
     setTextVisible(false);
     setExpandState({ clipStart, slideId: targetId });
@@ -165,6 +170,35 @@ export function HeroSection() {
 
   return (
     <section id="inicio" className="w-full relative overflow-hidden" style={{ height: '92vh', paddingTop: '10px', paddingBottom: '60px', backgroundColor: sectionBg }}>
+
+      {/* ── Imagem de fundo ao nível da section (inclui o gap do paddingBottom) ── */}
+      <AnimatePresence>
+        {SLIDES[current].image && (
+          <motion.img
+            key={`img-${current}`}
+            src={SLIDES[current].image}
+            aria-hidden="true"
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              position: 'absolute', inset: 0, width: '100%', height: '100%',
+              objectFit: 'cover', objectPosition: SLIDES[current].imagePosition ?? 'center',
+              zIndex: 1, pointerEvents: 'none',
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* ── Gradiente de legibilidade (cobre imagem + gap uniformemente) ── */}
+      {SLIDES[current].image && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{ zIndex: 2, background: 'linear-gradient(to right, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.28) 50%, rgba(0,0,0,0.10) 100%), linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 40%)' }}
+        />
+      )}
 
       {/* ── Botão play/pause ── */}
       <button
@@ -207,17 +241,12 @@ export function HeroSection() {
           aria-hidden="true"
           className="absolute inset-0 w-full h-full"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={{ opacity: SLIDES[current].image ? 0 : 1 }}
           transition={{ duration: 0.6 }}
           style={{ zIndex: 0, backgroundColor: SLIDES[current].color }}
         />
 
-        {/* ── Gradiente de legibilidade — ativo sobre imagem futura ── */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{ zIndex: 6, background: 'linear-gradient(to right, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.22) 55%, transparent 100%)' }}
-        />
+
 
         {/* ── Painel expansivo (clip-path) ── */}
         <AnimatePresence>
@@ -235,16 +264,40 @@ export function HeroSection() {
               }}
             >
               <div className="absolute inset-0 w-full h-full" style={{ backgroundColor: SLIDES[expandState.slideId].color }} />
+              {SLIDES[expandState.slideId].image && (
+                <>
+                  <motion.img
+                    src={SLIDES[expandState.slideId].image}
+                    aria-hidden="true"
+                    initial={{ scale: 1.5 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: EXPAND_MS / 1000, ease: [0.65, 0, 0.35, 1] }}
+                    style={{
+                      position: 'absolute', inset: 0, width: '100%', height: '100%',
+                      objectFit: 'cover', objectPosition: SLIDES[expandState.slideId].imagePosition ?? 'center',
+                      transformOrigin: 'center center',
+                      zIndex: 1, pointerEvents: 'none',
+                    }}
+                  />
+                  <div
+                    aria-hidden="true"
+                    style={{
+                      position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
+                      background: 'linear-gradient(to right, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.22) 55%, transparent 100%)',
+                    }}
+                  />
+                </>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* ── Texto esquerda ── */}
         <div
-          className="absolute inset-0 flex flex-col items-start justify-center px-8 sm:px-16 lg:px-24"
-          style={{ maxWidth: '800px', paddingTop: 'clamp(40px, 8vh, 80px)', paddingBottom: 'clamp(40px, 8vh, 80px)', zIndex: 20 }}
+          className="absolute inset-0 flex flex-col items-start justify-end sm:justify-center px-8 sm:px-16 lg:px-24 pb-36 sm:pb-10"
+          style={{ maxWidth: '800px', paddingTop: 'clamp(40px, 8vh, 80px)', zIndex: 20 }}
         >
-          <img src={portoBankLogo} alt="PortoBank" className="h-6 sm:h-8 w-auto object-contain" style={{ opacity: 0.95 }} />
+          <img src={portoBankLogo} alt="PortoBank" className="h-5 sm:h-6 w-auto object-contain" style={{ opacity: 0.95 }} />
 
           <motion.div
             key={current}
@@ -297,10 +350,11 @@ export function HeroSection() {
                 size="lg"
               />
             </div>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'rgba(255,255,255,0.38)', marginTop: '10px' }}>
-              *Consulte condições.
-            </p>
           </div>
+
+          <p style={{ position: 'absolute', bottom: '16px', left: 'clamp(32px, 8vw, 96px)', fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'rgba(255,255,255,0.38)', zIndex: 50 }}>
+            *Consulte condições.
+          </p>
         </div>
 
         {/* ── Fila de thumbnails — canto inferior direito ── */}
@@ -324,7 +378,7 @@ export function HeroSection() {
                   layout:   { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
                   default:  { duration: 0.38, ease: [0.22, 1, 0.36, 1] },
                 }}
-                ref={i === 0 ? (el: HTMLDivElement | null) => { firstThumbRef.current = el; } : undefined}
+                ref={(el: HTMLDivElement | null) => { thumbRefs.current[i] = el; }}
                 onClick={() => handleThumbClick(i)}
                 style={{
                   position: 'relative',
@@ -340,7 +394,15 @@ export function HeroSection() {
                     : '1.5px solid rgba(255,255,255,0.18)',
                 }}
               >
-                <div className="w-full h-full" style={{ backgroundColor: slide.color }} />
+                <div className="w-full h-full" style={{ backgroundColor: slide.color }}>
+                  {slide.image && (
+                    <img
+                      src={slide.image}
+                      alt=""
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '75% center', display: 'block', transform: 'scale(1.5)', transformOrigin: '75% center' }}
+                    />
+                  )}
+                </div>
 
                 {/* Gradiente + etiqueta */}
                 <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: THUMB_GRAD, padding: '20px 7px 7px' }}>
