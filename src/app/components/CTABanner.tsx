@@ -4,7 +4,7 @@ export function CTABanner() {
   return (
     <section
       id="cta"
-      className="relative w-full py-24 px-4 flex flex-col items-center justify-center text-center overflow-hidden"
+      className="relative w-full py-12 sm:py-24 px-4 flex flex-col items-center justify-center text-center overflow-hidden"
       style={{ backgroundColor: '#ffffff' }}
     >
       <div className="relative z-10">

@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router';
 
 const BLUE = '#009cde';
-const SPEED = 0.25;
+const SPEED = 0.16;
 const DRAG_THRESHOLD = 6;
 
 const products = [
@@ -203,7 +203,7 @@ export function ProductCarousel() {
     <div
       className="relative z-20 py-4"
       style={{
-        marginBottom: '8px',
+        marginBottom: 'clamp(24px, 3vw, 32px)',
         overflowX: 'clip',
         overflowY: 'visible',
         cursor: isDragging ? 'grabbing' : 'grab',
@@ -215,10 +215,10 @@ export function ProductCarousel() {
       onPointerLeave={onPointerUp}
     >
       {/* Fade esquerda */}
-      <div className="absolute left-0 top-0 bottom-0 w-28 z-10 pointer-events-none"
+      <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-28 z-10 pointer-events-none"
         style={{ background: 'linear-gradient(to right, #eeebe6, transparent)' }} />
       {/* Fade direita */}
-      <div className="absolute right-0 top-0 bottom-0 w-28 z-10 pointer-events-none"
+      <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-28 z-10 pointer-events-none"
         style={{ background: 'linear-gradient(to left, #eeebe6, transparent)' }} />
 
       <div ref={trackRef} className="flex gap-5 w-max" style={{ willChange: 'transform' }}>

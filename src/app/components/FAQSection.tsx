@@ -91,7 +91,7 @@ export function FAQSection() {
   return (
     <section
       id="faq"
-      className="py-24 px-4 sm:px-8 lg:px-16 bg-white dark:bg-gray-900 transition-colors duration-300"
+      className="py-12 sm:py-24 px-4 sm:px-8 lg:px-16 bg-white dark:bg-gray-900 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-[1fr_1.6fr] gap-16 items-start">

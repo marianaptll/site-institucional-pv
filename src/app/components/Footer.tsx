@@ -305,7 +305,7 @@ export function Footer() {
               &copy; {currentYear} Porto Vale Consórcios
             </p>
             <p className="text-[11px] text-[#4B5563]" style={{ fontFamily: "'Inter', sans-serif" }}>
-              CNPJ 07.081.058/0001-56 &nbsp;·&nbsp; SUSEP n° 202089657
+              CNPJ 07.081.058/0001-56 &nbsp;·&nbsp; SUSEP n° 3SQ64J
             </p>
           </div>
           <p className="text-[11px] text-[#4B5563]" style={{ fontFamily: "'Inter', sans-serif" }}>

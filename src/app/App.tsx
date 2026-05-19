@@ -48,7 +48,7 @@ function HomePage() {
       <Header />
       <main>
         <HeroSection />
-        <div className="rounded-2xl sm:rounded-[32px] lg:rounded-[46px]" style={{ backgroundColor: '#eeebe6', marginTop: '-100px', position: 'relative', zIndex: 10 }}>
+        <div className="rounded-2xl sm:rounded-[32px] lg:rounded-[46px]" style={{ backgroundColor: '#eeebe6', marginTop: '-52px', position: 'relative', zIndex: 10 }}>
           <WhatIsConsorcioSection />
           <BenefitsSection />
         </div>

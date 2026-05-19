@@ -43,12 +43,11 @@ export function PortoValeSection() {
               </video>
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '80px', background: 'linear-gradient(to top, rgba(17,24,39,0.6), transparent)' }} />
             </div>
-            {/* Badge "20 anos" com efeito 3D tilt */}
+            {/* Badge "20 anos" com efeito 3D tilt — desktop */}
             <ExperienceBadge />
-            {/* Badge "23 anos" versão mobile inline */}
-            <div className="sm:hidden flex items-center gap-3 mt-4 bg-white rounded-2xl px-5 py-4" style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.14)' }}>
-              <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: '36px', lineHeight: 1, color: '#0055c4' }}>+20</span>
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#111827', lineHeight: 1.3 }}>anos de experiência</span>
+            {/* Badge "20 anos" inline — mobile, sobrepõe o topo da imagem */}
+            <div className="sm:hidden absolute left-1/2 -translate-x-1/2" style={{ top: '-48px', zIndex: 10 }}>
+              <ExperienceBadge variant="inline" />
             </div>
           </div>
 
