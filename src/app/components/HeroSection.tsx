@@ -306,9 +306,6 @@ export function HeroSection() {
             transition={{ duration: textVisible ? 0.52 : 0.32, ease: [0.22, 1, 0.36, 1] }}
             style={{ marginTop: '32px' }}
           >
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(11px,1vw,13px)', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '10px' }}>
-              {SLIDES[current].label}
-            </p>
             <h1 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 'clamp(22px,2.8vw,38px)', lineHeight: 1.1, color: '#fff', fontWeight: 800, letterSpacing: '-0.02em' }}>
               {SLIDES[current].title}
             </h1>
@@ -382,8 +379,8 @@ export function HeroSection() {
                 onClick={() => handleThumbClick(i)}
                 style={{
                   position: 'relative',
-                  width: '80px',
-                  height: '108px',
+                  width: '64px',
+                  height: '86px',
                   borderRadius: '10px',
                   overflow: 'hidden',
                   flexShrink: 0,
@@ -406,9 +403,6 @@ export function HeroSection() {
 
                 {/* Gradiente + etiqueta */}
                 <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: THUMB_GRAD, padding: '20px 7px 7px' }}>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '7px', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '2px', lineHeight: 1.2 }}>
-                    {slide.label}
-                  </p>
                   <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '9px', color: '#fff', lineHeight: 1.2 }}>
                     {slide.title}
                   </p>

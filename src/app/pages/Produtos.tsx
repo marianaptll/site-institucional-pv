@@ -878,7 +878,7 @@ const tiposImovel: TipoItem[] = [
 const ofertasImovel: Oferta[] = [
   {
     media: 'photo',
-    badge: 'Entrada acessível',
+    badge: 'Para começar',
     credito: 'R$ 200.000',
     parcela: '',
     prazo: '180 meses',
@@ -1127,7 +1127,7 @@ const tiposAutomovel: TipoItem[] = [
 ];
 
 const ofertasAutomovel: Oferta[] = [
-  { media: 'photo', badge: 'Entrada acessível', credito: 'R$ 70.000',  parcela: '', prazo: '50 meses', descricao: 'Ideal para motos, carros populares ou seminovos com parcelas que cabem no orçamento.',  imagem: '/imagens/carro-70k.jpg' },
+  { media: 'photo', badge: 'Para começar', credito: 'R$ 70.000',  parcela: '', prazo: '50 meses', descricao: 'Ideal para motos, carros populares ou seminovos com parcelas que cabem no orçamento.',  imagem: '/imagens/carro-70k.jpg' },
   { media: 'photo', badge: 'Mais escolhido',    credito: 'R$ 150.000', parcela: '', prazo: '70 meses', descricao: 'O crédito certo para hatches, sedãs e SUVs compactos novos ou seminovos premium.',    imagem: '/imagens/carro-150k.jpg' },
   { media: 'photo', badge: 'Maior crédito',     credito: 'R$ 300.000', parcela: '', prazo: '80 meses', descricao: 'Para SUVs, picapes, utilitários ou renovação de frota com o máximo poder de compra.', imagem: '/imagens/carro-300k.jpg' },
 ];
@@ -1310,7 +1310,7 @@ const tiposTerreno: TipoItem[] = [
 ];
 
 const ofertasTerreno: Oferta[] = [
-  { media: 'photo', badge: 'Entrada acessível', credito: 'R$ 80.000',  parcela: '', prazo: '160 meses', descricao: 'Ideal para terrenos residenciais em regiões em crescimento.' },
+  { media: 'photo', badge: 'Para começar', credito: 'R$ 80.000',  parcela: '', prazo: '160 meses', descricao: 'Ideal para terrenos residenciais em regiões em crescimento.' },
   { media: 'photo', badge: 'Mais escolhido',    credito: 'R$ 160.000', parcela: '', prazo: '180 meses', descricao: 'O equilíbrio perfeito entre crédito e prazo para lotes residenciais ou comerciais.' },
   { media: 'photo', badge: 'Maior crédito',     credito: 'R$ 240.000', parcela: '', prazo: '200 meses', descricao: 'Para quem busca terrenos maiores, em melhores localizações ou para fins de investimento.' },
 ];
