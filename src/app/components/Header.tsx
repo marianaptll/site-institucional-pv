@@ -1,5 +1,6 @@
 import { Menu, X, ChevronDown, Home, Car, Truck, Building2, Sprout, TrendingUp, Zap, Briefcase, Users, Heart, Globe, Handshake, Phone, Info, Calculator, BookOpen, Newspaper } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate, useLocation } from 'react-router';
 import portoValeLogo from '../../assets/logo-portovale.png';
 import { SimulacaoModal } from './SimulacaoModal';
@@ -108,56 +109,63 @@ function DropdownMenu({
           size={14}
           style={{
             color: BLUE,
-            transition: 'transform 0.2s',
+            transition: 'transform 0.3s ease',
             transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
           }}
         />
       </button>
 
-      {open && (
-        <div
-          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 rounded-2xl z-50"
-          style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid #E5E7EB',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.10)',
-            minWidth: '210px',
-          }}
-        >
-          {/* Triangle pointer */}
-          <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-white border-t border-l border-[#E5E7EB]" />
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.97 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-2 rounded-2xl z-50"
+            style={{
+              backgroundColor: '#FFFFFF',
+              border: '1px solid #E5E7EB',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.10)',
+              minWidth: '210px',
+              transformOrigin: 'top center',
+            }}
+          >
+            {/* Triangle pointer */}
+            <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-white border-t border-l border-[#E5E7EB]" />
 
-          <div className="p-2">
-            {dropdown.items.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={i}
-                  onClick={() => {
-                    if (item.href) { onNavigatePage(item.href); }
-                    else { onNavigate(item.sectionId); }
-                    setOpen(false);
-                  }}
-                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors duration-150 hover:bg-[#E8F7FD] group"
-                >
-                  <div
-                    className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: '#E8F7FD' }}
+            <div className="p-2">
+              {dropdown.items.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      if (item.href) { onNavigatePage(item.href); }
+                      else { onNavigate(item.sectionId); }
+                      setOpen(false);
+                    }}
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors duration-150 hover:bg-[#E8F7FD] group"
                   >
-                    <Icon size={14} style={{ color: BLUE }} />
-                  </div>
-                  <span
-                    className="text-[13px] text-[#111827] truncate"
-                    style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
-                  >
-                    {item.label}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
+                    <div
+                      className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: '#E8F7FD' }}
+                    >
+                      <Icon size={14} style={{ color: BLUE }} />
+                    </div>
+                    <span
+                      className="text-[13px] text-[#111827] truncate"
+                      style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
+                    >
+                      {item.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

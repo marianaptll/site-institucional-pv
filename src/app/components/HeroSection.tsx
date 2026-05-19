@@ -1,18 +1,72 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useNavigate } from 'react-router';
+import { Pause, Play } from 'lucide-react';
 import portoBankLogo from '../../assets/logo-portobank.png';
 import { SimulacaoModal } from './SimulacaoModal';
 import { FlowButton } from './FlowButton';
 
-const AUTO_INTERVAL = 6000;
+const AUTO_INTERVAL = 10000;
 const EXPAND_MS     = 900;
 const PRE_EXIT_MS   = 450;
 
-const SLIDES = [
-  { id: 0, color: '#003580', label: 'Consórcio de Imóvel',     title: 'O primeiro passo',          description: 'Comprar o seu imóvel é mais simples do que você imagina, simule agora!' },
-  { id: 1, color: '#0A2647', label: 'Consórcio de Automóvel',   title: 'Seu carro novo, sem juros', description: 'A forma mais inteligente de conquistar seu próximo veículo.' },
-  { id: 2, color: '#1B4332', label: 'Consórcio Agro',           title: 'Invista no campo',          description: 'Máquinas e equipamentos agrícolas com o melhor custo-benefício.' },
-  { id: 3, color: '#1A1147', label: 'Consórcio Empresarial',    title: 'Cresça com planejamento',   description: 'Planeje a expansão da sua empresa com segurança e sem burocracia.' },
+interface Slide {
+  id: number;
+  color: string;
+  label: string;
+  title: string;
+  description: string;
+  cta: string;
+  ctaHref?: string;
+  secondaryHref?: string;
+}
+
+const SLIDES: Slide[] = [
+  {
+    id: 0,
+    color: '#0D2137',
+    label: 'Consórcio de Imóvel',
+    title: 'O primeiro passo',
+    description: 'Comprar o seu imóvel é mais simples do que você imagina, conheça nossos planos personalizados!',
+    cta: 'Simule agora',
+    secondaryHref: '/consorcio-imovel',
+  },
+  {
+    id: 1,
+    color: '#0A1D2E',
+    label: 'Consórcio de Automóvel',
+    title: 'Carro novo na hora certa',
+    description: 'Parcelas planejadas que se encaixam perfeitamente no seu orçamento.',
+    cta: 'Ver planos',
+    secondaryHref: '/consorcio-automovel',
+  },
+  {
+    id: 2,
+    color: '#161D2A',
+    label: 'Consórcio de Pesados',
+    title: 'Sua frota mais forte',
+    description: 'Amplie sua capacidade de operação pagando menos',
+    cta: 'Fale conosco',
+    ctaHref: '/contato',
+    secondaryHref: '/consorcio-pesados',
+  },
+  {
+    id: 3,
+    color: '#1A1147',
+    label: 'Porto Vale Consórcios',
+    title: 'Tudo o que você planeja, a Porto Vale ajuda a realizar',
+    description: 'A segurança e credibilidade que você procura para investir no que importa.',
+    cta: 'Simular consórcio',
+  },
+  {
+    id: 4,
+    color: '#0D2B1E',
+    label: 'Investimento',
+    title: 'Pensando em investir?',
+    description: 'Multiplique o seu capital de forma segura, planejada e sem juros.',
+    cta: 'Conheça nossos planos',
+    secondaryHref: '/consorcio-investimento',
+  },
 ];
 
 const N = SLIDES.length;
@@ -22,12 +76,15 @@ const NAV_H = 68; // header height in px (position: fixed)
 interface ExpandState { clipStart: string; slideId: number }
 
 export function HeroSection() {
+  const navigate = useNavigate();
   const [current,     setCurrent]     = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [expandState, setExpandState] = useState<ExpandState | null>(null);
   const [modalOpen,   setModalOpen]   = useState(false);
   const [textVisible, setTextVisible] = useState(true);
   const [sectionBg,   setSectionBg]   = useState(SLIDES[0].color);
+  const [secHover,    setSecHover]    = useState(false);
+  const [isPaused,    setIsPaused]    = useState(false);
 
   const containerRef  = useRef<HTMLDivElement>(null);
   // ref para o primeiro card da fila (o que vai expandir)
@@ -35,8 +92,8 @@ export function HeroSection() {
   const timerRef      = useRef<ReturnType<typeof setTimeout> | null>(null);
   const preExitRef    = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // fila: os 3 próximos slides (não inclui o atual)
-  const queue = [1, 2, 3].map(o => SLIDES[(current + o) % N]);
+  // fila: os N-1 próximos slides (todos exceto o atual)
+  const queue = Array.from({ length: N - 1 }, (_, i) => SLIDES[(current + i + 1) % N]);
 
   const getClip = (): string => {
     const ctnr  = containerRef.current;
@@ -69,13 +126,14 @@ export function HeroSection() {
   }, [current, isAnimating]);
 
   useEffect(() => {
+    if (isPaused) return;
     preExitRef.current = setTimeout(() => setTextVisible(false), AUTO_INTERVAL - PRE_EXIT_MS);
     timerRef.current   = setTimeout(advance, AUTO_INTERVAL);
     return () => {
       if (preExitRef.current) clearTimeout(preExitRef.current);
       if (timerRef.current)   clearTimeout(timerRef.current);
     };
-  }, [advance, current]);
+  }, [advance, current, isPaused]);
 
   const handleThumbClick = (slideOffset: number) => {
     // slideOffset: 0 = próximo, 1 = +2, 2 = +3
@@ -108,13 +166,35 @@ export function HeroSection() {
   return (
     <section id="inicio" className="w-full relative overflow-hidden" style={{ height: '92vh', paddingTop: '10px', paddingBottom: '60px', backgroundColor: sectionBg }}>
 
+      {/* ── Botão play/pause ── */}
+      <button
+        onClick={() => setIsPaused(p => !p)}
+        aria-label={isPaused ? 'Retomar apresentação' : 'Pausar apresentação'}
+        style={{
+          position: 'absolute', top: `${NAV_H + 14}px`, right: '20px', zIndex: 55,
+          width: '30px', height: '30px', borderRadius: '50%',
+          background: 'rgba(255,255,255,0.10)',
+          border: '1px solid rgba(255,255,255,0.2)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          cursor: 'pointer', backdropFilter: 'blur(6px)',
+          transition: 'background 0.2s',
+        }}
+        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.22)'; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.10)'; }}
+      >
+        {isPaused
+          ? <Play  size={11} fill="rgba(255,255,255,0.85)" stroke="none" />
+          : <Pause size={11} fill="rgba(255,255,255,0.85)" stroke="none" />
+        }
+      </button>
+
       {/* ── Loading progress line — right at header bottom edge (top: NAV_H) ── */}
       <div style={{ position: 'absolute', top: `${NAV_H}px`, left: 0, right: 0, height: '3px', backgroundColor: 'rgba(255,255,255,0.12)', zIndex: 60 }}>
         <motion.div
-          key={`line-${current}`}
+          key={`line-${current}-${isPaused}`}
           initial={{ width: '0%' }}
-          animate={{ width: '100%' }}
-          transition={{ duration: AUTO_INTERVAL / 1000, ease: 'linear' }}
+          animate={{ width: isPaused ? '0%' : '100%' }}
+          transition={{ duration: isPaused ? 0 : AUTO_INTERVAL / 1000, ease: 'linear' }}
           style={{ height: '100%', backgroundColor: 'rgba(255,255,255,0.75)' }}
         />
       </div>
@@ -130,6 +210,13 @@ export function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
           style={{ zIndex: 0, backgroundColor: SLIDES[current].color }}
+        />
+
+        {/* ── Gradiente de legibilidade — ativo sobre imagem futura ── */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{ zIndex: 6, background: 'linear-gradient(to right, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.22) 55%, transparent 100%)' }}
         />
 
         {/* ── Painel expansivo (clip-path) ── */}
@@ -178,8 +265,39 @@ export function HeroSection() {
           </motion.div>
 
           <div style={{ marginTop: '40px', position: 'relative', zIndex: 50 }}>
-            <FlowButton text="Simular agora" onClick={() => setModalOpen(true)} size="lg" />
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'rgba(255,255,255,0.38)', marginTop: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+              {SLIDES[current].secondaryHref && (
+                <button
+                  onClick={() => navigate(SLIDES[current].secondaryHref!)}
+                  onMouseEnter={() => setSecHover(true)}
+                  onMouseLeave={() => setSecHover(false)}
+                  style={{
+                    background: secHover ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.07)',
+                    border: `1.5px solid ${secHover ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.28)'}`,
+                    borderRadius: '100px',
+                    padding: '13px 26px',
+                    color: secHover ? '#ffffff' : 'rgba(255,255,255,0.78)',
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '15px',
+                    fontWeight: 500,
+                    cursor: 'pointer',
+                    transition: 'background 0.2s, border-color 0.2s, color 0.2s',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  Saiba mais
+                </button>
+              )}
+              <FlowButton
+                text={SLIDES[current].cta}
+                onClick={() => {
+                  if (SLIDES[current].ctaHref) navigate(SLIDES[current].ctaHref!);
+                  else setModalOpen(true);
+                }}
+                size="lg"
+              />
+            </div>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'rgba(255,255,255,0.38)', marginTop: '10px' }}>
               *Consulte condições.
             </p>
           </div>
