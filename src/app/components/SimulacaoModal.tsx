@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { X, ArrowLeft, Home, MapPin, Hammer, Car, Truck, Sprout, TrendingUp, Sun, Briefcase, ChevronRight } from 'lucide-react';
-import { WHATSAPP_NUMBER } from '../constants';
 
 function maskPhone(value: string) {
   const digits = value.replace(/\D/g, '').slice(0, 11);

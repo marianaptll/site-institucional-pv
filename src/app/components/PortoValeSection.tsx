@@ -73,7 +73,7 @@ export function PortoValeSection() {
                 <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </Link>
-            <div style={{ width: '100%', height: '1px', background: 'linear-gradient(to right, rgba(255,255,255,0.12), transparent)' }} />
+            <div className="hidden lg:block" style={{ width: '100%', height: '1px', background: 'linear-gradient(to right, rgba(255,255,255,0.12), transparent)' }} />
           </div>
         </div>
       </div>

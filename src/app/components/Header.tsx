@@ -1,4 +1,4 @@
-import { Menu, X, ChevronDown, Home, Car, Truck, Building2, Sprout, TrendingUp, Zap, Briefcase, Users, Heart, Globe, Handshake, Phone, Info, Calculator, BookOpen, Newspaper } from 'lucide-react';
+import { Menu, X, ChevronDown, Home, Car, Truck, Hammer, Sprout, TrendingUp, Sun, Briefcase, Users, Heart, MapPin, Handshake, Phone, Info, Calculator, BookOpen, Newspaper } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate, useLocation } from 'react-router';
@@ -27,8 +27,8 @@ const navDropdowns: NavDropdown[] = [
     label: 'Consórcio de Imóveis',
     items: [
       { icon: Home,      label: 'Imóvel',              href: '/consorcio-imovel' },
-      { icon: Globe,     label: 'Terreno',              href: '/consorcio-terreno' },
-      { icon: Building2, label: 'Construção e Reforma', href: '/consorcio-construcao-reforma' },
+      { icon: MapPin,  label: 'Terreno',              href: '/consorcio-terreno' },
+      { icon: Hammer,  label: 'Construção e Reforma', href: '/consorcio-construcao-reforma' },
     ],
   },
   {
@@ -45,7 +45,7 @@ const navDropdowns: NavDropdown[] = [
     items: [
       { icon: Sprout,     label: 'Agro',        href: '/consorcio-agro' },
       { icon: TrendingUp, label: 'Investimento', href: '/consorcio-investimento' },
-      { icon: Zap,        label: 'Placa Solar',  href: '/consorcio-placa-solar' },
+      { icon: Sun,        label: 'Placa Solar',  href: '/consorcio-placa-solar' },
       { icon: Briefcase,  label: 'Empresarial',  href: '/consorcio-empresarial' },
     ],
   },

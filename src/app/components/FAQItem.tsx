@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 
 export interface FAQEntry {
   question: string;

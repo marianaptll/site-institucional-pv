@@ -31,7 +31,7 @@ const SLIDES: Slide[] = [
     color: '#0D2137',
     image: '/imagens/banner-imovel.png',
     imageMobile: '/imagens/banner-imovel-mobile.png',
-    imagePositionMobile: 'center 70%',
+    imagePositionMobile: 'center 40%',
     label: 'Consórcio de Imóvel',
     title: 'O primeiro passo',
     description: 'Comprar o seu imóvel é mais simples do que você imagina, conheça nossos planos personalizados!',
@@ -43,7 +43,7 @@ const SLIDES: Slide[] = [
     color: '#0A1D2E',
     image: '/imagens/banner-carro.png',
     imageMobile: '/imagens/banner-carro-mobile.png',
-    imagePositionMobile: 'center 70%',
+    imagePositionMobile: 'center 25%',
     label: 'Consórcio de Automóvel',
     title: 'Carro novo na hora certa',
     description: 'Parcelas planejadas que se encaixam perfeitamente no seu orçamento.',
@@ -55,7 +55,7 @@ const SLIDES: Slide[] = [
     color: '#0D2B1E',
     image: '/imagens/banner-investir.png',
     imageMobile: '/imagens/banner-investir-mobile.png',
-    imagePositionMobile: 'center 70%',
+    imagePositionMobile: 'center 60%',
     imagePosition: 'right center',
     label: 'Investimento',
     title: 'Pensando em investir?',
@@ -68,7 +68,7 @@ const SLIDES: Slide[] = [
     color: '#161D2A',
     image: '/imagens/banner-pesados.png',
     imageMobile: '/imagens/banner-pesados-mobile.png',
-    imagePositionMobile: 'center 70%',
+    imagePositionMobile: 'center 50%',
     label: 'Consórcio de Pesados',
     title: 'Sua frota mais forte',
     description: 'Amplie sua capacidade de operação pagando menos.',
@@ -81,7 +81,7 @@ const SLIDES: Slide[] = [
     color: '#1A1147',
     image: '/imagens/banner-geral.png',
     imageMobile: '/imagens/banner-geral-mobile.png',
-    imagePositionMobile: 'center 70%',
+    imagePositionMobile: 'center 60%',
     label: 'Porto Vale Consórcios',
     title: 'Tudo o que você planeja, a Porto Vale ajuda a realizar',
     description: 'A segurança e credibilidade que você procura para investir no que importa.',
@@ -90,13 +90,27 @@ const SLIDES: Slide[] = [
 ];
 
 const N = SLIDES.length;
-const THUMB_GRAD = 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, transparent 100%)';
 const NAV_H = 68; // header height in px (position: fixed)
 
 interface ExpandState { cx: number; cy: number; r0: number; slideId: number }
 
 export function HeroSection() {
   const navigate = useNavigate();
+
+  const [current,     setCurrent]     = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [expandState, setExpandState] = useState<ExpandState | null>(null);
+  const [modalOpen,   setModalOpen]   = useState(false);
+  const [textVisible, setTextVisible] = useState(true);
+  const [secHover,    setSecHover]    = useState(false);
+  const [isPaused,    setIsPaused]    = useState(false);
+
+  const containerRef    = useRef<HTMLDivElement>(null);
+  const timerRef        = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const preExitRef      = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const preloadedImages = useRef<HTMLImageElement[]>([]);
+  const touchStartX     = useRef<number>(0);
+  const touchStartY     = useRef<number>(0);
 
   useEffect(() => {
     SLIDES.forEach(slide => {
@@ -105,41 +119,14 @@ export function HeroSection() {
     });
   }, []);
 
-  const [current,     setCurrent]     = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [expandState, setExpandState] = useState<ExpandState | null>(null);
-  const [modalOpen,   setModalOpen]   = useState(false);
-  const [textVisible, setTextVisible] = useState(true);
-  const [secHover,  setSecHover]  = useState(false);
-  const [isPaused,  setIsPaused]  = useState(false);
-
-  const containerRef    = useRef<HTMLDivElement>(null);
-  const thumbRefs       = useRef<(HTMLDivElement | null)[]>([]);
-  const timerRef        = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const preExitRef      = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const preloadedImages = useRef<HTMLImageElement[]>([]);
-
-  // fila: os N-1 próximos slides (todos exceto o atual)
-  const queue = Array.from({ length: N - 1 }, (_, i) => SLIDES[(current + i + 1) % N]);
-
-  const getThumbExpand = (thumb: HTMLDivElement | null): { cx: number; cy: number; r0: number } => {
-    const ctnr = containerRef.current;
-    if (!ctnr) return { cx: 0, cy: 0, r0: 60 };
-    const cr = ctnr.getBoundingClientRect();
-    if (!thumb) return { cx: cr.width * 0.88, cy: cr.height * 0.90, r0: 60 };
-    const tr = thumb.getBoundingClientRect();
-    const cx = tr.left - cr.left + tr.width  / 2;
-    const cy = tr.top  - cr.top  + tr.height / 2;
-    const r0 = Math.sqrt(tr.width ** 2 + tr.height ** 2) / 2 + 6;
-    return { cx, cy, r0 };
-  };
-
   const advance = useCallback(() => {
     if (isAnimating) return;
     const nextId = (current + 1) % N;
-    const exp    = getThumbExpand(thumbRefs.current[0]);
+    const ctnr = containerRef.current;
+    const cx = ctnr ? ctnr.offsetWidth / 2 : 200;
+    const cy = ctnr ? ctnr.offsetHeight * 0.6 : 300;
     setTextVisible(false);
-    setExpandState({ ...exp, slideId: nextId });
+    setExpandState({ cx, cy, r0: 40, slideId: nextId });
     setIsAnimating(true);
     setTimeout(() => {
       setCurrent(nextId);
@@ -162,24 +149,15 @@ export function HeroSection() {
     };
   }, [advance, current, isPaused]);
 
-  const handleThumbClick = (slideOffset: number) => {
-    // slideOffset: 0 = próximo, 1 = +2, 2 = +3
-    if (isAnimating || slideOffset === 0) {
-      if (slideOffset === 0) {
-        if (preExitRef.current) clearTimeout(preExitRef.current);
-        if (timerRef.current)   clearTimeout(timerRef.current);
-        setTextVisible(false);
-        advance();
-      }
-      return;
-    }
-    // Para cliques nos cards 2 e 3, avança diretamente ignorando os intermediários
+  const goTo = useCallback((targetId: number) => {
+    if (isAnimating) return;
     if (preExitRef.current) clearTimeout(preExitRef.current);
     if (timerRef.current)   clearTimeout(timerRef.current);
-    const targetId = (current + slideOffset + 1) % N;
-    const exp      = getThumbExpand(thumbRefs.current[slideOffset]);
+    const ctnr = containerRef.current;
+    const cx = ctnr ? ctnr.offsetWidth / 2 : 200;
+    const cy = ctnr ? ctnr.offsetHeight * 0.6 : 300;
     setTextVisible(false);
-    setExpandState({ ...exp, slideId: targetId });
+    setExpandState({ cx, cy, r0: 40, slideId: targetId });
     setIsAnimating(true);
     setTimeout(() => {
       setCurrent(targetId);
@@ -189,10 +167,30 @@ export function HeroSection() {
         setTimeout(() => setIsAnimating(false), 280);
       });
     }, EXPAND_MS);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAnimating]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
   };
 
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+    goTo(dx < 0 ? (current + 1) % N : (current - 1 + N) % N);
+  };
+
+
   return (
-    <section id="inicio" className="w-full relative overflow-hidden" style={{ height: '82vh', paddingTop: '10px' }}>
+    <section
+      id="inicio"
+      className="w-full relative overflow-hidden h-[580px] sm:h-[620px] md:h-[700px] lg:h-[82vh]"
+      style={{ paddingTop: '10px' }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
 
       {/* ── Botão play/pause ── */}
       <button
@@ -394,83 +392,30 @@ export function HeroSection() {
           </p>
         </div>
 
-        {/* ── Fila de thumbnails — canto inferior direito ── */}
+        {/* ── Dots ── */}
         <div
-          className="hidden sm:flex absolute gap-2 items-end"
-          style={{ bottom: '20px', right: '24px', zIndex: 30 }}
+          style={{ display: 'flex', position: 'absolute', bottom: '20px', left: 0, right: 0, justifyContent: 'center', alignItems: 'center', gap: '6px', zIndex: 60 }}
         >
-          <AnimatePresence initial={false} mode="popLayout">
-            {queue.map((slide, i) => (
-              <motion.div
-                key={slide.id}
-                layout
-                initial={{ opacity: 0, x: 40, scale: 0.92 }}
-                animate={{
-                  opacity: i === 0 ? 1 : i === 1 ? 0.72 : 0.45,
-                  x: 0,
-                  scale: 1,
-                }}
-                exit={{ opacity: 0, x: -20, scale: 0.94 }}
-                transition={{
-                  layout:   { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
-                  default:  { duration: 0.38, ease: [0.22, 1, 0.36, 1] },
-                }}
-                ref={(el: HTMLDivElement | null) => { thumbRefs.current[i] = el; }}
-                onClick={() => handleThumbClick(i)}
-                style={{
-                  position: 'relative',
-                  width: '64px',
-                  height: '86px',
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  flexShrink: 0,
-                  cursor: i === 0 && !isAnimating ? 'pointer' : i > 0 ? 'pointer' : 'default',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.45)',
-                  border: i === 0
-                    ? '1.5px solid rgba(255,255,255,0.65)'
-                    : '1.5px solid rgba(255,255,255,0.18)',
-                }}
-              >
-                <div className="w-full h-full" style={{ backgroundColor: slide.color }}>
-                  {slide.image && (
-                    <img
-                      src={slide.image}
-                      alt=""
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '75% center', display: 'block', transform: 'scale(1.5)', transformOrigin: '75% center' }}
-                    />
-                  )}
-                </div>
-
-                {/* Gradiente + etiqueta */}
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: THUMB_GRAD, padding: '20px 7px 7px' }}>
-                  <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: '9px', color: '#fff', lineHeight: 1.2 }}>
-                    {slide.title}
-                  </p>
-                </div>
-
-                {/* Barra de progresso — somente no primeiro card da fila */}
-                {i === 0 && (
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '3px', backgroundColor: 'rgba(255,255,255,0.15)' }}>
-                    <motion.div
-                      key={`prog-${current}`}
-                      initial={{ width: '0%' }}
-                      animate={{ width: isAnimating ? '100%' : '100%' }}
-                      style={{ height: '100%', backgroundColor: '#009cde', width: '0%' }}
-                    >
-                      <motion.div
-                        key={`progfill-${current}`}
-                        initial={{ width: '0%' }}
-                        animate={{ width: '100%' }}
-                        transition={{ duration: AUTO_INTERVAL / 1000, ease: 'linear' }}
-                        style={{ height: '100%', backgroundColor: '#009cde' }}
-                      />
-                    </motion.div>
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Ir para slide ${i + 1}`}
+              style={{
+                width: i === current ? '20px' : '7px',
+                height: '7px',
+                borderRadius: '999px',
+                backgroundColor: i === current ? '#009cde' : 'rgba(255,255,255,0.38)',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'width 0.3s ease, background-color 0.3s ease',
+                flexShrink: 0,
+              }}
+            />
+          ))}
         </div>
+
 
 
       </div>
